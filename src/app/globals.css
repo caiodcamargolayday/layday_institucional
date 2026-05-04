@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+}
+
+:root {
+  --background: oklch(0.93 0.02 90); /* #EBE6D8 approx */
+  --foreground: oklch(0.25 0.05 240); /* Dark blue/teal approx */
+  --primary: oklch(0.6 0.18 35); /* Orange #EE5B2B approx */
+  --primary-foreground: oklch(0.985 0 0);
+}
+
+@layer base {
+  body {
+    @apply bg-[#EBE6D8] text-[#083248] font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-wide;
+  }
+}
