@@ -35,7 +35,7 @@ const EXPERIENCES_DATA = [
   {
     title: "SURF & ADVENTURE",
     location: "Bali Coastline",
-    image: "/Lay Day Hostels/home_section.png",
+    image: "/lay_day_home/home_section.png",
     description: "From dawn patrol sessions at Echo Beach to secret reef breaks in Uluwatu. We organize daily surf trips for all levels, led by local legends who know every peak.",
     icon: Zap,
     tag: "Daily Trip"

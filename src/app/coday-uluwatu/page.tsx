@@ -13,7 +13,7 @@ const RECOVERY_CYCLE = [
   { src: "/coday_uluwatu/we get it 3.jpg", text: "WE GET IT" },
   { src: "/coday_uluwatu/swap the party 4.jpg", text: "SWAP THE PARTY" },
   { src: "/coday_uluwatu/for this 5.jpg", text: "FOR THIS" },
-  { src: "/coday_uluwatu/coday.jpg", text: "CODAY ULUWATU" }
+  { src: "/coday_uluwatu/coday 6.jpg", text: "CODAY ULUWATU" }
 ];
 
 
@@ -22,8 +22,7 @@ const COLIVING_IMAGES = [
   "/coday_uluwatu/co living 1.jpg",
   "/coday_uluwatu/co living 2.jpg",
   "/coday_uluwatu/co living 3.jpg",
-  "/coday_uluwatu/co living 4.jpg",
-  "/coday_uluwatu/co living 5.jpg"
+  "/coday_uluwatu/co living 4.jpg"
 ];
 
 export default function CodayPage() {

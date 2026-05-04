@@ -8,25 +8,25 @@ const DESTINATIONS = [
   {
     id: 1,
     name: "LAY DAY CANGGU",
-    image: encodeURI("/Lay Day Hostels/lay day canggu.jpeg"),
+    image: encodeURI("/lay_day_home/lay day canggu.jpeg"),
     link: "/hotel/view/1/lay-day-canggu"
   },
   {
     id: 17,
     name: "LAY DAY ULUWATU",
-    image: encodeURI("/Lay Day Hostels/lay day uluwatu.jpeg"),
+    image: encodeURI("/lay_day_home/lay day uluwatu.jpeg"),
     link: "/hotel/view/17/lay-day-uluwatu"
   },
   {
     id: 18,
     name: "LAY DAY GILI TRAWANGAN",
-    image: encodeURI("/Lay Day Hostels/lay day gili t.jpeg"),
+    image: encodeURI("/lay_day_home/lay day gili t.jpeg"),
     link: "/hotel/view/18/lay-day-gili-t"
   },
   {
     id: 20,
     name: "CODAY ULUWATU",
-    image: encodeURI("/Lay Day Hostels/coday uluwatu.jpeg"),
+    image: encodeURI("/lay_day_home/coday uluwatu.jpeg"),
     link: "/coday-uluwatu"
   }
 ];

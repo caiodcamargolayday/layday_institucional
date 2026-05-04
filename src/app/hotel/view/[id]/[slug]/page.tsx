@@ -12,7 +12,7 @@ const HOSTEL_DATA = {
   "1": {
     name: "Lay Day Canggu",
     location: "Canggu, Indonesia",
-    folder: "Lay Day Canggu",
+    folder: "lay_day_canggu",
     description: "Welcome to Lay Day Canggu, your home away from home in the heart of Bali's most vibrant surf town. We offer the perfect mix of party, surf, and chill vibes. Expect epic pool parties, comfortable beds, and a community of like-minded travelers.",
     amenities: ["Free WiFi", "Swimming Pool", "Bar & Restaurant", "Air Conditioning", "24/7 Security", "Surf Lessons"],
     price: 15,
@@ -31,7 +31,7 @@ const HOSTEL_DATA = {
   "17": {
     name: "Lay Day Uluwatu",
     location: "Uluwatu, Indonesia",
-    folder: "Lay Day Uluwatu Surf and Party Hostel",
+    folder: "lay_day_uluwatu",
     description: "Perched on the cliffs of Uluwatu, this hostel offers breathtaking ocean views and easy access to world-class surf breaks. Enjoy our infinity pool, daily yoga sessions, and legendary sunset parties.",
     amenities: ["Ocean View", "Infinity Pool", "Yoga Deck", "Scooter Rental", "Free WiFi"],
     price: 18,
@@ -49,7 +49,7 @@ const HOSTEL_DATA = {
   "18": {
     name: "Lay Day Gili T",
     location: "Gili Trawangan, Indonesia",
-    folder: "Lay Day Gili T Surf and Party Hostel",
+    folder: "lay_day_gilit",
     description: "Experience the ultimate island life at Lay Day Gili T. No cars, no motorbikes, just bicycles, horse carts, and crystal clear waters. Join our famous boat parties and snorkel with turtles.",
     amenities: ["Beachfront", "Dive Center", "Barbecue Area", "Bicycle Rental", "Free Breakfast"],
     price: 12,
@@ -67,7 +67,7 @@ const HOSTEL_DATA = {
   "20": {
     name: "CoDay Uluwatu",
     location: "Uluwatu, Indonesia",
-    folder: "Coday",
+    folder: "coday_uluwatu",
     description: "Coming Soon! CoDay Uluwatu is our newest addition, designed for digital nomads and remote workers who want to blend productivity with the laid-back surf lifestyle.",
     amenities: ["Coworking Space", "High-Speed Internet", "Private Pods", "Cafe", "Gym"],
     price: 25,

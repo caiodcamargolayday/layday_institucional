@@ -9,21 +9,21 @@ const HOSTELS = [
     id: 1,
     name: "Lay Day Canggu",
     location: "Canggu, Indonesia",
-    image: encodeURI("/Lay Day Hostels/lay day canggu.jpeg"),
+    image: encodeURI("/lay_day_home/lay day canggu.jpeg"),
     link: "/layday-canggu"
   },
   {
     id: 17,
     name: "Lay Day Uluwatu",
     location: "Uluwatu, Indonesia",
-    image: encodeURI("/Lay Day Hostels/lay day uluwatu.jpeg"),
+    image: encodeURI("/lay_day_home/lay day uluwatu.jpeg"),
     link: "/layday-uluwatu"
   },
   {
     id: 18,
     name: "Lay Day Gili T",
     location: "Gili Trawangan, Indonesia",
-    image: encodeURI("/Lay Day Hostels/lay day gili t.jpeg"),
+    image: encodeURI("/lay_day_home/lay day gili t.jpeg"),
     link: "/layday-gilit"
   }
 ];
@@ -58,7 +58,7 @@ export function HostelList() {
             <div className="absolute top-4 left-4 w-full h-full border-2 border-[#EE5B2B] z-0" />
             <div className="relative z-10 aspect-[3/4] w-full">
               <Image 
-                src={encodeURI("/Lay Day Hostels/party,surf and relaxation.jpeg")}
+                src={encodeURI("/lay_day_home/party,surf and relaxation.jpeg")}
                 alt="Party Surf Relaxation"
                 fill
                 className="object-cover border-2 border-[#004A61]"
@@ -125,7 +125,7 @@ export function HostelList() {
             <Link href="/coday-uluwatu" className="group cursor-pointer">
               <div className="relative aspect-[4/3] w-full overflow-hidden border-2 border-[#004A61]">
                 <Image
-                  src={encodeURI("/Lay Day Hostels/coday uluwatu.jpeg")}
+                  src={encodeURI("/lay_day_home/coday uluwatu.jpeg")}
                   alt="CoDay Uluwatu"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"

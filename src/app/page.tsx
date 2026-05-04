@@ -16,12 +16,12 @@ export const metadata: Metadata = {
 export default function Home() {
   let instagramImages: string[] = [];
   try {
-    const publicDir = path.join(process.cwd(), "public", "Lay Day Hostels");
+    const publicDir = path.join(process.cwd(), "public", "lay_day_home");
     if (fs.existsSync(publicDir)) {
       const files = fs.readdirSync(publicDir);
       instagramImages = files
         .filter(file => file.match(/\.(png|jpe?g|webp|gif)$/i))
-        .map(file => encodeURI(`/Lay Day Hostels/${file}`));
+        .map(file => encodeURI(`/lay_day_home/${file}`));
     }
   } catch (error) {
     console.error("Failed to read instagram images directory", error);
@@ -30,14 +30,14 @@ export default function Home() {
   // Fallbacks if no images are found
   if (instagramImages.length === 0) {
     instagramImages = [
-      encodeURI("/Lay Day Hostels/lay day canggu.jpeg"),
-      encodeURI("/Lay Day Hostels/lay day uluwatu.jpeg"),
-      encodeURI("/Lay Day Hostels/lay day gili t.jpeg"),
-      encodeURI("/Lay Day Hostels/home_section_2.jpeg"),
-      encodeURI("/Lay Day Hostels/home_section_3.jpeg"),
-      encodeURI("/Lay Day Hostels/home_section_4.jpeg"),
-      encodeURI("/Lay Day Hostels/home_section_5.jpeg"),
-      encodeURI("/Lay Day Hostels/party,surf and relaxation.jpeg")
+      encodeURI("/lay_day_home/lay day canggu.jpeg"),
+      encodeURI("/lay_day_home/lay day uluwatu.jpeg"),
+      encodeURI("/lay_day_home/lay day gili t.jpeg"),
+      encodeURI("/lay_day_home/home_section_2.jpeg"),
+      encodeURI("/lay_day_home/home_section_3.jpeg"),
+      encodeURI("/lay_day_home/home_section_4.jpeg"),
+      encodeURI("/lay_day_home/home_section_5.jpeg"),
+      encodeURI("/lay_day_home/party,surf and relaxation.jpeg")
     ];
   }
 

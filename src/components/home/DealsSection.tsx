@@ -7,17 +7,17 @@ import { motion } from "framer-motion";
 const DEALS = [
   {
     title: "HAPPY HOUR - CANGGU",
-    image: encodeURI("/Lay Day Hostels/happy hour canggu.jpeg"),
+    image: encodeURI("/lay_day_home/happy hour canggu.jpeg"),
     text: "Get your night started right with 2-for-1 cocktails and ice-cold Bintangs from 5 PM to 7 PM every day at our main bar."
   },
   {
     title: "DAILY HAPPY HOUR - ULUWATU",
-    image: encodeURI("/Lay Day Hostels/home_section_2.jpeg"),
+    image: encodeURI("/lay_day_home/home_section_2.jpeg"),
     text: "Join us by the pool for epic sunset views, half-price drinks, and live DJ sets to get you in the mood for the night."
   },
   {
     title: "EXCLUSIVE BREAKFAST PACKAGE - ULUWATU",
-    image: encodeURI("/Lay Day Hostels/exclusive breakfast.jpeg"),
+    image: encodeURI("/lay_day_home/exclusive breakfast.jpeg"),
     text: "Book direct and get our legendary surfer's breakfast included for free. Fuel up before you paddle out to the break."
   }
 ];
@@ -42,7 +42,7 @@ export function DealsSection() {
           </div>
           <div className="w-full md:w-2/3 relative min-h-[300px]">
             <Image 
-              src={encodeURI("/Lay Day Hostels/home_section_5.jpeg")}
+              src={encodeURI("/lay_day_home/home_section_5.jpeg")}
               alt="Saturdays by the pool"
               fill
               className="object-cover"

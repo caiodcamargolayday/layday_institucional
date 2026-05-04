@@ -6,11 +6,11 @@ import { Search, ChevronDown } from "lucide-react";
 import Image from "next/image";
 
 const BACKGROUNDS = [
-  { src: "/Lay Day Hostels/home_section.png", alt: "Lay Day Hero 1" },
-  { src: "/Lay Day Hostels/home_section_2.jpeg", alt: "Lay Day Hero 2" },
-  { src: "/Lay Day Hostels/home_section_3.jpeg", alt: "Lay Day Hero 3" },
-  { src: "/Lay Day Hostels/home_section_4.jpeg", alt: "Lay Day Hero 4" },
-  { src: "/Lay Day Hostels/home_section_5.jpeg", alt: "Lay Day Hero 5" }
+  { src: "/lay_day_home/home_section.png", alt: "Lay Day Hero 1" },
+  { src: "/lay_day_home/home_section_2.jpeg", alt: "Lay Day Hero 2" },
+  { src: "/lay_day_home/home_section_3.jpeg", alt: "Lay Day Hero 3" },
+  { src: "/lay_day_home/home_section_4.jpeg", alt: "Lay Day Hero 4" },
+  { src: "/lay_day_home/home_section_5.jpeg", alt: "Lay Day Hero 5" }
 ];
 
 export function Hero() {

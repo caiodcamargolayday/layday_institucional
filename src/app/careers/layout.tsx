@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Careers at Lay Day | Join the Global Family",
     description: "Build your career in paradise. Join the professional team behind the world's best social hostels.",
-    images: ["/Lay Day Hostels/careers_hero.jpeg"],
+    images: ["/lay_day_home/careers_hero.jpeg"],
   },
 };
 

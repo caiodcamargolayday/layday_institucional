@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Lay Day Deals | Exclusive Offers for the Tribe",
     description: "Unlock exclusive perks and better rates by booking direct.",
-    images: ["/Lay Day Hostels/home_section_5.jpeg"],
+    images: ["/lay_day_home/home_section_5.jpeg"],
   },
 };
 

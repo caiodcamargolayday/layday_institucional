@@ -62,7 +62,7 @@ export default function CareersPage() {
       <section className="relative h-[70vh] md:h-[80vh] w-full overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0 z-0">
           <Image 
-            src={encodeURI("/Lay Day Hostels/careers_hero.jpeg")} 
+            src={encodeURI("/lay_day_home/careers_hero.jpeg")} 
             alt="Careers Hero" 
             fill 
             priority

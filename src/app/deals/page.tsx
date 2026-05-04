@@ -9,35 +9,35 @@ import { Button } from "@/components/ui/button";
 const DEALS = [
   {
     title: "HAPPY HOUR - CANGGU",
-    image: "/Lay Day Hostels/happy hour canggu.jpeg",
+    image: "/lay_day_home/happy hour canggu.jpeg",
     text: "Get your night started right with 2-for-1 cocktails and ice-cold Bintangs from 5 PM to 7 PM every day at our main bar. The perfect bridge between surf and party.",
     tag: "DRINKS",
     color: "#EE5B2B"
   },
   {
     title: "DAILY HAPPY HOUR - ULUWATU",
-    image: "/Lay Day Hostels/home_section_2.jpeg",
+    image: "/lay_day_home/home_section_2.jpeg",
     text: "Join us by the pool for epic sunset views, half-price drinks, and live DJ sets. The best pre-party in Uluwatu starts right here at our cliffside sanctuary.",
     tag: "DRINKS",
     color: "#EE5B2B"
   },
   {
     title: "EXCLUSIVE BREAKFAST",
-    image: "/Lay Day Hostels/exclusive breakfast.jpeg",
+    image: "/lay_day_home/exclusive breakfast.jpeg",
     text: "Book direct and get our legendary surfer's breakfast included for free. Fuel up with fresh fruit, eggs, and strong coffee before you hit the waves.",
     tag: "BOOK DIRECT",
     color: "#004A61"
   },
   {
     title: "LONG STAY NOMAD",
-    image: "/Lay Day Hostels/home_section_3.jpeg",
+    image: "/lay_day_home/home_section_3.jpeg",
     text: "Planning to stay for 14+ days? Unlock our special nomad rates with high-speed fiber and coworking access included. The ultimate work-from-paradise deal.",
     tag: "STAY",
     color: "#004A61"
   },
   {
     title: "GROUP SURF CAMP",
-    image: "/Lay Day Hostels/home_section_4.jpeg",
+    image: "/lay_day_home/home_section_4.jpeg",
     text: "Traveling with a crew? Book 5+ beds and get 15% off plus a free private surf guide for your first session. Group dynamics, amplified.",
     tag: "GROUP",
     color: "#EE5B2B"
@@ -67,7 +67,7 @@ export default function DealsPage() {
       <section className="relative h-[60vh] w-full overflow-hidden flex items-center justify-center pt-20">
         <motion.div style={{ y: heroY }} className="absolute inset-0 z-0">
           <Image 
-            src={encodeURI("/Lay Day Hostels/home_section_5.jpeg")} 
+            src={encodeURI("/lay_day_home/home_section_5.jpeg")} 
             alt="Deals Hero" 
             fill 
             priority
