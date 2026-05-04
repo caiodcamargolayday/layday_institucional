@@ -241,6 +241,7 @@ export default async function HotelPage({ params }: { params: Promise<{ id: stri
             {/* FAQs (Accordion) */}
             <section>
               <h2 className="text-3xl font-heading tracking-wide mb-6">FREQUENTLY ASKED QUESTIONS</h2>
+
               <Accordion {...({ type: "single", collapsible: true, className: "w-full bg-white border-2 border-[#083248] px-4" } as any)}>
                 {data.faqs.map((faq, i) => (
                   <AccordionItem key={i} value={`item-${i}`}>

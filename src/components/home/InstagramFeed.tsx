@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+
 
 export function InstagramFeed({ images }: { images: string[] }) {
   const displayImages = images.slice(0, 8); // exactly 8 images

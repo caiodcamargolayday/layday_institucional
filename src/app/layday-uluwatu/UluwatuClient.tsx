@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { ChevronDown, MapPin, Camera, Zap, ShoppingBag, Rocket } from "lucide-react";
+import { ChevronDown, MapPin, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const ASSETS = {

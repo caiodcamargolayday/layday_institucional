@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { MapPin, Wifi, Coffee, Zap, Droplets, Wind, Star } from "lucide-react";
 import { FaInstagram } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
@@ -17,13 +16,7 @@ const RECOVERY_CYCLE = [
   { src: "/coday_uluwatu/coday.jpg", text: "CODAY ULUWATU" }
 ];
 
-const WELLNESS_IMAGES = [
-  "/coday_uluwatu/sauna 1.jpg",
-  "/coday_uluwatu/sauna 2.jpg",
-  "/coday_uluwatu/relax.jpg",
-  "/coday_uluwatu/relax 2.jpg",
-  "/coday_uluwatu/hangover 1.jpg"
-];
+
 
 const COLIVING_IMAGES = [
   "/coday_uluwatu/co living 1.jpg",

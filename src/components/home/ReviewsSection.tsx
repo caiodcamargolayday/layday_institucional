@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star } from "lucide-react";
+import Image from "next/image";
 import {
   Carousel,
   CarouselContent,
@@ -129,7 +130,7 @@ export function ReviewsSection() {
                       <div>
                         <p className="font-bold text-sm tracking-wide line-clamp-1">{review.author}</p>
                         <div className="text-xs text-gray-500 flex items-center gap-1 select-none pointer-events-none">
-                          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="" className="w-3 h-3" />
+                          <Image src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="" className="w-3 h-3" width={12} height={12} />
                           Google Review
                         </div>
                       </div>
