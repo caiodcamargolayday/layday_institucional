@@ -125,6 +125,7 @@ function FormModal({ onClose }: { onClose: () => void }) {
   };
 
   const finishForm = async (finalAnswers: Record<number, string>) => {
+    if (submitting || done) return;
     setSubmitting(true);
     await submitToSheets(finalAnswers);
     setSubmitting(false);
@@ -132,6 +133,7 @@ function FormModal({ onClose }: { onClose: () => void }) {
   };
 
   const next = () => {
+    if (submitting || done) return;
     if (step < total - 1) setStep((s) => s + 1);
     else finishForm(answers);
   };
@@ -139,16 +141,22 @@ function FormModal({ onClose }: { onClose: () => void }) {
   const canContinue = answers[step] !== undefined && answers[step].trim() !== "";
 
   const handleRadio = (val: string) => {
+    if (submitting || done) return;
     const newAnswers = { ...answers, [step]: val };
     setAnswers(newAnswers);
+    
+    // Use a small delay for visual feedback, but block further clicks
     setTimeout(() => {
       // Eligibility gate: disqualify on "No" for critical questions
       if (DISQUALIFY_ON_NO.has(step) && val === "No") {
         setDisqualified(true);
         return;
       }
-      if (step < total - 1) setStep((s) => s + 1);
-      else finishForm(newAnswers);
+      if (step < total - 1) {
+        setStep((s) => s + 1);
+      } else {
+        finishForm(newAnswers);
+      }
     }, 280);
   };
 
