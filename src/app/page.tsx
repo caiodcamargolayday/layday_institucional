@@ -4,6 +4,7 @@ import { Hero } from "@/components/home/Hero";
 import { HostelList } from "@/components/home/HostelList";
 import { InstagramFeed } from "@/components/home/InstagramFeed";
 import { DealsSection } from "@/components/home/DealsSection";
+import { CloudbedsRedirect } from "@/components/home/CloudbedsRedirect";
 
 import { Metadata } from "next";
 
@@ -43,6 +44,7 @@ export default function Home() {
 
   return (
     <>
+      <CloudbedsRedirect />
       <Hero />
       <HostelList />
       <InstagramFeed images={instagramImages} />
