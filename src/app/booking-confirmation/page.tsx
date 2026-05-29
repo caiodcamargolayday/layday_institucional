@@ -3,6 +3,9 @@
 import { useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
+import { CheckCircle2, Home } from 'lucide-react';
+import Link from 'next/link';
+
 function getCookie(name: string) {
   if (typeof document === 'undefined') return null;
   const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -55,7 +58,6 @@ function ConfirmationLogic() {
         country: 'id',                  // Indonesia
         value: parseFloat(total || '0') || 0,
         orderId: reservationId,
-        // testEventCode: 'TEST12345',  // Uncomment during testing only
       }),
     })
       .then((r) => r.json())
@@ -68,13 +70,33 @@ function ConfirmationLogic() {
 
 export default function BookingConfirmationPage() {
   return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 space-y-6">
-      <h1 className="text-4xl md:text-5xl font-heading text-[#004A61] tracking-widest uppercase">
-        Booking Confirmed! 🎉
-      </h1>
-      <p className="text-[#004A61]/70 font-medium max-w-md">
-        Thank you for booking with Lay Day Surf Hostel. We can't wait to see you!
-      </p>
+    <div className="min-h-[75vh] flex flex-col items-center justify-center text-center px-4 py-20 relative overflow-hidden bg-[#EBE7E0]">
+      {/* Decorative background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-96 bg-[#EE5B2B]/5 blur-3xl rounded-full pointer-events-none" />
+      
+      <div className="relative z-10 flex flex-col items-center max-w-xl mx-auto bg-white/50 p-10 md:p-16 rounded-[2rem] border border-white shadow-2xl backdrop-blur-sm">
+        
+        <div className="w-24 h-24 bg-[#EE5B2B]/10 rounded-full flex items-center justify-center mb-8 border-[6px] border-white shadow-inner">
+          <CheckCircle2 className="w-12 h-12 text-[#EE5B2B]" strokeWidth={2.5} />
+        </div>
+
+        <div className="space-y-4">
+          <h1 className="text-4xl md:text-5xl font-heading text-[#004A61] tracking-widest uppercase leading-[1.1]">
+            BOOKING <br className="md:hidden" /><span className="text-[#EE5B2B]">CONFIRMED</span>
+          </h1>
+          <p className="text-[#004A61]/70 font-bold text-xs md:text-sm leading-relaxed max-w-sm mx-auto uppercase tracking-[2px]">
+            You're all set. We can't wait to see you at the legend.
+          </p>
+        </div>
+        
+        <Link 
+          href="/"
+          className="mt-10 inline-flex items-center gap-2 bg-[#004A61] text-white hover:bg-[#EE5B2B] px-8 py-4 text-[10px] font-bold uppercase tracking-[3px] transition-all duration-500 rounded-none shadow-xl"
+        >
+          <Home className="w-4 h-4 mb-[2px]" />
+          BACK TO HOME
+        </Link>
+      </div>
       
       <Suspense fallback={null}>
         <ConfirmationLogic />
