@@ -1,9 +1,19 @@
 import crypto from 'crypto';
 
-const PIXEL_ID = process.env.META_PIXEL_ID;
-const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
 const API_VERSION = 'v21.0';
-const ENDPOINT = `https://graph.facebook.com/${API_VERSION}/${PIXEL_ID}/events`;
+
+export function getCapiConfig(origin: string) {
+  if (origin === 'gilit') {
+    return {
+      pixelId: process.env.META_PIXEL_ID_LDGILIT,
+      accessToken: process.env.META_ACCESS_TOKEN_LDGILIT,
+    };
+  }
+  return {
+    pixelId: process.env.META_PIXEL_ID_LDCANGGU,
+    accessToken: process.env.META_ACCESS_TOKEN_LDCANGGU,
+  };
+}
 
 /**
  * Hash a string value with SHA256 (required by Meta for PII fields)
@@ -99,11 +109,19 @@ export function buildPurchaseEvent({
  * @param {Array} events - array of event objects
  * @param {string} testEventCode - optional, from Events Manager > Test Events
  */
-export async function sendToMetaCAPI(events: any[], testEventCode: string | null = null) {
+export async function sendToMetaCAPI(events: any[], origin: string, testEventCode: string | null = null) {
   const body: any = { data: events };
   if (testEventCode) body.test_event_code = testEventCode;
 
-  const response = await fetch(`${ENDPOINT}?access_token=${ACCESS_TOKEN}`, {
+  const config = getCapiConfig(origin);
+  if (!config.pixelId || !config.accessToken) {
+    console.log(`[Meta CAPI] Missing configuration for origin: ${origin}`);
+    return;
+  }
+
+  const endpoint = `https://graph.facebook.com/${API_VERSION}/${config.pixelId}/events`;
+
+  const response = await fetch(`${endpoint}?access_token=${config.accessToken}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),

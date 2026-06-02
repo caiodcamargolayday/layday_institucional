@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Lay Day Gili T | Island Sanctuary",
     description: "Pure vibes and the best pool parties in Gili Trawangan.",
-    images: ["/layday_gilit/layday_gilit_picture 1.jpg"],
+    images: ["/layday_gilit/hero_gilit (2).JPG"],
   },
 };
 

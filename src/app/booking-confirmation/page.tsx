@@ -26,10 +26,10 @@ function ConfirmationLogic() {
     // Only fire if we have a reservation ID (real booking)
     if (!reservationId) return;
 
-    // Only fire if the booking originated from Canggu
+    // Only fire if the booking originated from Canggu or Gili T
     const origin = sessionStorage.getItem("booking_origin") || localStorage.getItem("booking_origin");
-    if (origin !== "canggu") {
-      console.log("[CAPI] Ignored: Booking did not originate from Canggu page.");
+    if (origin !== "canggu" && origin !== "gilit") {
+      console.log("[CAPI] Ignored: Booking origin unknown.");
       return;
     }
 
@@ -58,6 +58,7 @@ function ConfirmationLogic() {
         country: 'id',                  // Indonesia
         value: parseFloat(total || '0') || 0,
         orderId: reservationId,
+        origin,
       }),
     })
       .then((r) => r.json())

@@ -18,6 +18,7 @@ export async function POST(request: Request) {
       value,
       orderId,
       testEventCode, // only pass this during testing
+      origin,
     } = body;
 
     // Validate required fields
@@ -52,7 +53,7 @@ export async function POST(request: Request) {
       orderId,
     });
 
-    await sendToMetaCAPI([event], testEventCode || null);
+    await sendToMetaCAPI([event], origin || 'canggu', testEventCode || null);
 
     return NextResponse.json({ success: true });
   } catch (error) {

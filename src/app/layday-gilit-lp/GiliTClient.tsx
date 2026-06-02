@@ -7,7 +7,7 @@ import { Users, Music, Star, ChevronDown, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const ASSETS = {
-  hero: "/layday_gilit/layday_gilit_picture 1.jpg",
+  hero: "/layday_gilit/hero_gilit (2).JPG",
   pool: "/layday_gilit/layday_gilit_picture 2.jpg",
   social: "/layday_gilit/layday_gilit_picture 3.jpg",
   rooms: "/layday_gilit/layday_gilit_picture 4.jpg",
@@ -70,7 +70,10 @@ export function GiliTClient() {
             </p>
             <div className="mt-10 md:mt-12 flex flex-col items-center">
               <Button 
-                onClick={() => window.open("https://hotels.cloudbeds.com/en/reservation/4fbPDV?currency=idr", "_blank")}
+                onClick={() => {
+                  localStorage.setItem("booking_origin", "gilit");
+                  window.open("https://hotels.cloudbeds.com/en/reservation/4fbPDV?currency=idr", "_blank");
+                }}
                 className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-10 font-bold uppercase tracking-[3px] text-xs transition-all duration-300 shadow-xl mb-12">
                 BOOK NOW
               </Button>
@@ -181,7 +184,10 @@ export function GiliTClient() {
               READY FOR THE <span className="text-[#EE5B2B]">ISLAND?</span>
             </h2>
             <Button 
-              onClick={() => window.open("https://hotels.cloudbeds.com/en/reservation/4fbPDV?currency=idr", "_blank")}
+              onClick={() => {
+                localStorage.setItem("booking_origin", "gilit");
+                window.open("https://hotels.cloudbeds.com/en/reservation/4fbPDV?currency=idr", "_blank");
+              }}
               className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-12 font-bold uppercase tracking-[3px] text-[10px] transition-all duration-500 shadow-xl">
               BOOK NOW
             </Button>
