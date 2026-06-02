@@ -22,6 +22,7 @@ function ConfirmationLogic() {
     const firstName = searchParams.get('firstName') || searchParams.get('first_name');
     const lastName = searchParams.get('lastName') || searchParams.get('last_name');
     const phone = searchParams.get('phone');
+    const testEventCode = searchParams.get('testEventCode') || searchParams.get('test_event_code');
 
     // Only fire if we have a reservation ID (real booking)
     if (!reservationId) return;
@@ -59,6 +60,7 @@ function ConfirmationLogic() {
         value: parseFloat(total || '0') || 0,
         orderId: reservationId,
         origin,
+        testEventCode,
       }),
     })
       .then((r) => r.json())
