@@ -6,7 +6,7 @@ import Image from "next/image";
 import { MapPin, Calendar, Music, Sparkles, Zap, Trophy, ChevronDown } from "lucide-react";
 import { FaInstagram, FaFacebookF, FaTiktok } from "react-icons/fa";
 
-const HERO_IMAGE = "/lay_day_home/home_section_5.jpeg";
+const HERO_IMAGE = "/lay_day_home/home_section_4.jpeg";
 
 const EXPERIENCES_DATA = [
   {
