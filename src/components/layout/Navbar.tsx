@@ -63,7 +63,7 @@ export function Navbar() {
               <Menu className="h-6 w-6" />
               <span className="sr-only">Toggle menu</span>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-[#EBE6D8] border-l-[#083248]/10 text-[#083248]">
+            <SheetContent side="right" className="bg-[#EBE6D8] border-l-[#083248]/10 text-[#083248] p-6">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex flex-col space-y-6 mt-12">
                 <Link href="/experiences" className="text-sm font-bold uppercase tracking-widest hover:text-[#EE5B2B] transition-colors">Experiences</Link>

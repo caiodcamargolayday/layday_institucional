@@ -6,13 +6,13 @@ import Image from "next/image";
 import { MapPin, Calendar, Music, Sparkles, Zap, Trophy, ChevronDown } from "lucide-react";
 import { FaInstagram, FaFacebookF, FaTiktok } from "react-icons/fa";
 
-const HERO_IMAGE = "/experiences/saturdays by the pool.jpg";
+const HERO_IMAGE = "/lay_day_home/home_section_5.jpeg";
 
 const EXPERIENCES_DATA = [
   {
     title: "SATURDAY POOL PARTIES",
     location: "Canggu & Uluwatu",
-    image: "/experiences/saturdays by the pool.jpg",
+    image: "/lay_day_home/party,surf and relaxation.jpeg",
     description: "The biggest pool parties in Bali. We bring the DJs, the floaties, and the electric energy. It's not just a party; it's the legendary Saturday ritual where the whole tribe comes together.",
     icon: Music,
     tag: "Weekly Event"
@@ -21,11 +21,9 @@ const EXPERIENCES_DATA = [
     title: "GOLDEN HOUR RITUALS",
     location: "All Locations",
     images: [
-      "/experiences/golden hour 1.jpg",
-      "/experiences/golden hour 2.jpg",
-      "/experiences/golden hour 3.jpg",
-      "/experiences/golden hour 4.jpg",
-      "/experiences/golden hour 5.jpg"
+      "/lay_day_home/happy hour canggu.jpeg",
+      "/lay_day_home/home_section_3.jpeg",
+      "/lay_day_home/home_section_4.jpeg"
     ],
     description: "2-for-1 cocktails and ice-cold Bintangs as the sun dips below the horizon. The perfect bridge between a day of surf and a night of legendary Canggu vibes.",
     icon: Sparkles,
@@ -43,7 +41,7 @@ const EXPERIENCES_DATA = [
   {
     title: "COMMUNITY EVENTS",
     location: "The Common Room",
-    image: "/experiences/snapinsta.com.br-69f7b8b060982.jpg",
+    image: "/lay_day_home/home_section_2.jpeg",
     description: "BBQ nights, beer pong tournaments, and live acoustic sessions. Our spaces are designed to turn strangers into a global family within minutes.",
     icon: Trophy,
     tag: "Social"
