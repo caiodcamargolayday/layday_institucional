@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 
 const BACKGROUNDS = [
@@ -56,16 +56,7 @@ export function Hero() {
         </h1>
 
         <div className="mt-12 w-full max-w-2xl flex flex-col items-center">
-          <div className="relative flex items-center w-full h-16 bg-[#EBE7E0] rounded-full px-6 shadow-lg border border-white/20 mb-12">
-            <input 
-              type="text" 
-              placeholder="Where do you want to go?" 
-              className="w-full bg-transparent border-none outline-none text-[#757575] text-lg placeholder:text-[#757575] font-sans px-4"
-            />
-            <button className="flex items-center justify-center w-12 h-12 rounded-full bg-[#004A61] text-white shrink-0 hover:opacity-90 transition-opacity ml-2">
-              <Search className="w-6 h-6" />
-            </button>
-          </div>
+
 
           <motion.div
             animate={{ y: [0, 10, 0] }}
