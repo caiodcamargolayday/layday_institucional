@@ -51,7 +51,7 @@ export function CodayUluwatuClient() {
       <section className="relative h-screen w-full overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0 z-0">
           <Image 
-            src={encodeURI("/coday_uluwatu/hero_coday.jpeg")} 
+            src={encodeURI("/coday_uluwatu/uluwatu_surfers_hero.png")} 
             alt="CoDay Uluwatu Hero" 
             fill 
             priority

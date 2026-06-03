@@ -7,7 +7,7 @@ import { Users, Music, Star, ChevronDown, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const ASSETS = {
-  hero: "/layday_gilit/hero_gilit (2).JPG",
+  hero: "/layday_gilit/hero_gilit_oficial.jpeg",
   pool: "/layday_gilit/layday_gilit_picture 2.jpg",
   social: "/layday_gilit/layday_gilit_picture 3.jpg",
   rooms: "/layday_gilit/layday_gilit_picture 4.jpg",
