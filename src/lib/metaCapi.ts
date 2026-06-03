@@ -9,6 +9,12 @@ export function getCapiConfig(origin: string) {
       accessToken: process.env.META_ACCESS_TOKEN_LDGILIT,
     };
   }
+  if (origin === 'coday') {
+    return {
+      pixelId: process.env.META_PIXEL_ID_CODAY,
+      accessToken: process.env.META_ACCESS_TOKEN_CODAY,
+    };
+  }
   return {
     pixelId: process.env.META_PIXEL_ID_LDCANGGU,
     accessToken: process.env.META_ACCESS_TOKEN_LDCANGGU,

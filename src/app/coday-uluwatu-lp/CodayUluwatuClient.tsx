@@ -25,7 +25,7 @@ const COLIVING_IMAGES = [
   "/coday_uluwatu/co living 4.jpg"
 ];
 
-export default function CodayPage() {
+export function CodayUluwatuClient() {
   const [hasMounted, setHasMounted] = useState(false);
   const containerRef = useRef(null);
   const [activeCycleIndex, setActiveCycleIndex] = useState(0);
