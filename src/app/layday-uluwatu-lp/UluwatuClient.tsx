@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { ChevronDown, MapPin, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,13 +9,11 @@ import { Button } from "@/components/ui/button";
 const ASSETS = {
   hero: "/lay_day_uluwatu/place 2.jpeg",
   showcase: [
-    "/lay_day_uluwatu/place 1.jpeg",
-    "/lay_day_uluwatu/place.jpeg",
-    "/lay_day_uluwatu/place 2.jpeg",
-    "/lay_day_uluwatu/palce 3.jpeg",
-    "/lay_day_uluwatu/place 4.jpeg",
-    "/lay_day_uluwatu/place 5.jpeg",
-    "/lay_day_uluwatu/place 6.jpeg"
+    "/lay_day_uluwatu/uluwatu_1.jpg",
+    "/lay_day_uluwatu/uluwatu_2.jpg",
+    "/lay_day_uluwatu/uluwatu_3.jpg",
+    "/lay_day_uluwatu/uluwatu_4.jpg",
+    "/lay_day_uluwatu/uluwatu_5.jpg"
   ],
   meals: [
     "/lay_day_uluwatu/bowl.jpeg",
@@ -30,10 +28,6 @@ const ASSETS = {
     "/lay_day_uluwatu/place_zoom 3.jpeg",
     "/lay_day_uluwatu/place_zoom 4.jpeg"
   ],
-  future: [
-    "/lay_day_uluwatu/tusk.jpeg",
-    "/lay_day_uluwatu/black_betty.jpeg"
-  ],
   shop: "/lay_day_uluwatu/models.jpeg"
 };
 
@@ -44,6 +38,59 @@ const sportsImages = [
   "/lay_day_uluwatu/sport 3.jpeg",
   "/lay_day_uluwatu/surf 2.jpeg"
 ];
+
+function CodayStyleCarousel({ images, aspect = "aspect-[16/9]" }: { images: string[], aspect?: string }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  
+  return (
+    <div className={`relative w-full ${aspect} group mx-auto`}>
+      {/* Preload all images so they don't delay on slide change */}
+      <div className="absolute opacity-0 pointer-events-none w-0 h-0 overflow-hidden -z-10">
+        {images.map((img, i) => (
+          <Image key={i} src={encodeURI(img)} alt="preload" width={100} height={100} priority />
+        ))}
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeIndex}
+          initial={{ opacity: 0, scale: 0.98, x: 20 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          exit={{ opacity: 0, scale: 1.02, x: -20 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="absolute inset-0 shadow-2xl border-[4px] md:border-[8px] border-white overflow-hidden bg-white"
+        >
+          <Image 
+            src={encodeURI(images[activeIndex])}
+            alt={`Slide ${activeIndex + 1}`}
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority={activeIndex === 0}
+          />
+          <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm px-4 py-2 font-bold text-xs tracking-widest uppercase text-[#004A61] z-20 shadow-sm">
+            Slide {activeIndex + 1} / {images.length}
+          </div>
+        </motion.div>
+      </AnimatePresence>
+      
+      <button 
+        onClick={() => setActiveIndex((prev) => (prev - 1 + images.length) % images.length)}
+        className="absolute left-[-15px] md:left-[-20px] top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white border border-[#004A61] rounded-full flex items-center justify-center z-30 shadow-xl hover:bg-[#EE5B2B] hover:text-white hover:border-[#EE5B2B] transition-colors"
+      >
+        <span className="sr-only">Prev</span>
+        ←
+      </button>
+      <button 
+        onClick={() => setActiveIndex((prev) => (prev + 1) % images.length)}
+        className="absolute right-[-15px] md:right-[-20px] top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white border border-[#004A61] rounded-full flex items-center justify-center z-30 shadow-xl hover:bg-[#EE5B2B] hover:text-white hover:border-[#EE5B2B] transition-colors"
+      >
+        <span className="sr-only">Next</span>
+        →
+      </button>
+    </div>
+  );
+}
 
 function StoryCarousel({ images, title, subtitle, aspect = "aspect-[16/10]" }: { images: string[], title?: string, subtitle?: string, aspect?: string }) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -164,14 +211,14 @@ export function UluwatuClient() {
             <div className="max-w-xl space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 border border-[#EE5B2B]/20 rounded-full">
                 <MapPin className="w-3.5 h-3.5 text-[#EE5B2B]" />
-                <span className="text-[10px] font-bold tracking-[2px] uppercase">The Landmark</span>
+                <span className="text-[10px] font-bold tracking-[2px] uppercase">The Vibe</span>
               </div>
               <h2 className="text-2xl md:text-5xl font-heading tracking-widest uppercase leading-[0.9]">
-                THE <span className="text-[#EE5B2B]">CLIFFSIDE</span> SANCTUARY
+                THE ULUWATU <span className="text-[#EE5B2B]">VIBE</span>
               </h2>
             </div>
             <p className="max-w-xs text-[10px] font-bold uppercase tracking-[2px] opacity-60 leading-relaxed">
-              Industrial luxury meets raw energy. Minimalist. Precise.
+              Raw energy. Good times. The ultimate island experience.
             </p>
           </div>
           
@@ -179,11 +226,11 @@ export function UluwatuClient() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="border-[4px] md:border-[8px] border-white shadow-lg"
+            className="w-full"
           >
-            <StoryCarousel 
+            <CodayStyleCarousel 
               images={ASSETS.showcase} 
-              aspect="aspect-[16/9]"
+              aspect="aspect-[4/3] md:aspect-[16/9]"
             />
           </motion.div>
         </section>
@@ -250,14 +297,13 @@ export function UluwatuClient() {
           </motion.div>
         </section>
 
-        {/* 5. Shop & Future */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          
+        {/* 5. Shop */}
+        <div className="flex justify-center">
           <motion.div 
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative aspect-[4/5] overflow-hidden group"
+            className="relative w-full max-w-lg aspect-[4/5] overflow-hidden group"
           >
             <Image src={ASSETS.shop} alt="Shop" fill className="object-cover transition-transform duration-1000 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 45vw" />
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500 flex flex-col items-center justify-center text-center">
@@ -266,20 +312,6 @@ export function UluwatuClient() {
               <Button className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none px-6 h-10 text-[10px] tracking-[2px]">SHOP NOW</Button>
             </div>
           </motion.div>
-
-          <div className="flex flex-col h-full">
-            <div className="flex-grow mb-4 overflow-hidden border-[4px] border-white shadow-md">
-              <StoryCarousel 
-                images={ASSETS.future} 
-                aspect="h-full min-h-[350px]"
-              />
-            </div>
-            <div className="space-y-2">
-              <h3 className="text-xl md:text-3xl font-heading tracking-widest uppercase leading-none">THE <span className="text-[#EE5B2B]">FUTURE</span> IS COMING</h3>
-              <p className="text-[10px] font-bold opacity-50 uppercase tracking-widest">Tusk • Black Betty</p>
-            </div>
-          </div>
-
         </div>
 
         {/* 6. Final CTA */}
