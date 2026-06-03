@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   },
 };
 
+import { Suspense } from "react";
+import { MetaPixel } from "@/components/layout/MetaPixel";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,6 +30,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.google.com" />
       </head>
       <body className={`${montserrat.variable} ${bebas.variable} font-sans antialiased bg-[#EBE6D8] text-[#004A61] flex flex-col min-h-screen`}>
+        <Suspense fallback={null}>
+          <MetaPixel />
+        </Suspense>
         <ConditionalShell>
           <PageTransition>
             {children}

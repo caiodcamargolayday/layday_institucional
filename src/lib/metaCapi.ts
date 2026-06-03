@@ -5,18 +5,18 @@ const API_VERSION = 'v21.0';
 export function getCapiConfig(origin: string) {
   if (origin === 'gilit') {
     return {
-      pixelId: process.env.META_PIXEL_ID_LDGILIT,
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_LDGILIT,
       accessToken: process.env.META_ACCESS_TOKEN_LDGILIT,
     };
   }
   if (origin === 'coday') {
     return {
-      pixelId: process.env.META_PIXEL_ID_CODAY,
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_CODAY,
       accessToken: process.env.META_ACCESS_TOKEN_CODAY,
     };
   }
   return {
-    pixelId: process.env.META_PIXEL_ID_LDCANGGU,
+    pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_LDCANGGU,
     accessToken: process.env.META_ACCESS_TOKEN_LDCANGGU,
   };
 }
