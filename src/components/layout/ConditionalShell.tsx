@@ -12,7 +12,12 @@ export function ConditionalShell({ children }: { children: React.ReactNode }) {
   const isStandalone = STANDALONE_ROUTES.some((r) => pathname.startsWith(r)) || pathname.endsWith("-lp");
 
   if (isStandalone) {
-    return <>{children}</>;
+    return (
+      <>
+        {children}
+        <ReviewsSection />
+      </>
+    );
   }
 
   return (
