@@ -1,337 +1,563 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ChevronDown, MapPin, ShoppingBag } from "lucide-react";
+import { 
+  ChevronDown, Camera, Waves, Utensils, Wifi, Map as MapIcon,
+  Plane, Luggage, Users, Cigarette, Beer, DoorClosed, Bed, Wind, Plug, Lock,
+  Lightbulb, PartyPopper, Bath, ChevronLeft, ChevronRight, X, Car, ShoppingBag, LifeBuoy
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const ASSETS = {
   hero: "/lay_day_uluwatu/place 2.jpeg",
-  showcase: [
+  ribbon: [
     "/lay_day_uluwatu/uluwatu_1.jpg",
     "/lay_day_uluwatu/uluwatu_2.jpg",
     "/lay_day_uluwatu/uluwatu_3.jpg",
     "/lay_day_uluwatu/uluwatu_4.jpg",
-    "/lay_day_uluwatu/uluwatu_5.jpg"
+    "/lay_day_uluwatu/uluwatu_5.jpg",
+    "/lay_day_uluwatu/party 1.jpeg",
+    "/lay_day_uluwatu/party 2.jpeg",
+    "/lay_day_uluwatu/place 5.jpeg",
+    "/lay_day_uluwatu/place 6.jpeg"
   ],
-  meals: [
+  masonry: [
+    { src: "/lay_day_uluwatu/room.jpeg", size: "large", title: "THE VILLA" },
+    { src: "/lay_day_uluwatu/place 2.jpeg", size: "small", title: "POOL SESSIONS" },
+    { src: "/lay_day_uluwatu/bowl.jpeg", size: "small", title: "ISLAND FLAVORS" },
+    { src: "/lay_day_uluwatu/bar 1.jpeg", size: "medium", title: "SOCIAL BAR" },
+    { src: "/lay_day_uluwatu/models.jpeg", size: "small", title: "THE SHOP" }
+  ],
+  facilitiesGallery: [
+    "/lay_day_uluwatu/place 2.jpeg",
+    "/lay_day_uluwatu/bar.jpeg",
     "/lay_day_uluwatu/bowl.jpeg",
-    "/lay_day_uluwatu/meal 1.jpeg",
-    "/lay_day_uluwatu/meal.jpeg"
-  ],
-  zoom: [
-    "/lay_day_uluwatu/palce_zoom 6.jpeg",
-    "/lay_day_uluwatu/palce_zoom 7.jpeg",
-    "/lay_day_uluwatu/place_zoom 1.jpeg",
-    "/lay_day_uluwatu/place_zoom 2.jpeg",
-    "/lay_day_uluwatu/place_zoom 3.jpeg",
-    "/lay_day_uluwatu/place_zoom 4.jpeg"
-  ],
-  shop: "/lay_day_uluwatu/models.jpeg"
+    "/lay_day_uluwatu/bar 1.jpeg",
+    "/lay_day_uluwatu/meal 1.jpeg"
+  ]
 };
 
-const sportsImages = [
-  "/lay_day_uluwatu/surf 1.jpeg",
-  "/lay_day_uluwatu/surf 3.jpeg",
-  "/lay_day_uluwatu/sport.jpeg",
-  "/lay_day_uluwatu/sport 3.jpeg",
-  "/lay_day_uluwatu/surf 2.jpeg"
+const FACILITIES = [
+  { icon: Utensils, label: "Restaurant" },
+  { icon: Waves, label: "Swimming Pool" },
+  { icon: Luggage, label: "Luggage Storage" },
+  { icon: Users, label: "Tours & Activities" },
+  { icon: Wifi, label: "Free WiFi" },
+  { icon: Cigarette, label: "Smoking Area" },
+  { icon: Beer, label: "Bar" },
+  { icon: DoorClosed, label: "Private Rooms" },
+  { icon: Wind, label: "Air Conditioning" },
+  { icon: Plug, label: "Personal International Power Sockets" },
+  { icon: Lock, label: "Individual Lockers" },
+  { icon: Lightbulb, label: "Bed Lights" },
+  { icon: PartyPopper, label: "Nightly Events" },
+  { icon: Bath, label: "Towels" },
+  { icon: Bed, label: "Capsule Beds" },
+  { icon: Car, label: "Underground Parking" },
+  { icon: Waves, label: "Poolside Bar" },
+  { icon: ShoppingBag, label: "Retail Store" },
+  { icon: Beer, label: "Beer Pong Tables" },
+  { icon: LifeBuoy, label: "Pool Toys" },
+  { icon: Lock, label: "Padlock Rental" }
 ];
 
-function CodayStyleCarousel({ images, aspect = "aspect-[16/9]" }: { images: string[], aspect?: string }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  
-  return (
-    <div className={`relative w-full ${aspect} group mx-auto`}>
-      {/* Preload all images so they don't delay on slide change */}
-      <div className="absolute opacity-0 pointer-events-none w-0 h-0 overflow-hidden -z-10">
-        {images.map((img, i) => (
-          <Image key={i} src={encodeURI(img)} alt="preload" width={100} height={100} priority />
-        ))}
-      </div>
+const ROOMS = [
+  {
+    image: "/lay_day_uluwatu/room 1.jpeg",
+    title: "STANDARD 8 BED FEMALE DORM",
+    price: "Starts from IDR 190,000",
+    details: "Sleeps 1 I Single Bed I Pool View"
+  },
+  {
+    image: "/lay_day_uluwatu/room 2.jpeg",
+    title: "STANDARD 8 BED MIXED DORM",
+    price: "Starts from IDR 170,000",
+    details: "Sleeps 1 I Single Bed I Pool View"
+  },
+  {
+    image: "/lay_day_uluwatu/room 3.jpeg",
+    title: "DELUXE 6 BED MIXED DORM",
+    price: "Starts from IDR 250,000",
+    details: "Sleeps 1 I Single Bed I Pool View"
+  },
+  {
+    image: "/lay_day_uluwatu/room 4.jpeg",
+    title: "STANDARD 4 BED MIXED DORM",
+    price: "Starts from IDR 290,000",
+    details: "Sleeps 1 I Single Bed I Pool View"
+  },
+  {
+    image: "/lay_day_uluwatu/room.jpeg",
+    title: "PRIVATE DOUBLE ROOM W/ ENSUITE BATHROOM",
+    price: "Starts from IDR 2,000,000",
+    details: "Sleeps 2 I Queen Bed I Ensuite Bathroom I Pool View"
+  }
+];
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeIndex}
-          initial={{ opacity: 0, scale: 0.98, x: 20 }}
-          animate={{ opacity: 1, scale: 1, x: 0 }}
-          exit={{ opacity: 0, scale: 1.02, x: -20 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="absolute inset-0 shadow-2xl border-[4px] md:border-[8px] border-white overflow-hidden bg-white"
-        >
-          <Image 
-            src={encodeURI(images[activeIndex])}
-            alt={`Slide ${activeIndex + 1}`}
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority={activeIndex === 0}
-          />
-          <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm px-4 py-2 font-bold text-xs tracking-widest uppercase text-[#004A61] z-20 shadow-sm">
-            Slide {activeIndex + 1} / {images.length}
-          </div>
-        </motion.div>
-      </AnimatePresence>
-      
-      <button 
-        onClick={() => setActiveIndex((prev) => (prev - 1 + images.length) % images.length)}
-        className="absolute left-[-15px] md:left-[-20px] top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white border border-[#004A61] rounded-full flex items-center justify-center z-30 shadow-xl hover:bg-[#EE5B2B] hover:text-white hover:border-[#EE5B2B] transition-colors"
-      >
-        <span className="sr-only">Prev</span>
-        ←
-      </button>
-      <button 
-        onClick={() => setActiveIndex((prev) => (prev + 1) % images.length)}
-        className="absolute right-[-15px] md:right-[-20px] top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white border border-[#004A61] rounded-full flex items-center justify-center z-30 shadow-xl hover:bg-[#EE5B2B] hover:text-white hover:border-[#EE5B2B] transition-colors"
-      >
-        <span className="sr-only">Next</span>
-        →
-      </button>
-    </div>
-  );
-}
+const DESTINATIONS = [
+  { image: "/lay_day_uluwatu/Surf Lessons in Padang Padang Beach.jpeg", title: "Surf Lessons in Padang Padang Beach", type: "beach", description: "A small sandy bay that once got popular because of its feature in the movie ‘Eat, Pray, Love’. The beach itself has a lot of umbrellas for sunbathing and relaxing." },
+  { image: "/lay_day_uluwatu/Bingin Beach.jpeg", title: "Bingin Beach", type: "beach", description: "A beautiful beach with crystal blue water and even a little Amalfi vibe to it. One of the great beaches Uluwatu has to offer." },
+  { image: "/lay_day_uluwatu/Sunset at Uluwatu Beach.jpeg", title: "Sunset at Uluwatu Beach", type: "beach", description: "For the surf legends among us, this is the go-to beach. Catch some mega swells and enjoy the beautiful sunset in the end of the day!" },
+  { image: "/lay_day_uluwatu/Uluwatu Temple.jpeg", title: "Uluwatu Temple", type: "temple", description: "One of Bali’s most scenic temples, built on top of a 70-metre-high cliff, is Uluwatu Temple." },
+  { image: "/lay_day_uluwatu/Kecak Fire Dance.jpeg", title: "Kecak Fire Dance", type: "museum", description: "The Kecak Fire Dance is an iconic dance performance in Bali. A group of 65+ human vocals acts as instruments that strengthen a story told in the form of dance. All of this happens during sunset time on a clifftop amphitheatre inside the Uluwatu Temple complex." },
+  { image: "/lay_day_uluwatu/Paragliding in Nyang Nyang.jpeg", title: "Paragliding in Nyang Nyang", type: "activities", description: "Gliding above the iconic Uluwatu cliffs, surrounded by the lush greenery and the endless blue of the Ocean." },
+  { image: "/lay_day_uluwatu/Paintball in Jimbaran.jpeg", title: "Paintball in Jimbaran", type: "activities", description: "Swap the surfboards for paintball markers! Experience the best of Uluwatu's coastal vibes by day and unleash colorful chaos on a paintball battlefield!" },
+  { image: "/lay_day_uluwatu/Padel in Uluwatu.jpeg", title: "Padel in Uluwatu", type: "activities", description: "Padel Paradise in Uluwatu: Where the Game Meets the Tropics!" },
+  { image: "/lay_day_uluwatu/Sea Food Restaurants in Jimbaran.jpeg", title: "Sea Food Restaurants in Jimbaran", type: "activities", description: "A gastronomic journey that combines the freshest catches with the enchanting beauty of Jimbaran's nature!" },
+  { image: "/lay_day_uluwatu/Savaya Beach Club.jpeg", title: "Savaya Beach Club", type: "attraction", description: "Savaya is one of Bali's most renowned beach clubs with ongoing events, nestled between the wild paradise of the jungle and soaring limestone cliffs of Uluwatu. This enclave of luxury sits upon a breathtaking natural wonder 100 meters above the Indian Ocean." },
+  { image: "/lay_day_uluwatu/El Kabron Beach Club.jpeg", title: "El Kabron Beach Club", type: "activities", description: "El Kabron is an iconic luxury Beach Club, Live Music Venue & Seafood Restaurant in Uluwatu known for the best sunsets in the world." },
+  { image: "/lay_day_uluwatu/Hatch Sunday Market.jpeg", title: "Hatch Sunday Market", type: "activities", description: "From 11am to 6pm every Sunday, Hatch has a delicious BBQ and talented acoustic musicians" },
+  { image: "/lay_day_uluwatu/Sundays Beach Club in Uluwatu.jpeg", title: "Sundays Beach Club in Uluwatu", type: "activities", description: "Sundays Beach Club is Bali’s most beautiful beachfront location, offering endless enjoyment for adults and kids in Uluwatu" },
+  { image: "/lay_day_uluwatu/Balangan Beach.jpeg", title: "Balangan Beach", type: "activities", description: "The beach is located in the white stone hill area of Pecatu, south part of Bali Island right in Uluwatu peninsula, it is well known for being one of the best surfing points in the island of god." },
+  { image: "/lay_day_uluwatu/Dreamland Beach.jpeg", title: "Dreamland Beach", type: "activities", description: "Boasting limestone cliffs, golden sands, and turquoise waters, Dreamland Beach is a beloved tourist spot that’s not to be missed when exploring Uluwatu." },
+  { image: "/lay_day_uluwatu/Pandawa Beach.jpeg", title: "Pandawa Beach", type: "activities", description: "Pandawa Beach is definitely worth a visit! Not only is it a stunning place but it’s also a haven for beach activities like swimming, surfing, kayaking, and even paragliding." }
+];
 
-function StoryCarousel({ images, title, subtitle, aspect = "aspect-[16/10]" }: { images: string[], title?: string, subtitle?: string, aspect?: string }) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  return (
-    <div className={`relative group bg-[#D8D2C5] ${aspect} overflow-hidden`}>
-      <div 
-        ref={scrollRef}
-        className="flex w-full h-full overflow-x-auto snap-x snap-mandatory no-scrollbar cursor-grab active:cursor-grabbing"
-      >
-        {images.map((src, i) => (
-          <div key={i} className="flex-shrink-0 w-full h-full snap-center relative">
-            <Image 
-              src={src} 
-              alt={`${title || "Slide"} ${i}`} 
-              fill 
-              className="object-cover" 
-              sizes="(max-width: 768px) 100vw, 80vw"
-              priority={i === 0}
-            />
-          </div>
-        ))}
-      </div>
-      
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 pointer-events-none" />
-      
-      {(title || subtitle) && (
-        <div className="absolute bottom-6 left-6 z-20 space-y-2 pointer-events-none">
-          {subtitle && (
-            <p className="text-[#EE5B2B] font-bold tracking-[3px] uppercase text-[10px]">
-              {subtitle}
-            </p>
-          )}
-          {title && (
-            <h3 className="text-white font-heading text-2xl md:text-4xl tracking-widest uppercase">
-              {title}
-            </h3>
-          )}
-        </div>
-      )}
-
-      <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2 text-white/50 text-[8px] font-bold tracking-[2px] uppercase pointer-events-none">
-        <span className="animate-pulse">Swipe</span>
-        <div className="w-4 h-[1px] bg-white/30" />
-      </div>
-    </div>
-  );
-}
+const DISPLAY_DESTINATIONS = DESTINATIONS.slice(0, 6);
 
 export function UluwatuClient() {
   const [hasMounted, setHasMounted] = useState(false);
   const containerRef = useRef(null);
+  const [currentStoryImg, setCurrentStoryImg] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentFacilityImg, setCurrentFacilityImg] = useState(0);
+
+  const storyImages = [
+    "/lay_day_uluwatu/uluwatu_1.jpg",
+    "/lay_day_uluwatu/place 2.jpeg",
+    "/lay_day_uluwatu/uluwatu_4.jpg",
+    "/lay_day_uluwatu/bar.jpeg"
+  ];
 
   useEffect(() => {
     setHasMounted(true);
-  }, []);
+    const timer = setInterval(() => {
+      setCurrentStoryImg((prev) => (prev + 1) % storyImages.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [storyImages.length]);
 
   const { scrollYProgress } = useScroll({
     offset: ["start start", "end end"]
   });
 
   const heroY = useTransform(scrollYProgress, [0, 0.2], [0, -40]);
+  const ribbonX = useTransform(scrollYProgress, [0, 1], [0, -2500]);
+
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  const scrollCarousel = (dir: 'left' | 'right') => {
+    if (carouselRef.current) {
+      const scrollAmount = 700;
+      carouselRef.current.scrollBy({ left: dir === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  const scrollFacility = (dir: 'left' | 'right') => {
+    const newIdx = dir === 'right'
+      ? (currentFacilityImg + 1) % ASSETS.facilitiesGallery.length
+      : (currentFacilityImg - 1 + ASSETS.facilitiesGallery.length) % ASSETS.facilitiesGallery.length;
+    setCurrentFacilityImg(newIdx);
+  };
 
   if (!hasMounted) return <div className="min-h-screen bg-[#EBE7E0]" />;
 
   return (
     <div ref={containerRef} className="bg-[#EBE7E0] text-[#004A61] font-sans selection:bg-[#EE5B2B] selection:text-white overflow-x-hidden">
-      
-      {/* 1. Cinematic Hero */}
+
+      {/* 1. Hero */}
       <section className="relative h-[70vh] md:h-[80vh] w-full overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0 z-0">
-          <Image 
-            src={ASSETS.hero} 
-            alt="Uluwatu Hero" 
-            fill 
+          <Image
+            src={ASSETS.hero}
+            alt="Uluwatu Hero"
+            fill
             priority
             className="object-cover scale-105 brightness-90 saturate-[0.8]"
             sizes="100vw"
           />
         </motion.div>
-        
+
         <div className="absolute inset-0 bg-black/30 z-10" />
-        
+
         <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <span className="text-white font-bold tracking-[4px] uppercase text-[11px] mb-3 block drop-shadow-lg">Uluwatu • Sanctuary</span>
+            <span className="text-white font-bold tracking-[4px] uppercase text-[9px] mb-2 block drop-shadow-lg">Cliffside Sanctuary • Uluwatu</span>
             <h1 className="text-5xl md:text-7xl font-heading text-white tracking-widest leading-none mb-6 drop-shadow-2xl">
               LAY DAY <span className="text-[#EE5B2B]">ULUWATU</span>
             </h1>
+            <p className="max-w-xl mx-auto text-white/90 font-medium tracking-wide text-lg md:text-xl leading-relaxed mb-8">
+              Industrial luxury meets the raw energy of the Bukit Peninsula. Cliffside vibes and legendary social rituals.
+            </p>
             <div className="flex flex-col items-center">
-              <Button 
-                onClick={() => window.open("https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR", "_blank")}
+              <Button
+                onClick={() => {
+                  localStorage.setItem("booking_origin", "uluwatu");
+                  window.open("https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR", "_blank");
+                }}
                 className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-10 font-bold uppercase tracking-[3px] text-xs transition-all duration-500 shadow-xl mb-6">
-                SECURE YOUR SPOT
+                BOOK THE LEGEND
               </Button>
-              
+
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
                 className="opacity-40"
               >
-                <ChevronDown className="w-6 h-6 text-white" strokeWidth={1.5} />
+                <ChevronDown className="w-5 h-5 text-white" strokeWidth={1.5} />
               </motion.div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-4 py-8 md:py-16 space-y-12 md:space-y-20">
-        
-        {/* 2. The Place */}
-        <section className="space-y-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="max-w-xl space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 border border-[#EE5B2B]/20 rounded-full">
-                <MapPin className="w-3.5 h-3.5 text-[#EE5B2B]" />
-                <span className="text-[10px] font-bold tracking-[2px] uppercase">The Vibe</span>
-              </div>
-              <h2 className="text-2xl md:text-5xl font-heading tracking-widest uppercase leading-[0.9]">
-                THE ULUWATU <span className="text-[#EE5B2B]">VIBE</span>
-              </h2>
+      {/* 2. Ribbon */}
+      <div className="py-4 md:py-6 overflow-hidden bg-white/5">
+        <motion.div
+          style={{ x: ribbonX }}
+          className="flex gap-4 md:gap-6 whitespace-nowrap"
+        >
+          {[...ASSETS.ribbon, ...ASSETS.ribbon].map((img, i) => (
+            <div key={i} className="relative w-[240px] md:w-[400px] aspect-video flex-shrink-0 grayscale-[0.3] hover:grayscale-0 transition-all duration-700 overflow-hidden">
+              <Image src={img} alt="Vibe" fill className="object-cover" sizes="(max-width: 768px) 50vw, 30vw" />
             </div>
-            <p className="max-w-xs text-[10px] font-bold uppercase tracking-[2px] opacity-60 leading-relaxed">
-              Raw energy. Good times. The ultimate island experience.
-            </p>
-          </div>
-          
+          ))}
+        </motion.div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 py-8 md:py-16">
+
+        {/* 3. Intro */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center mb-12 md:mb-20">
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="w-full"
-          >
-            <CodayStyleCarousel 
-              images={ASSETS.showcase} 
-              aspect="aspect-[4/3] md:aspect-[16/9]"
-            />
-          </motion.div>
-        </section>
-
-        {/* 3. Ritual */}
-        <section className="relative py-6 md:py-10 overflow-hidden">
-          <div className="mb-6">
-            <h2 className="text-3xl md:text-5xl font-heading tracking-tighter uppercase mb-2">
-              SURF, <span className="text-[#EE5B2B]">SWEAT</span>, LEGEND.
-            </h2>
-            <p className="text-[#004A61] text-xs font-bold uppercase tracking-wider opacity-50">
-              No filters. Just pure ritual.
-            </p>
-          </div>
-
-          <div className="relative w-full overflow-x-auto no-scrollbar pb-4">
-            <div className="flex items-center gap-3 md:gap-6 px-[5vw] w-max">
-              {[...sportsImages, ...sportsImages].map((src, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  className={`relative flex-shrink-0 ${
-                    i % 3 === 0 ? 'w-[220px] md:w-[350px] aspect-[4/5]' : 
-                    i % 3 === 1 ? 'w-[200px] md:w-[320px] aspect-square' : 
-                    'w-[260px] md:w-[450px] aspect-[16/9]'
-                  } border-[1px] border-[#004A61]/5 shadow-sm group overflow-hidden bg-white`}
-                >
-                  <Image 
-                    src={src} 
-                    alt="Ritual" 
-                    fill 
-                    className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
-                    sizes="(max-width: 768px) 50vw, 30vw"
-                  />
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 4. Meals */}
-        <section className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
-          <div className="md:col-span-5 space-y-4">
-            <h2 className="text-2xl md:text-5xl font-heading tracking-widest uppercase">
-              ISLAND <span className="text-[#EE5B2B]">FLAVORS</span>
-            </h2>
-            <p className="text-xs leading-relaxed font-medium opacity-80 uppercase tracking-tight">
-              Fuel for the waves. Pure. Fresh.
-            </p>
-          </div>
-          
-          <motion.div
-            initial={{ opacity: 0, x: 10 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="md:col-span-7 border-[4px] md:border-[8px] border-white shadow-lg"
+            className="space-y-6"
           >
-            <StoryCarousel 
-              images={ASSETS.meals} 
-              aspect="aspect-[4/3]"
-            />
+            <div className="inline-flex items-center gap-3 px-3 py-1 border border-[#EE5B2B]/20 rounded-full">
+              <Waves className="w-3.5 h-3.5 text-[#EE5B2B]" />
+              <span className="text-[10px] font-bold tracking-[2px] uppercase">Surf &amp; Party</span>
+            </div>
+            <h2 className="text-2xl md:text-5xl font-heading tracking-widest leading-tight uppercase">
+              CLIFFSIDE <span className="text-[#EE5B2B]">PARADISE</span>
+            </h2>
+            <p className="text-sm md:text-base leading-relaxed font-medium opacity-70 max-w-lg uppercase tracking-tight">
+              Welcome to Lay Day Uluwatu — where good vibes, salty hair, and unforgettable nights come standard. With 168 dorm beds and 5 private rooms, we’re your ultimate base for partying, chilling, and meeting people from around the world. By day, lounge by our massive pool or relax with a cold drink. By night, our lively bar keeps the energy high and the good times rolling.
+            </p>
           </motion.div>
-        </section>
 
-        {/* 5. Shop */}
-        <div className="flex justify-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative w-full max-w-lg aspect-[4/5] overflow-hidden group"
+            className="aspect-[4/5] relative border-[4px] md:border-[8px] border-white shadow-lg overflow-hidden"
           >
-            <Image src={ASSETS.shop} alt="Shop" fill className="object-cover transition-transform duration-1000 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 45vw" />
-            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500 flex flex-col items-center justify-center text-center">
-              <ShoppingBag className="w-6 h-6 text-white mb-4" />
-              <h3 className="text-white font-heading text-3xl tracking-widest uppercase mb-2">THE <span className="text-[#EE5B2B]">SHOP</span></h3>
-              <Button className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none px-6 h-10 text-[10px] tracking-[2px]">SHOP NOW</Button>
-            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentStoryImg}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.8 }}
+                className="absolute inset-0"
+              >
+                <Image src={storyImages[currentStoryImg]} alt="Story" fill className="object-cover" sizes="(max-width: 768px) 100vw, 40vw" />
+              </motion.div>
+            </AnimatePresence>
           </motion.div>
         </div>
 
-        {/* 6. Final CTA */}
-        <section className="text-center bg-[#004A61] text-white p-8 md:p-16 relative overflow-hidden">
-          <div className="relative z-10 space-y-6">
-            <h2 className="text-4xl md:text-6xl font-heading tracking-widest uppercase leading-none">
-              ULU <span className="text-[#EE5B2B]">WAITING</span>
-            </h2>
-            <Button 
-              onClick={() => window.open("https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR", "_blank")}
-              className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-12 font-bold uppercase tracking-[3px] text-xs transition-all duration-500 shadow-xl">
-              CLAIM YOUR SPOT
-            </Button>
+        {/* 4. Our Destinations */}
+        <section className="mb-16 md:mb-24">
+          <div className="mb-10">
+            <h2 className="text-2xl md:text-4xl font-heading tracking-widest uppercase">OUR <span className="text-[#EE5B2B]">DESTINATIONS</span></h2>
           </div>
-          <div className="absolute inset-0 z-0 opacity-10">
-            <Image src="/lay_day_uluwatu/surf 1.jpeg" alt="BG" fill className="object-cover grayscale" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="space-y-6">
+              <h3 className="text-lg font-medium opacity-80 mb-4 border-b border-[#004A61]/10 pb-4">Nearby Places</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {DISPLAY_DESTINATIONS.map((dest, i) => (
+                  <div key={i} className="flex items-center gap-4 group cursor-pointer">
+                    <div className="w-24 h-24 relative flex-shrink-0 overflow-hidden border-2 border-white shadow-sm">
+                      <Image src={dest.image} alt={dest.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                    </div>
+                    <div>
+                      <h4 className="font-heading tracking-wider uppercase text-base md:text-lg leading-tight text-[#004A61] group-hover:text-[#EE5B2B] transition-colors mb-1">{dest.title}</h4>
+                      <span className="text-xs text-[#EE5B2B] lowercase font-bold tracking-widest">{dest.type}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="pt-6">
+                <Button onClick={() => setIsModalOpen(true)} variant="outline" className="border-[#EE5B2B] text-[#EE5B2B] rounded-none px-8 py-4 h-auto font-bold uppercase tracking-widest text-xs hover:bg-[#EE5B2B] hover:text-white transition-colors">
+                  SEE MORE
+                </Button>
+              </div>
+            </div>
+
+            {/* OpenStreetMap — Uluwatu coords: -8.814861, 115.112472 */}
+            <div className="relative min-h-[400px] w-full border-[4px] md:border-[8px] border-white shadow-lg overflow-hidden bg-[#A3CAE1]/20">
+              <div className="absolute top-0 left-0 w-full h-[calc(100%+32px)]">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  scrolling="no"
+                  marginHeight={0}
+                  marginWidth={0}
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=115.0925%2C-8.827361%2C115.1325%2C-8.802361&amp;layer=mapnik&amp;marker=-8.814861%2C115.112472"
+                  style={{ border: "none", position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+                ></iframe>
+              </div>
+              <div className="absolute bottom-0 right-0 bg-white/80 backdrop-blur-sm px-2 py-0.5 text-[10px] text-[#004A61] z-10 pointer-events-none">
+                Leaflet | © OpenStreetMap contributors
+              </div>
+            </div>
           </div>
         </section>
 
+        {/* 5. Facilities + Amenities */}
+        <section className="mb-16 md:mb-24 py-12 md:py-16 border-y border-[#004A61]/10">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-4xl font-heading tracking-widest uppercase">FACILITIES + <span className="text-[#EE5B2B]">AMENITIES</span></h2>
+          </div>
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-10 md:gap-x-12 md:gap-y-12">
+            {FACILITIES.map((fac, i) => (
+              <div key={i} className="flex flex-col items-center text-center w-[80px] md:w-[100px] group">
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 group-hover:-translate-y-2 transition-transform duration-300">
+                  <fac.icon className="w-6 h-6 md:w-8 md:h-8 text-[#004A61] stroke-[1.5]" />
+                </div>
+                <span className="text-[10px] md:text-xs font-medium leading-tight opacity-80">{fac.label}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 6. Accommodation Options */}
+        <section className="mb-16 md:mb-24 relative">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-4xl font-heading tracking-widest uppercase">ACCOMMODATION <span className="text-[#EE5B2B]">OPTIONS</span></h2>
+          </div>
+
+          <div className="relative">
+            <div ref={carouselRef} className="flex overflow-x-auto gap-6 md:gap-10 pb-10 snap-x snap-mandatory no-scrollbar scroll-smooth">
+              {ROOMS.map((room, i) => (
+                <div key={i} className="snap-center shrink-0 w-[85vw] md:w-[800px] bg-white flex flex-col md:flex-row shadow-xl border-[4px] md:border-[8px] border-white">
+                  <div className="relative w-full md:w-1/2 h-[300px] md:h-[450px]">
+                    <Image src={room.image} alt={room.title} fill className="object-cover" />
+                  </div>
+                  <div className="p-8 md:p-12 flex flex-col justify-center w-full md:w-1/2">
+                    <h3 className="text-xl md:text-2xl font-heading tracking-widest text-[#004A61] mb-2 uppercase">{room.title}</h3>
+                    <p className="font-bold text-[#EE5B2B] text-lg mb-6">{room.price}</p>
+                    <p className="text-sm opacity-70 font-medium mb-10">{room.details}</p>
+                    <Button
+                      onClick={() => {
+                        window.open("https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR", "_blank");
+                      }}
+                      className="bg-[#EE5B2B] text-white hover:bg-[#004A61] rounded-none h-12 px-8 font-bold uppercase text-xs tracking-widest transition-colors w-full sm:w-auto"
+                    >
+                      BOOK NOW
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Carousel Arrows */}
+            <div className="hidden lg:flex absolute top-1/2 -translate-y-1/2 -left-16 -right-16 justify-between pointer-events-none">
+              <button onClick={() => scrollCarousel('left')} className="pointer-events-auto text-[#EE5B2B] opacity-50 hover:opacity-100 transition-opacity">
+                <ChevronLeft className="w-12 h-12" strokeWidth={1} />
+              </button>
+              <button onClick={() => scrollCarousel('right')} className="pointer-events-auto text-[#EE5B2B] opacity-50 hover:opacity-100 transition-opacity">
+                <ChevronRight className="w-12 h-12" strokeWidth={1} />
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* 7. Facilities Photo Gallery */}
+        <section className="mb-16 md:mb-24">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-4xl font-heading tracking-widest uppercase">SEE THE <span className="text-[#EE5B2B]">VIBE</span></h2>
+          </div>
+          <div className="relative">
+            {/* Main Image */}
+            <div className="relative aspect-[16/9] md:aspect-[21/9] overflow-hidden border-[4px] md:border-[8px] border-white shadow-xl">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentFacilityImg}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={ASSETS.facilitiesGallery[currentFacilityImg]}
+                    alt="Facility"
+                    fill
+                    className="object-cover"
+                    sizes="100vw"
+                  />
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Side preview strips */}
+              <div className="absolute left-0 top-0 w-[12%] h-full z-10 overflow-hidden opacity-60">
+                <Image
+                  src={ASSETS.facilitiesGallery[(currentFacilityImg - 1 + ASSETS.facilitiesGallery.length) % ASSETS.facilitiesGallery.length]}
+                  alt="prev"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="absolute right-0 top-0 w-[12%] h-full z-10 overflow-hidden opacity-60">
+                <Image
+                  src={ASSETS.facilitiesGallery[(currentFacilityImg + 1) % ASSETS.facilitiesGallery.length]}
+                  alt="next"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Navigation */}
+            <div className="flex justify-center items-center gap-8 mt-6">
+              <button
+                onClick={() => scrollFacility('left')}
+                className="w-10 h-10 rounded-full border-2 border-[#EE5B2B] text-[#EE5B2B] flex items-center justify-center hover:bg-[#EE5B2B] hover:text-white transition-colors"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <div className="flex gap-2">
+                {ASSETS.facilitiesGallery.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentFacilityImg(i)}
+                    className={`h-2 rounded-full transition-all duration-300 ${i === currentFacilityImg ? 'bg-[#EE5B2B] w-6' : 'bg-[#004A61]/30 w-2'}`}
+                  />
+                ))}
+              </div>
+              <button
+                onClick={() => scrollFacility('right')}
+                className="w-10 h-10 rounded-full border-2 border-[#EE5B2B] text-[#EE5B2B] flex items-center justify-center hover:bg-[#EE5B2B] hover:text-white transition-colors"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* 8. Gallery */}
+        <section className="mb-12 md:mb-20">
+          <div className="text-center mb-8">
+            <Camera className="w-5 h-5 text-[#EE5B2B] mx-auto mb-4" />
+            <h2 className="text-xl md:text-4xl font-heading tracking-widest uppercase">THE <span className="text-[#EE5B2B]">UNFILTERED</span> GALLERY</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
+            {ASSETS.masonry.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className={`relative overflow-hidden group ${
+                  item.size === 'large' ? 'md:col-span-8 md:row-span-2 aspect-[16/10]' :
+                  item.size === 'medium' ? 'md:col-span-6 aspect-square' :
+                  'md:col-span-4 aspect-[4/5]'
+                }`}
+              >
+                <Image src={item.src} alt={item.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 30vw" />
+                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center p-4 text-center">
+                  <h4 className="text-white font-heading text-lg tracking-widest">{item.title}</h4>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* 9. Final CTA */}
+        <motion.section
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="relative h-[40vh] md:h-[50vh] flex items-center justify-center text-center overflow-hidden"
+        >
+          <div className="absolute inset-0 z-0">
+            <Image src="/lay_day_uluwatu/uluwatu_4.jpg" alt="Vibe" fill className="object-cover grayscale brightness-50" sizes="100vw" />
+          </div>
+          <div className="relative z-10 px-4 space-y-4">
+            <h2 className="text-3xl md:text-6xl font-heading text-white tracking-[6px] md:tracking-[12px] uppercase leading-none">
+              LIVE THE <span className="text-[#EE5B2B]">VIBE</span>
+            </h2>
+            <Button
+              onClick={() => {
+                localStorage.setItem("booking_origin", "uluwatu");
+                window.open("https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR", "_blank");
+              }}
+              className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-12 font-bold uppercase tracking-[4px] text-[10px] transition-all duration-500">
+              BOOK NOW
+            </Button>
+          </div>
+        </motion.section>
+
       </div>
+
+      {/* Destinations Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsModalOpen(false)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/60 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-[#EBE7E0] w-full max-w-4xl max-h-full overflow-y-auto shadow-2xl flex flex-col custom-scrollbar"
+            >
+              <style>{`
+                .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+                .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+                .custom-scrollbar::-webkit-scrollbar-thumb { background-color: rgba(0,74,97,0.4); border-radius: 10px; }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #EE5B2B; }
+              `}</style>
+              <div className="sticky top-0 bg-[#EBE7E0] z-10 p-6 flex justify-between items-center border-b border-[#004A61]/10">
+                <h2 className="text-xl font-heading tracking-widest uppercase text-[#004A61]">MORE PLACES TO VISIT</h2>
+                <button onClick={() => setIsModalOpen(false)} className="text-[#004A61] hover:text-[#EE5B2B] transition-colors">
+                  <X className="w-8 h-8" />
+                </button>
+              </div>
+              <div className="p-6 md:p-10 space-y-10">
+                {DESTINATIONS.map((dest, i) => (
+                  <div key={i} className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+                    <div className="w-full sm:w-[280px] aspect-[16/10] relative flex-shrink-0">
+                      <Image src={dest.image} alt={dest.title} fill className="object-cover shadow-sm border-2 border-white" />
+                    </div>
+                    <div>
+                      <span className="text-[#EE5B2B] lowercase font-bold tracking-widest text-[10px] mb-2 block">{dest.type}</span>
+                      <h3 className="text-2xl md:text-3xl font-heading tracking-widest text-[#004A61] uppercase leading-tight mb-3">{dest.title}</h3>
+                      <p className="text-sm opacity-70 font-medium">{dest.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
