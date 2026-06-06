@@ -24,7 +24,7 @@ const ASSETS = {
     "/lay_day_uluwatu/place 6.jpeg"
   ],
   masonry: [
-    { src: "/lay_day_uluwatu/room.jpeg", size: "large", title: "THE VILLA" },
+    { src: "/lay_day_uluwatu/room2mill.jpeg", size: "large", title: "THE VILLA" },
     { src: "/lay_day_uluwatu/place 2.jpeg", size: "small", title: "POOL SESSIONS" },
     { src: "/lay_day_uluwatu/bowl.jpeg", size: "small", title: "ISLAND FLAVORS" },
     { src: "/lay_day_uluwatu/bar 1.jpeg", size: "medium", title: "SOCIAL BAR" },
@@ -65,31 +65,31 @@ const FACILITIES = [
 
 const ROOMS = [
   {
-    image: "/lay_day_uluwatu/room 1.jpeg",
+    image: "/lay_day_uluwatu/room190k.jpeg",
     title: "STANDARD 8 BED FEMALE DORM",
     price: "Starts from IDR 190,000",
     details: "Sleeps 1 I Single Bed I Pool View"
   },
   {
-    image: "/lay_day_uluwatu/room 2.jpeg",
+    image: "/lay_day_uluwatu/room170k.jpg",
     title: "STANDARD 8 BED MIXED DORM",
     price: "Starts from IDR 170,000",
     details: "Sleeps 1 I Single Bed I Pool View"
   },
   {
-    image: "/lay_day_uluwatu/room 3.jpeg",
+    image: "/lay_day_uluwatu/room250k.jpeg",
     title: "DELUXE 6 BED MIXED DORM",
     price: "Starts from IDR 250,000",
     details: "Sleeps 1 I Single Bed I Pool View"
   },
   {
-    image: "/lay_day_uluwatu/room 4.jpeg",
+    image: "/lay_day_uluwatu/room290k.png",
     title: "STANDARD 4 BED MIXED DORM",
     price: "Starts from IDR 290,000",
     details: "Sleeps 1 I Single Bed I Pool View"
   },
   {
-    image: "/lay_day_uluwatu/room.jpeg",
+    image: "/lay_day_uluwatu/room2mill.jpeg",
     title: "PRIVATE DOUBLE ROOM W/ ENSUITE BATHROOM",
     price: "Starts from IDR 2,000,000",
     details: "Sleeps 2 I Queen Bed I Ensuite Bathroom I Pool View"
