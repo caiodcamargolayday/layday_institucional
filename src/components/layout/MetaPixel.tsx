@@ -10,7 +10,10 @@ function getPixelIdForPath(pathname: string) {
   if (pathname.includes("gilit")) {
     return process.env.NEXT_PUBLIC_META_PIXEL_ID_LDGILIT;
   }
-  // Default to Canggu
+  if (pathname.includes("canggu")) {
+    return process.env.NEXT_PUBLIC_META_PIXEL_ID_LDCANGGU;
+  }
+  // Default to Canggu for the main site too
   return process.env.NEXT_PUBLIC_META_PIXEL_ID_LDCANGGU;
 }
 
