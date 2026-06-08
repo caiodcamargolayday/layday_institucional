@@ -199,6 +199,9 @@ export function UluwatuClient() {
               <Button
                 onClick={() => {
                   localStorage.setItem("booking_origin", "uluwatu");
+                  if (typeof window !== "undefined" && (window as any).fbq) {
+                    (window as any).fbq('track', 'InitiateCheckout');
+                  }
                   window.open("https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR", "_blank");
                 }}
                 className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-10 font-bold uppercase tracking-[3px] text-xs transition-all duration-500 shadow-xl mb-6">
@@ -359,6 +362,9 @@ export function UluwatuClient() {
                     <p className="text-sm opacity-70 font-medium mb-10">{room.details}</p>
                     <Button
                       onClick={() => {
+                        if (typeof window !== "undefined" && (window as any).fbq) {
+                          (window as any).fbq('track', 'InitiateCheckout');
+                        }
                         window.open("https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR", "_blank");
                       }}
                       className="bg-[#EE5B2B] text-white hover:bg-[#004A61] rounded-none h-12 px-8 font-bold uppercase text-xs tracking-widest transition-colors w-full sm:w-auto"
@@ -501,6 +507,9 @@ export function UluwatuClient() {
             <Button
               onClick={() => {
                 localStorage.setItem("booking_origin", "uluwatu");
+                if (typeof window !== "undefined" && (window as any).fbq) {
+                  (window as any).fbq('track', 'InitiateCheckout');
+                }
                 window.open("https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR", "_blank");
               }}
               className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-12 font-bold uppercase tracking-[4px] text-[10px] transition-all duration-500">

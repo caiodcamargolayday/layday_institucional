@@ -27,9 +27,9 @@ function ConfirmationLogic() {
     // Only fire if we have a reservation ID (real booking)
     if (!reservationId) return;
 
-    // Only fire if the booking originated from Canggu, Gili T, or Coday
+    // Only fire if the booking originated from Canggu, Gili T, Coday, or Uluwatu
     const origin = sessionStorage.getItem("booking_origin") || localStorage.getItem("booking_origin");
-    if (origin !== "canggu" && origin !== "gilit" && origin !== "coday") {
+    if (origin !== "canggu" && origin !== "gilit" && origin !== "coday" && origin !== "uluwatu") {
       console.log("[CAPI] Ignored: Booking origin unknown.");
       return;
     }
