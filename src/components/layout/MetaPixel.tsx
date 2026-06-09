@@ -3,17 +3,19 @@
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-function getPixelIdForPath(pathname: string) {
-  if (pathname.includes("coday")) {
+function getPixelIdForPath(pathname: string, origin?: string | null) {
+  const target = origin || pathname;
+
+  if (target.includes("coday")) {
     return process.env.NEXT_PUBLIC_META_PIXEL_ID_CODAY;
   }
-  if (pathname.includes("gilit")) {
+  if (target.includes("gilit")) {
     return process.env.NEXT_PUBLIC_META_PIXEL_ID_LDGILIT;
   }
-  if (pathname.includes("uluwatu")) {
+  if (target.includes("uluwatu")) {
     return process.env.NEXT_PUBLIC_META_PIXEL_ID_LDULUWATU;
   }
-  if (pathname.includes("canggu")) {
+  if (target.includes("canggu")) {
     return process.env.NEXT_PUBLIC_META_PIXEL_ID_LDCANGGU;
   }
   // Default to Canggu for the main site too
@@ -28,7 +30,12 @@ export function MetaPixel() {
   useEffect(() => {
     if (!pathname) return;
 
-    const pixelId = getPixelIdForPath(pathname);
+    let origin: string | null = null;
+    if (pathname.includes("booking-confirmation")) {
+      origin = sessionStorage.getItem("booking_origin") || localStorage.getItem("booking_origin");
+    }
+
+    const pixelId = getPixelIdForPath(pathname, origin);
     if (!pixelId) return;
 
     // Load Pixel script if not already loaded
