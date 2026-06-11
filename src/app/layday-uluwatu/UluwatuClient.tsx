@@ -14,14 +14,20 @@ const ASSETS = {
   hero: "/lay_day_uluwatu/place 2.jpeg",
   ribbon: [
     "/lay_day_uluwatu/uluwatu_1.jpg",
+    "/lay_day_uluwatu/new_01.jpg",
     "/lay_day_uluwatu/uluwatu_2.jpg",
+    "/lay_day_uluwatu/new_02.JPG",
     "/lay_day_uluwatu/uluwatu_3.jpg",
     "/lay_day_uluwatu/uluwatu_4.jpg",
+    "/lay_day_uluwatu/party 1.jpeg",
     "/lay_day_uluwatu/uluwatu_5.jpg",
     "/lay_day_uluwatu/party 1.jpeg",
+    "/lay_day_uluwatu/new_04.jpg",
     "/lay_day_uluwatu/party 2.jpeg",
     "/lay_day_uluwatu/place 5.jpeg",
-    "/lay_day_uluwatu/place 6.jpeg"
+    "/lay_day_uluwatu/new_05.jpg",
+    "/lay_day_uluwatu/place 6.jpeg",
+    "/lay_day_uluwatu/new_06.jpg"
   ],
   masonry: [
     { src: "/lay_day_uluwatu/room2mill.jpeg", size: "large", title: "THE VILLA" },
@@ -32,10 +38,16 @@ const ASSETS = {
   ],
   facilitiesGallery: [
     "/lay_day_uluwatu/place 2.jpeg",
+    "/lay_day_uluwatu/new_01.jpg",
     "/lay_day_uluwatu/bar.jpeg",
+    "/lay_day_uluwatu/new_02.JPG",
     "/lay_day_uluwatu/bowl.jpeg",
+    "/lay_day_uluwatu/party 1.jpeg",
     "/lay_day_uluwatu/bar 1.jpeg",
-    "/lay_day_uluwatu/meal 1.jpeg"
+    "/lay_day_uluwatu/new_04.jpg",
+    "/lay_day_uluwatu/meal 1.jpeg",
+    "/lay_day_uluwatu/new_05.jpg",
+    "/lay_day_uluwatu/new_06.jpg"
   ]
 };
 
@@ -227,8 +239,8 @@ export function UluwatuClient() {
           className="flex gap-4 md:gap-6 whitespace-nowrap"
         >
           {[...ASSETS.ribbon, ...ASSETS.ribbon].map((img, i) => (
-            <div key={i} className="relative w-[240px] md:w-[400px] aspect-video flex-shrink-0 grayscale-[0.3] hover:grayscale-0 transition-all duration-700 overflow-hidden">
-              <Image src={img} alt="Vibe" fill className="object-cover" sizes="(max-width: 768px) 50vw, 30vw" />
+            <div key={i} className="relative w-[240px] md:w-[400px] aspect-[4/3] md:aspect-[16/9] flex-shrink-0 grayscale-[0.3] hover:grayscale-0 transition-all duration-700 overflow-hidden">
+              <Image src={img} alt="Vibe" fill className="object-cover object-[center_35%]" sizes="(max-width: 768px) 50vw, 30vw" />
             </div>
           ))}
         </motion.div>
@@ -395,7 +407,7 @@ export function UluwatuClient() {
           </div>
           <div className="relative">
             {/* Main Image */}
-            <div className="relative aspect-[16/9] md:aspect-[21/9] overflow-hidden border-[4px] md:border-[8px] border-white shadow-xl">
+            <div className="relative aspect-[4/3] md:aspect-[16/9] overflow-hidden border-[4px] md:border-[8px] border-white shadow-xl">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentFacilityImg}
@@ -409,7 +421,7 @@ export function UluwatuClient() {
                     src={ASSETS.facilitiesGallery[currentFacilityImg]}
                     alt="Facility"
                     fill
-                    className="object-cover"
+                    className="object-cover object-[center_35%]"
                     sizes="100vw"
                   />
                 </motion.div>
@@ -421,7 +433,7 @@ export function UluwatuClient() {
                   src={ASSETS.facilitiesGallery[(currentFacilityImg - 1 + ASSETS.facilitiesGallery.length) % ASSETS.facilitiesGallery.length]}
                   alt="prev"
                   fill
-                  className="object-cover"
+                  className="object-cover object-[center_35%]"
                 />
               </div>
               <div className="absolute right-0 top-0 w-[12%] h-full z-10 overflow-hidden opacity-60">
@@ -429,7 +441,7 @@ export function UluwatuClient() {
                   src={ASSETS.facilitiesGallery[(currentFacilityImg + 1) % ASSETS.facilitiesGallery.length]}
                   alt="next"
                   fill
-                  className="object-cover"
+                  className="object-cover object-[center_35%]"
                 />
               </div>
             </div>
