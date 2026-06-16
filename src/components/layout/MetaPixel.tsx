@@ -31,9 +31,7 @@ export function MetaPixel() {
     if (!pathname) return;
 
     let origin: string | null = null;
-    if (pathname.includes("booking-confirmation")) {
-      origin = sessionStorage.getItem("booking_origin") || localStorage.getItem("booking_origin");
-    }
+    // We now rely on the pathname containing the venue name (e.g. /booking-confirmation/canggu)
 
     const pixelId = getPixelIdForPath(pathname, origin);
     if (!pixelId) return;

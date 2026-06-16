@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useParams } from 'next/navigation';
 
 import { CheckCircle2, Home } from 'lucide-react';
 import Link from 'next/link';
@@ -14,6 +14,8 @@ function getCookie(name: string) {
 
 function ConfirmationLogic() {
   const searchParams = useSearchParams();
+  const params = useParams();
+  const venue = params.venue as string;
 
   useEffect(() => {
     const reservationId = searchParams.get('reservationId') || searchParams.get('reservation_id');
@@ -27,10 +29,10 @@ function ConfirmationLogic() {
     // Only fire if we have a reservation ID (real booking)
     if (!reservationId) return;
 
-    // Only fire if the booking originated from Canggu, Gili T, Coday, or Uluwatu
-    const origin = sessionStorage.getItem("booking_origin") || localStorage.getItem("booking_origin");
-    if (origin !== "canggu" && origin !== "gilit" && origin !== "coday" && origin !== "uluwatu") {
-      console.log("[CAPI] Ignored: Booking origin unknown.");
+    // Validate the venue from the URL path
+    const validVenues = ["canggu", "gilit", "coday", "uluwatu"];
+    if (!venue || !validVenues.includes(venue)) {
+      console.log("[CAPI] Ignored: Booking origin unknown or invalid venue.");
       return;
     }
 
@@ -50,9 +52,9 @@ function ConfirmationLogic() {
         currency: 'IDR',
         content_type: 'hotel',
       }, {
-        eventID: reservationId,
+        eventID: reservationId, // This eventID deduplicates with the Server CAPI event!
       });
-      console.log('[Pixel] Browser Purchase event sent');
+      console.log(`[Pixel] Browser Purchase event sent for ${venue}`);
     }
 
     // Send to our API route
@@ -71,14 +73,14 @@ function ConfirmationLogic() {
         country: 'id',                  // Indonesia
         value: parseFloat(total || '0') || 0,
         orderId: reservationId,
-        origin,
+        origin: venue,                  // Send the specific venue from the URL!
         testEventCode,
       }),
     })
       .then((r) => r.json())
-      .then((data) => console.log('[CAPI] Purchase sent:', data))
+      .then((data) => console.log(`[CAPI] Purchase sent for ${venue}:`, data))
       .catch((err) => console.error('[CAPI] Error:', err));
-  }, [searchParams]);
+  }, [searchParams, venue]);
 
   return null;
 }
