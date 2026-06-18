@@ -154,6 +154,9 @@ export function GiliTClient() {
             <div className="mt-10 md:mt-12 flex flex-col items-center">
               <Button 
                 onClick={() => {
+                  if (typeof window !== "undefined" && (window as any).fbq) {
+                    (window as any).fbq('track', 'InitiateCheckout');
+                  }
                   localStorage.setItem("booking_origin", "gilit");
                   window.open("https://hotels.cloudbeds.com/en/reservation/4fbPDV?currency=idr", "_blank");
                 }}
@@ -294,6 +297,10 @@ export function GiliTClient() {
                     <p className="text-sm opacity-70 font-medium mb-10">{room.details}</p>
                     <div className="flex flex-col sm:flex-row gap-4 mt-auto">
                       <Button onClick={() => { 
+                        if (typeof window !== "undefined" && (window as any).fbq) {
+                          (window as any).fbq('track', 'InitiateCheckout');
+                        }
+                        localStorage.setItem("booking_origin", "gilit");
                         window.open("https://hotels.cloudbeds.com/en/reservation/4fbPDV?currency=idr", "_blank"); 
                       }} className="bg-[#EE5B2B] text-white hover:bg-[#004A61] rounded-none h-12 px-8 font-bold uppercase text-xs tracking-widest transition-colors w-full sm:w-auto">
                         BOOK NOW
@@ -375,6 +382,9 @@ export function GiliTClient() {
             </h2>
             <Button 
               onClick={() => {
+                if (typeof window !== "undefined" && (window as any).fbq) {
+                  (window as any).fbq('track', 'InitiateCheckout');
+                }
                 localStorage.setItem("booking_origin", "gilit");
                 window.open("https://hotels.cloudbeds.com/en/reservation/4fbPDV?currency=idr", "_blank");
               }}

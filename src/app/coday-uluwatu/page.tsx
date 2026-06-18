@@ -149,6 +149,9 @@ export default function CodayPage() {
             <div className="flex flex-col items-center">
               <Button
                 onClick={() => {
+                  if (typeof window !== "undefined" && (window as any).fbq) {
+                    (window as any).fbq('track', 'InitiateCheckout');
+                  }
                   localStorage.setItem("booking_origin", "coday");
                   window.open("https://hotels.cloudbeds.com/en/reservation/WEE9oP?currency=idr", "_blank");
                 }}
@@ -409,6 +412,9 @@ export default function CodayPage() {
             </h2>
             <Button
               onClick={() => {
+                if (typeof window !== "undefined" && (window as any).fbq) {
+                  (window as any).fbq('track', 'InitiateCheckout');
+                }
                 localStorage.setItem("booking_origin", "coday");
                 window.open("https://hotels.cloudbeds.com/en/reservation/WEE9oP?currency=idr", "_blank");
               }}
