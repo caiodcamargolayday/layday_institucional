@@ -9,7 +9,7 @@ const bebas = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-
 
 export const metadata: Metadata = {
   title: "Lay Day Hostels",
-  description: "Lay Day embodies the perfect trifecta of party, surf, and relaxation.",
+  description: "Lay Day has been the trailblazer in Bali's hostel scene modest hostel in Canggu with just 30 beds, a small pool, and a cosy little bar grew to become a ...",
   icons: {
     icon: "/logo-layday.png",
   },

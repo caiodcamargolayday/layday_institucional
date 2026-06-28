@@ -9,9 +9,8 @@ import { CloudbedsRedirect } from "@/components/home/CloudbedsRedirect";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Lay Day Hostels | The World's Best Social & Surf Hostels in Bali",
-  description: "Experience the legendary social vibe at Lay Day Hostels in Canggu, Uluwatu, and Gili T. Join the global tribe for surf, party, and island living.",
-  keywords: "Bali Hostels, Canggu Hostel, Uluwatu Hostel, Gili T Hostel, Surf Hostel, Party Hostel Bali",
+  title: "Lay Day Hostels",
+  description: "Lay Day has been the trailblazer in Bali's hostel scene modest hostel in Canggu with just 30 beds, a small pool, and a cosy little bar grew to become a ...",
 };
 
 export default function Home() {
