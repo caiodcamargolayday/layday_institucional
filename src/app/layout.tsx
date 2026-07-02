@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 import { Suspense } from "react";
 import { MetaPixel } from "@/components/layout/MetaPixel";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout({
   children,
@@ -38,6 +39,7 @@ export default function RootLayout({
           <PageTransition>
             {children}
             <Analytics />
+            <SpeedInsights />
           </PageTransition>
         </ConditionalShell>
       </body>
