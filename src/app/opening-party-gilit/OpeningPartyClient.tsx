@@ -72,10 +72,10 @@ export function OpeningPartyClient() {
               <Button 
                 onClick={() => {
                   if (typeof window !== "undefined" && (window as any).fbq) {
-                    (window as any).fbq('track', 'InitiateCheckout');
+                    (window as any).fbq('track', 'Contact');
                   }
-                  localStorage.setItem("booking_origin", "gilit-opening");
-                  window.open("https://hotels.cloudbeds.com/en/reservation/4fbPDV?currency=idr", "_blank");
+                  const message = encodeURIComponent("Hey! I'd love to secure my spot on the guestlist for the Lay Day Gili T Grand Opening Party! 🌴🔥");
+                  window.open(`https://wa.me/31616922563?text=${message}`, "_blank");
                 }}
                 className="text-white hover:bg-white rounded-none h-14 md:h-16 px-12 md:px-16 font-bold uppercase tracking-[4px] md:tracking-[6px] text-xs md:text-sm transition-all duration-300 shadow-2xl mb-8 border-none"
                 style={{ backgroundColor: COLORS.darkPink }}
@@ -181,10 +181,10 @@ export function OpeningPartyClient() {
           <Button 
             onClick={() => {
               if (typeof window !== "undefined" && (window as any).fbq) {
-                (window as any).fbq('track', 'InitiateCheckout');
+                (window as any).fbq('track', 'Contact');
               }
-              localStorage.setItem("booking_origin", "gilit-opening");
-              window.open("https://hotels.cloudbeds.com/en/reservation/4fbPDV?currency=idr", "_blank");
+              const message = encodeURIComponent("Hey! I'd love to secure my spot on the guestlist for the Lay Day Gili T Grand Opening Party! 🌴🔥");
+              window.open(`https://wa.me/31616922563?text=${message}`, "_blank");
             }}
             className="text-white hover:bg-white rounded-none h-16 md:h-20 px-10 md:px-24 font-bold uppercase tracking-[4px] md:tracking-[10px] text-sm md:text-lg transition-all duration-500 shadow-xl border-none"
             style={{ backgroundColor: COLORS.darkPink }}
