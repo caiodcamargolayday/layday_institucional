@@ -309,6 +309,9 @@ export function OpeningPartyClient() {
               <p>
                 The party kicks off at 2pm, with DJs, drink specials, free BBQ & finger food, and an afterparty keeping things going until 3AM.
               </p>
+              <p>
+                Join the exclusive guestlist and secure your spot. Guests who sign up through this page will unlock special opening-night perks and exclusive benefits available only to the guestlist.
+              </p>
               <p className="font-bold pt-6 text-xl md:text-3xl uppercase tracking-widest" style={{ color: COLORS.darkPink }}>
                 Grab your crew and come celebrate with us. See you there.
               </p>
