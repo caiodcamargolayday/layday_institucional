@@ -73,6 +73,9 @@ function FormModal({ onClose }: { onClose: () => void }) {
     if (submitting || done) return;
     setSubmitting(true);
     await submitToSheets(finalAnswers);
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      (window as any).fbq('track', 'Contact');
+    }
     setSubmitting(false);
     setDone(true);
   };
@@ -265,9 +268,6 @@ export function OpeningPartyClient() {
             <div className="flex flex-col items-center">
               <Button 
                 onClick={() => {
-                  if (typeof window !== "undefined" && (window as any).fbq) {
-                    (window as any).fbq('track', 'Contact');
-                  }
                   setFormOpen(true);
                 }}
                 className="text-white hover:bg-white rounded-none h-14 md:h-16 px-12 md:px-16 font-bold uppercase tracking-[4px] md:tracking-[6px] text-xs md:text-sm transition-all duration-300 shadow-2xl mb-8 border-none"
@@ -376,9 +376,6 @@ export function OpeningPartyClient() {
           </h2>
           <Button 
             onClick={() => {
-              if (typeof window !== "undefined" && (window as any).fbq) {
-                (window as any).fbq('track', 'Contact');
-              }
               setFormOpen(true);
             }}
             className="text-white hover:bg-white rounded-none h-16 md:h-20 px-10 md:px-24 font-bold uppercase tracking-[4px] md:tracking-[10px] text-sm md:text-lg transition-all duration-500 shadow-xl border-none"
