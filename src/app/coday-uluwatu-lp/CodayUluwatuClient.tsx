@@ -84,6 +84,28 @@ export function CodayUluwatuClient() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentFacilityImg, setCurrentFacilityImg] = useState(0);
 
+  const handleBooking = () => {
+    if (typeof window !== "undefined") {
+      if ((window as any).fbq) {
+        (window as any).fbq('track', 'InitiateCheckout');
+      }
+      localStorage.setItem("booking_origin", "coday");
+      
+      const baseUrl = "https://hotels.cloudbeds.com/en/reservation/WEE9oP?currency=idr";
+      const url = new URL(baseUrl);
+      const incoming = new URLSearchParams(window.location.search);
+      const keep = ['gclid', 'gbraid', 'wbraid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid'];
+      
+      keep.forEach(k => {
+        if (incoming.has(k)) {
+          url.searchParams.set(k, incoming.get(k)!);
+        }
+      });
+      
+      window.open(url.toString(), "_blank");
+    }
+  };
+
   const storyImages = [
     "/coday_uluwatu/co living 1.jpg",
     "/coday_uluwatu/sauna 1.jpg",
@@ -148,13 +170,7 @@ export function CodayUluwatuClient() {
             </p>
             <div className="flex flex-col items-center">
               <Button
-                onClick={() => {
-                  if (typeof window !== "undefined" && (window as any).fbq) {
-                    (window as any).fbq('track', 'InitiateCheckout');
-                  }
-                  localStorage.setItem("booking_origin", "coday");
-                  window.open("https://hotels.cloudbeds.com/en/reservation/WEE9oP?currency=idr", "_blank");
-                }}
+                onClick={handleBooking}
                 className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-10 font-bold uppercase tracking-[3px] text-xs transition-all duration-500 shadow-xl mb-6">
                 BOOK YOUR STAY
               </Button>
@@ -411,13 +427,7 @@ export function CodayUluwatuClient() {
               LIVE THE <span className="text-[#EE5B2B]">VIBE</span>
             </h2>
             <Button
-              onClick={() => {
-                if (typeof window !== "undefined" && (window as any).fbq) {
-                  (window as any).fbq('track', 'InitiateCheckout');
-                }
-                localStorage.setItem("booking_origin", "coday");
-                window.open("https://hotels.cloudbeds.com/en/reservation/WEE9oP?currency=idr", "_blank");
-              }}
+              onClick={handleBooking}
               className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-12 font-bold uppercase tracking-[4px] text-[10px] transition-all duration-500">
               BOOK NOW
             </Button>

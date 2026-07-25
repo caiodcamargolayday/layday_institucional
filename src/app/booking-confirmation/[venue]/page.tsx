@@ -45,7 +45,6 @@ function ConfirmationLogic() {
     const fbp = getCookie('_fbp');
     const fbc = getCookie('_fbc');
 
-    // Trigger browser Pixel Purchase event for deduplication
     if (typeof window !== 'undefined' && (window as any).fbq) {
       (window as any).fbq('track', 'Purchase', {
         value: parseFloat(total || '0') || 0,

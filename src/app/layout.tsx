@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 
 import { Suspense } from "react";
 import { MetaPixel } from "@/components/layout/MetaPixel";
+import { GoogleAdsPixel } from "@/components/layout/GoogleAdsPixel";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -34,6 +35,7 @@ export default function RootLayout({
       <body className={`${montserrat.variable} ${bebas.variable} font-sans antialiased bg-[#EBE6D8] text-[#004A61] flex flex-col min-h-screen`}>
         <Suspense fallback={null}>
           <MetaPixel />
+          <GoogleAdsPixel />
         </Suspense>
         <ConditionalShell>
           <PageTransition>

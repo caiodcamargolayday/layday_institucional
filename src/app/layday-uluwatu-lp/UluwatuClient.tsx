@@ -129,6 +129,18 @@ const DESTINATIONS = [
 
 const DISPLAY_DESTINATIONS = DESTINATIONS.slice(0, 6);
 
+const trackGoogleAdsConversion = () => {
+  if (typeof window !== "undefined" && (window as any).gtag) {
+    const id = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID_ULUWATU;
+    const label = process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL_ULUWATU_BOOKING;
+    if (id && label) {
+      (window as any).gtag('event', 'conversion', {
+        'send_to': `${id}/${label}`
+      });
+    }
+  }
+};
+
 export function UluwatuClient() {
   const [hasMounted, setHasMounted] = useState(false);
   const containerRef = useRef(null);
@@ -214,6 +226,7 @@ export function UluwatuClient() {
                   if (typeof window !== "undefined" && (window as any).fbq) {
                     (window as any).fbq('track', 'InitiateCheckout');
                   }
+                  trackGoogleAdsConversion();
                   window.open("https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR", "_blank");
                 }}
                 className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-10 font-bold uppercase tracking-[3px] text-xs transition-all duration-500 shadow-xl mb-6">
@@ -377,6 +390,7 @@ export function UluwatuClient() {
                         if (typeof window !== "undefined" && (window as any).fbq) {
                           (window as any).fbq('track', 'InitiateCheckout');
                         }
+                        trackGoogleAdsConversion();
                         window.open("https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR", "_blank");
                       }}
                       className="bg-[#EE5B2B] text-white hover:bg-[#004A61] rounded-none h-12 px-8 font-bold uppercase text-xs tracking-widest transition-colors w-full sm:w-auto"
@@ -522,6 +536,7 @@ export function UluwatuClient() {
                 if (typeof window !== "undefined" && (window as any).fbq) {
                   (window as any).fbq('track', 'InitiateCheckout');
                 }
+                trackGoogleAdsConversion();
                 window.open("https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR", "_blank");
               }}
               className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-12 font-bold uppercase tracking-[4px] text-[10px] transition-all duration-500">
