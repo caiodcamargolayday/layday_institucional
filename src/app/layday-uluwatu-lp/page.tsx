@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   },
 };
 
+import { Suspense } from "react";
+
 export default function Page() {
-  return <UluwatuClient />;
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#EBE7E0]" />}>
+      <UluwatuClient />
+    </Suspense>
+  );
 }

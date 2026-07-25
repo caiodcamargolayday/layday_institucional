@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { 
@@ -147,6 +148,34 @@ export function UluwatuClient() {
   const [currentStoryImg, setCurrentStoryImg] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentFacilityImg, setCurrentFacilityImg] = useState(0);
+  const searchParams = useSearchParams();
+
+  const handleBooking = () => {
+    localStorage.setItem("booking_origin", "uluwatu");
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      (window as any).fbq('track', 'InitiateCheckout');
+    }
+    trackGoogleAdsConversion();
+
+    let baseUrl = "https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR";
+    const keep = ['gclid', 'gbraid', 'wbraid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid'];
+    
+    if (searchParams) {
+      const paramsToKeep = new URLSearchParams();
+      let hasParams = false;
+      keep.forEach(key => {
+        const value = searchParams.get(key);
+        if (value) {
+          paramsToKeep.set(key, value);
+          hasParams = true;
+        }
+      });
+      if (hasParams) {
+        baseUrl += "&" + paramsToKeep.toString();
+      }
+    }
+    window.open(baseUrl, "_blank");
+  };
 
   const storyImages = [
     "/lay_day_uluwatu/uluwatu_1.jpg",
@@ -221,14 +250,7 @@ export function UluwatuClient() {
             </p>
             <div className="flex flex-col items-center">
               <Button
-                onClick={() => {
-                  localStorage.setItem("booking_origin", "uluwatu");
-                  if (typeof window !== "undefined" && (window as any).fbq) {
-                    (window as any).fbq('track', 'InitiateCheckout');
-                  }
-                  trackGoogleAdsConversion();
-                  window.open("https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR", "_blank");
-                }}
+                onClick={handleBooking}
                 className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-10 font-bold uppercase tracking-[3px] text-xs transition-all duration-500 shadow-xl mb-6">
                 BOOK THE LEGEND
               </Button>
@@ -386,13 +408,7 @@ export function UluwatuClient() {
                     <p className="font-bold text-[#EE5B2B] text-lg mb-6">{room.price}</p>
                     <p className="text-sm opacity-70 font-medium mb-10">{room.details}</p>
                     <Button
-                      onClick={() => {
-                        if (typeof window !== "undefined" && (window as any).fbq) {
-                          (window as any).fbq('track', 'InitiateCheckout');
-                        }
-                        trackGoogleAdsConversion();
-                        window.open("https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR", "_blank");
-                      }}
+                      onClick={handleBooking}
                       className="bg-[#EE5B2B] text-white hover:bg-[#004A61] rounded-none h-12 px-8 font-bold uppercase text-xs tracking-widest transition-colors w-full sm:w-auto"
                     >
                       BOOK NOW
@@ -531,14 +547,7 @@ export function UluwatuClient() {
               LIVE THE <span className="text-[#EE5B2B]">VIBE</span>
             </h2>
             <Button
-              onClick={() => {
-                localStorage.setItem("booking_origin", "uluwatu");
-                if (typeof window !== "undefined" && (window as any).fbq) {
-                  (window as any).fbq('track', 'InitiateCheckout');
-                }
-                trackGoogleAdsConversion();
-                window.open("https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR", "_blank");
-              }}
+              onClick={handleBooking}
               className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-12 font-bold uppercase tracking-[4px] text-[10px] transition-all duration-500">
               BOOK NOW
             </Button>
