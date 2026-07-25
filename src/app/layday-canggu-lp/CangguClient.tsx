@@ -131,6 +131,28 @@ export function CangguClient() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentFacilityImg, setCurrentFacilityImg] = useState(0);
   
+  const handleBooking = () => {
+    if (typeof window !== "undefined") {
+      if ((window as any).fbq) {
+        (window as any).fbq('track', 'InitiateCheckout');
+      }
+      localStorage.setItem("booking_origin", "canggu");
+      
+      const baseUrl = "https://hotels.cloudbeds.com/en/reservation/idPO4I?currency=idr";
+      const url = new URL(baseUrl);
+      const incoming = new URLSearchParams(window.location.search);
+      const keep = ['gclid', 'gbraid', 'wbraid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid'];
+      
+      keep.forEach(k => {
+        if (incoming.has(k)) {
+          url.searchParams.set(k, incoming.get(k)!);
+        }
+      });
+      
+      window.open(url.toString(), "_blank");
+    }
+  };
+
   const storyImages = [
     "/lay_day_canggu/bar 1.jpeg",
     "/lay_day_canggu/swimming_pools.jpeg",
@@ -205,10 +227,7 @@ export function CangguClient() {
             </p>
             <div className="flex flex-col items-center">
               <Button 
-                onClick={() => {
-                  localStorage.setItem("booking_origin", "canggu");
-                  window.open("https://hotels.cloudbeds.com/en/reservation/idPO4I?currency=idr", "_blank");
-                }}
+                onClick={handleBooking}
                 className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-10 font-bold uppercase tracking-[3px] text-xs transition-all duration-500 shadow-xl mb-6">
                 BOOK THE LEGEND
               </Button>
@@ -366,9 +385,7 @@ export function CangguClient() {
                     <p className="font-bold text-[#EE5B2B] text-lg mb-6">{room.price}</p>
                     <p className="text-sm opacity-70 font-medium mb-10">{room.details}</p>
                     <div className="flex flex-col sm:flex-row gap-4 mt-auto">
-                      <Button onClick={() => { 
-                        window.open("https://hotels.cloudbeds.com/en/reservation/idPO4I?currency=idr", "_blank"); 
-                      }} className="bg-[#EE5B2B] text-white hover:bg-[#004A61] rounded-none h-12 px-8 font-bold uppercase text-xs tracking-widest transition-colors w-full sm:w-auto">
+                      <Button onClick={handleBooking} className="bg-[#EE5B2B] text-white hover:bg-[#004A61] rounded-none h-12 px-8 font-bold uppercase text-xs tracking-widest transition-colors w-full sm:w-auto">
                         BOOK NOW
                       </Button>
                     </div>
@@ -506,10 +523,7 @@ export function CangguClient() {
               LIVE THE <span className="text-[#EE5B2B]">VIBE</span>
             </h2>
             <Button 
-              onClick={() => {
-                localStorage.setItem("booking_origin", "canggu");
-                window.open("https://hotels.cloudbeds.com/en/reservation/idPO4I?currency=idr", "_blank");
-              }}
+              onClick={handleBooking}
               className="bg-[#EE5B2B] text-white hover:bg-white hover:text-[#004A61] rounded-none h-12 px-12 font-bold uppercase tracking-[4px] text-[10px] transition-all duration-500">
               BOOK NOW
             </Button>
