@@ -129,6 +129,51 @@ export function VicePartyClient() {
         </div>
       </section>
 
+      {/* 1.2 Announcement Section */}
+      <section className="py-12 md:py-16 bg-[#0a0a0a] border-b border-[#FF1493]/20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#FF1493]/10 via-[#0a0a0a] to-[#0a0a0a] z-0"></div>
+        <div className="max-w-4xl mx-auto px-4 relative z-10 text-center flex flex-col items-center gap-4 md:gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="inline-block border border-[#FF1493] px-6 py-2 rounded-full mb-2 bg-[#FF1493]/10 backdrop-blur-sm shadow-[0_0_15px_rgba(255,20,147,0.2)]"
+          >
+            <span className="text-[#FF1493] font-bold tracking-widest text-sm md:text-base uppercase">Online Exclusive</span>
+          </motion.div>
+          
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-3xl md:text-5xl font-heading tracking-widest uppercase text-white/90 leading-tight drop-shadow-[0_0_15px_rgba(255,20,147,0.3)]"
+          >
+            DOUBLE YOUR <span className="text-[#FF1493]">FREE DRINKS</span>
+          </motion.h2>
+
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto leading-relaxed"
+          >
+            Skip the line, double the fun. Normally, entry at the door gets you one free drink. But when you secure your ticket online, you'll get <strong className="text-white font-bold drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">TWO complimentary drink vouchers</strong> on arrival!
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+             className="text-sm md:text-base text-[#FF1493]/80 font-medium tracking-widest uppercase mt-2"
+          >
+            * Just show your online ticket at the door to claim.
+          </motion.p>
+        </div>
+      </section>
+
       {/* 1.5 Video Section */}
       <section className="py-16 md:py-28 bg-[#0a0a0a]">
         <div className="max-w-5xl mx-auto px-4">
