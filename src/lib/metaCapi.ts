@@ -21,6 +21,12 @@ export function getCapiConfig(origin: string) {
       accessToken: process.env.META_ACCESS_TOKEN_LDULUWATU,
     };
   }
+  if (origin === 'vice') {
+    return {
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_VICE,
+      accessToken: process.env.META_ACCESS_TOKEN_VICE,
+    };
+  }
   return {
     pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_LDCANGGU,
     accessToken: process.env.META_ACCESS_TOKEN_LDCANGGU,

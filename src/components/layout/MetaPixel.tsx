@@ -18,6 +18,9 @@ function getPixelIdForPath(pathname: string, origin?: string | null) {
   if (target.includes("canggu")) {
     return process.env.NEXT_PUBLIC_META_PIXEL_ID_LDCANGGU;
   }
+  if (target.includes("vice")) {
+    return process.env.NEXT_PUBLIC_META_PIXEL_ID_VICE;
+  }
   // Default to Canggu for the main site too
   return process.env.NEXT_PUBLIC_META_PIXEL_ID_LDCANGGU;
 }
