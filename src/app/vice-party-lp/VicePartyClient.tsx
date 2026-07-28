@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const ASSETS = {
@@ -23,6 +23,50 @@ const ASSETS = {
     "/vice_party_pictures/12.jpeg",
     "/vice_party_pictures/13.jpeg",
   ]
+};
+
+const VideoPlayer = ({ src }: { src: string }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  return (
+    <div className="relative w-full max-w-[300px] sm:max-w-[340px] mx-auto aspect-[9/16] rounded-2xl overflow-hidden group border-[2px] md:border-[4px] border-[#FF1493]/40 shadow-[0_0_30px_rgba(255,20,147,0.2)] bg-black">
+      <video
+        ref={videoRef}
+        src={src}
+        className="w-full h-full object-cover"
+        loop
+        playsInline
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      />
+      
+      {/* Overlay */}
+      <div 
+        className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 cursor-pointer ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}
+        onClick={togglePlay}
+      >
+        <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#FF1493]/90 flex items-center justify-center shadow-[0_0_25px_rgba(255,20,147,0.8)] transform transition-transform hover:scale-110">
+          {isPlaying ? (
+            <Pause className="w-8 h-8 md:w-10 md:h-10 text-white ml-0" fill="currentColor" />
+          ) : (
+            <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1 md:ml-2" fill="currentColor" />
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export function VicePartyClient() {
@@ -71,9 +115,9 @@ export function VicePartyClient() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-            className="w-full flex flex-col items-center gap-6"
+            className="w-full flex flex-col items-center gap-4 md:gap-6"
           >
-            <h1 className="text-5xl md:text-8xl font-heading text-white tracking-widest leading-none drop-shadow-[0_0_15px_rgba(255,20,147,0.5)]">
+            <h1 className="text-5xl sm:text-6xl md:text-8xl font-heading text-white tracking-widest leading-none drop-shadow-[0_0_15px_rgba(255,20,147,0.5)]">
               VICE <span className="text-[#FF1493]">PARTY</span>
             </h1>
             <Button
@@ -82,6 +126,19 @@ export function VicePartyClient() {
               GET TICKETS
             </Button>
           </motion.div>
+        </div>
+      </section>
+
+      {/* 1.5 Video Section */}
+      <section className="py-16 md:py-28 bg-[#0a0a0a]">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-heading tracking-widest uppercase text-white/90">WATCH THE <span className="text-[#FF1493]">MADNESS</span></h2>
+          </div>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-10 md:gap-16">
+            <VideoPlayer src="/vice_party_pictures/video-1.MOV" />
+            <VideoPlayer src="/vice_party_pictures/video-2.MOV" />
+          </div>
         </div>
       </section>
 
