@@ -1,10 +1,18 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+const HERO_IMAGES = [
+  "/vice_party_pictures/LDU-Vice Pool Party-IGF-ESSAR & URI.jpg",
+  "/vice_party_pictures/LDU-Vice Pool Party-IGF-Jaka.jpg"
+];
 
 const ASSETS = {
   hero: "/vice_party_pictures/Lay Day Vice-Newsletter.png",
@@ -41,7 +49,7 @@ const VideoPlayer = ({ src }: { src: string }) => {
   };
 
   return (
-    <div className="relative w-full max-w-[300px] sm:max-w-[340px] mx-auto aspect-[9/16] rounded-2xl overflow-hidden group border-[2px] md:border-[4px] border-[#FF1493]/40 shadow-[0_0_30px_rgba(255,20,147,0.2)] bg-black">
+    <div className="relative w-full max-w-[300px] sm:max-w-[340px] mx-auto aspect-[9/16] rounded-2xl overflow-hidden group border-[2px] md:border-[4px] border-[#E72C7F]/40 shadow-[0_0_30px_rgba(255,20,147,0.2)] bg-black">
       <video
         ref={videoRef}
         src={src}
@@ -57,7 +65,7 @@ const VideoPlayer = ({ src }: { src: string }) => {
         className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 cursor-pointer ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}
         onClick={togglePlay}
       >
-        <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#FF1493]/90 flex items-center justify-center shadow-[0_0_25px_rgba(255,20,147,0.8)] transform transition-transform hover:scale-110">
+        <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#E72C7F]/90 flex items-center justify-center shadow-[0_0_25px_rgba(255,20,147,0.8)] transform transition-transform hover:scale-110">
           {isPlaying ? (
             <Pause className="w-8 h-8 md:w-10 md:h-10 text-white ml-0" fill="currentColor" />
           ) : (
@@ -72,10 +80,64 @@ const VideoPlayer = ({ src }: { src: string }) => {
 export function VicePartyClient() {
   const containerRef = useRef(null);
   const [currentImg, setCurrentImg] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [heroIndex, setHeroIndex] = useState(0);
 
-  const handleBooking = () => {
-    if (typeof window !== "undefined") {
-      window.open("https://megatix.com.au/events/vice-party", "_blank");
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleBooking = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isLoading) return;
+    setIsLoading(true);
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      const data = {
+        name: formData.get("name") as string,
+        phone: formData.get("phone") as string,
+        email: formData.get("email") as string,
+        people: formData.get("people") as string,
+      };
+
+      // 1. Submit to Google Sheets (Apps Script)
+      const sheetUrl = process.env.NEXT_PUBLIC_VICE_PARTY_SHEETS_URL;
+      if (sheetUrl) {
+        await fetch(sheetUrl, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8", // text/plain prevents CORS preflight issues with some Apps Script setups
+          },
+        });
+      }
+
+      // 2. Submit to Meta CAPI
+      await fetch('/api/meta-capi/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          origin: 'vice',
+          eventSourceUrl: window.location.href,
+          email: data.email,
+          phone: data.phone,
+          firstName: data.name.split(' ')[0],
+          lastName: data.name.split(' ').slice(1).join(' ') || undefined,
+        })
+      });
+
+      setIsSuccess(true);
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -94,23 +156,33 @@ export function VicePartyClient() {
   };
 
   return (
-    <div ref={containerRef} className="bg-[#0a0a0a] text-white font-sans selection:bg-[#FF1493] selection:text-white overflow-x-hidden min-h-screen">
+    <div ref={containerRef} className="bg-[#0a0a0a] text-white font-sans selection:bg-[#E72C7F] selection:text-white overflow-x-hidden min-h-screen">
       {/* 1. Hero */}
-      <section className="relative h-[90vh] md:h-screen w-full overflow-hidden bg-[#111] flex items-center justify-center">
-        <motion.div style={{ y: heroY }} className="absolute inset-0 z-0">
-          <Image
-            src={ASSETS.hero}
-            alt="Vice Party Hero"
-            fill
-            priority
-            className="object-cover md:object-contain opacity-80"
-            sizes="100vw"
-          />
-        </motion.div>
+      <section className="relative min-h-screen w-full overflow-hidden bg-[#0a0a0a] flex flex-col items-center justify-center pt-10 pb-16 md:pb-24 px-4">
+        
+        <div className="relative z-10 w-full max-w-sm md:max-w-md mx-auto aspect-[4/5] mb-8 overflow-hidden rounded-lg shadow-[0_0_30px_rgba(231,44,127,0.2)] border border-[#E72C7F]/20">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={heroIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={HERO_IMAGES[heroIndex]}
+                alt="Vice Party Hero"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 400px"
+              />
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/40 to-transparent z-10" />
-
-        <div className="relative z-20 h-full w-full flex flex-col items-center justify-end pb-16 md:pb-24 text-center px-4">
+        <div className="relative z-20 w-full flex flex-col items-center gap-4 md:gap-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -118,59 +190,56 @@ export function VicePartyClient() {
             className="w-full flex flex-col items-center gap-4 md:gap-6"
           >
             <h1 className="text-5xl sm:text-6xl md:text-8xl font-heading text-white tracking-widest leading-none drop-shadow-[0_0_15px_rgba(255,20,147,0.5)]">
-              VICE <span className="text-[#FF1493]">PARTY</span>
+              VICE <span className="text-[#E72C7F]">PARTY</span>
             </h1>
-            <Button
-              onClick={handleBooking}
-              className="bg-[#FF1493] text-white hover:bg-white hover:text-[#FF1493] rounded-none h-14 md:h-16 px-12 md:px-16 font-bold uppercase tracking-[4px] text-sm md:text-base transition-all duration-500 shadow-[0_0_30px_rgba(255,20,147,0.6)] hover:scale-105">
-              GET TICKETS
-            </Button>
+            <Dialog onOpenChange={(open) => { if (!open) setIsSuccess(false); }}>
+              <DialogTrigger render={
+                <Button className="bg-[#E72C7F] text-white hover:bg-white hover:text-[#E72C7F] rounded-none h-14 md:h-16 px-8 md:px-16 font-bold uppercase tracking-[4px] text-sm md:text-base transition-all duration-500 shadow-[0_0_30px_rgba(255,20,147,0.6)] hover:scale-105" />
+              }>
+                ENTRY IN THE GUEST LIST
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px] bg-[#111] border-[#E72C7F]/30 text-white rounded-none">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-heading tracking-widest text-[#E72C7F] uppercase">
+                    {isSuccess ? "You're on the list!" : "Guest List"}
+                  </DialogTitle>
+                  <DialogDescription className="text-gray-400">
+                    {isSuccess ? "Thank you for registering." : "Register your details below to join the Vice Party guest list."}
+                  </DialogDescription>
+                </DialogHeader>
+                {isSuccess ? (
+                  <div className="py-8 flex flex-col items-center justify-center text-center space-y-4">
+                    <p className="text-white text-lg">Your details have been received.</p>
+                    <p className="text-white/80">
+                      Follow <a href="https://www.instagram.com/laydayuluwatu/" target="_blank" rel="noopener noreferrer" className="text-[#E72C7F] underline hover:text-white transition-colors">@laydayuluwatu</a> on Instagram to stay updated!
+                    </p>
+                  </div>
+                ) : (
+                  <form className="grid gap-4 py-4" onSubmit={handleBooking}>
+                    <div className="grid gap-2">
+                      <Label htmlFor="name" className="text-white/80 uppercase tracking-widest text-xs">Name</Label>
+                      <Input id="name" name="name" required className="bg-white/5 border-[#E72C7F]/30 text-white placeholder:text-white/30 focus-visible:ring-[#E72C7F] rounded-none h-12" placeholder="John Doe" />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="phone" className="text-white/80 uppercase tracking-widest text-xs">Phone</Label>
+                      <Input id="phone" name="phone" type="tel" required className="bg-white/5 border-[#E72C7F]/30 text-white placeholder:text-white/30 focus-visible:ring-[#E72C7F] rounded-none h-12" placeholder="+62..." />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="email" className="text-white/80 uppercase tracking-widest text-xs">Email</Label>
+                      <Input id="email" name="email" type="email" required className="bg-white/5 border-[#E72C7F]/30 text-white placeholder:text-white/30 focus-visible:ring-[#E72C7F] rounded-none h-12" placeholder="john@example.com" />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="people" className="text-white/80 uppercase tracking-widest text-xs">How many people?</Label>
+                      <Input id="people" name="people" type="number" min="1" required className="bg-white/5 border-[#E72C7F]/30 text-white placeholder:text-white/30 focus-visible:ring-[#E72C7F] rounded-none h-12" defaultValue="1" />
+                    </div>
+                    <Button type="submit" disabled={isLoading} className="w-full bg-[#E72C7F] text-white hover:bg-white hover:text-[#E72C7F] rounded-none h-12 font-bold uppercase tracking-[4px] mt-2 transition-all duration-300 shadow-[0_0_20px_rgba(255,20,147,0.4)] disabled:opacity-50">
+                      {isLoading ? "Registering..." : "Register Now"}
+                    </Button>
+                  </form>
+                )}
+              </DialogContent>
+            </Dialog>
           </motion.div>
-        </div>
-      </section>
-
-      {/* 1.2 Announcement Section */}
-      <section className="py-12 md:py-16 bg-[#0a0a0a] border-b border-[#FF1493]/20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#FF1493]/10 via-[#0a0a0a] to-[#0a0a0a] z-0"></div>
-        <div className="max-w-4xl mx-auto px-4 relative z-10 text-center flex flex-col items-center gap-4 md:gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-block border border-[#FF1493] px-6 py-2 rounded-full mb-2 bg-[#FF1493]/10 backdrop-blur-sm shadow-[0_0_15px_rgba(255,20,147,0.2)]"
-          >
-            <span className="text-[#FF1493] font-bold tracking-widest text-sm md:text-base uppercase">Online Exclusive</span>
-          </motion.div>
-          
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-3xl md:text-5xl font-heading tracking-widest uppercase text-white/90 leading-tight drop-shadow-[0_0_15px_rgba(255,20,147,0.3)]"
-          >
-            DOUBLE YOUR <span className="text-[#FF1493]">FREE DRINKS</span>
-          </motion.h2>
-
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto leading-relaxed"
-          >
-            Skip the line, double the fun. Normally, entry at the door gets you one free drink. But when you secure your ticket online, you'll get <strong className="text-white font-bold drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">TWO complimentary drink vouchers</strong> on arrival!
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-             className="text-sm md:text-base text-[#FF1493]/80 font-medium tracking-widest uppercase mt-2"
-          >
-            * Just show your online ticket at the door to claim.
-          </motion.p>
         </div>
       </section>
 
@@ -178,26 +247,26 @@ export function VicePartyClient() {
       <section className="py-16 md:py-28 bg-[#0a0a0a]">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-5xl font-heading tracking-widest uppercase text-white/90">WATCH THE <span className="text-[#FF1493]">MADNESS</span></h2>
+            <h2 className="text-3xl md:text-5xl font-heading tracking-widest uppercase text-white/90">WATCH THE <span className="text-[#E72C7F]">MADNESS</span></h2>
           </div>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-10 md:gap-16">
-            <VideoPlayer src="/vice_party_pictures/video-1.MOV" />
-            <VideoPlayer src="/vice_party_pictures/video-2.MOV" />
+            <VideoPlayer src="/vice_party_pictures/LDU-Vice Pool Party-Motion (ESSAR & URI).mp4" />
+            <VideoPlayer src="/vice_party_pictures/LDU-Vice Pool Party-Motion (JAKA).mp4" />
           </div>
         </div>
       </section>
 
       {/* 2. Ribbon */}
-      <div className="py-8 md:py-16 overflow-hidden bg-white/5 border-y border-[#FF1493]/20">
+      <div className="py-8 md:py-16 overflow-hidden bg-white/5 border-y border-[#E72C7F]/20">
         <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-4xl font-heading tracking-widest uppercase text-white/90">FEEL THE <span className="text-[#FF1493]">VIBE</span></h2>
+            <h2 className="text-2xl md:text-4xl font-heading tracking-widest uppercase text-white/90">FEEL THE <span className="text-[#E72C7F]">VIBE</span></h2>
         </div>
         <motion.div
           style={{ x: ribbonX }}
           className="flex gap-4 md:gap-6 whitespace-nowrap pt-4"
         >
           {[...ASSETS.images, ...ASSETS.images, ...ASSETS.images].map((img, i) => (
-            <div key={i} className="relative w-[260px] md:w-[400px] aspect-[4/5] md:aspect-video flex-shrink-0 grayscale-[0.2] hover:grayscale-0 transition-all duration-700 overflow-hidden border border-[#FF1493]/20 rounded-sm">
+            <div key={i} className="relative w-[260px] md:w-[400px] aspect-[4/5] md:aspect-video flex-shrink-0 grayscale-[0.2] hover:grayscale-0 transition-all duration-700 overflow-hidden border border-[#E72C7F]/20 rounded-sm">
               <Image src={img} alt="Vibe" fill className="object-cover" sizes="(max-width: 768px) 80vw, 40vw" />
             </div>
           ))}
@@ -208,11 +277,11 @@ export function VicePartyClient() {
         {/* 3. Interactive Gallery */}
         <section className="mb-16 md:mb-24">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-5xl font-heading tracking-widest uppercase text-white/90">PARTY <span className="text-[#FF1493]">GALLERY</span></h2>
+            <h2 className="text-3xl md:text-5xl font-heading tracking-widest uppercase text-white/90">PARTY <span className="text-[#E72C7F]">GALLERY</span></h2>
           </div>
           <div className="relative">
             {/* Main Image */}
-            <div className="relative aspect-[4/5] md:aspect-[21/9] overflow-hidden border-[2px] md:border-[4px] border-[#FF1493]/50 shadow-[0_0_30px_rgba(255,20,147,0.15)] bg-[#111] rounded-sm group">
+            <div className="relative aspect-[4/5] md:aspect-[21/9] overflow-hidden border-[2px] md:border-[4px] border-[#E72C7F]/50 shadow-[0_0_30px_rgba(255,20,147,0.15)] bg-[#111] rounded-sm group">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentImg}
@@ -233,7 +302,7 @@ export function VicePartyClient() {
               </AnimatePresence>
 
               {/* Side preview strips - Hidden on mobile */}
-              <div className="hidden md:block absolute left-0 top-0 w-[15%] h-full z-10 overflow-hidden opacity-20 hover:opacity-80 transition-opacity cursor-pointer border-r border-[#FF1493]/30 bg-black/50" onClick={() => scrollGallery('left')}>
+              <div className="hidden md:block absolute left-0 top-0 w-[15%] h-full z-10 overflow-hidden opacity-20 hover:opacity-80 transition-opacity cursor-pointer border-r border-[#E72C7F]/30 bg-black/50" onClick={() => scrollGallery('left')}>
                 <Image
                   src={ASSETS.images[(currentImg - 1 + ASSETS.images.length) % ASSETS.images.length]}
                   alt="prev"
@@ -244,7 +313,7 @@ export function VicePartyClient() {
                     <ChevronLeft className="w-12 h-12 text-white drop-shadow-md" />
                 </div>
               </div>
-              <div className="hidden md:block absolute right-0 top-0 w-[15%] h-full z-10 overflow-hidden opacity-20 hover:opacity-80 transition-opacity cursor-pointer border-l border-[#FF1493]/30 bg-black/50" onClick={() => scrollGallery('right')}>
+              <div className="hidden md:block absolute right-0 top-0 w-[15%] h-full z-10 overflow-hidden opacity-20 hover:opacity-80 transition-opacity cursor-pointer border-l border-[#E72C7F]/30 bg-black/50" onClick={() => scrollGallery('right')}>
                 <Image
                   src={ASSETS.images[(currentImg + 1) % ASSETS.images.length]}
                   alt="next"
@@ -261,7 +330,7 @@ export function VicePartyClient() {
             <div className="flex justify-center items-center gap-4 md:gap-8 mt-8">
               <button
                 onClick={() => scrollGallery('left')}
-                className="w-12 h-12 rounded-full border-2 border-[#FF1493] text-[#FF1493] flex items-center justify-center hover:bg-[#FF1493] hover:text-white transition-colors"
+                className="w-12 h-12 rounded-full border-2 border-[#E72C7F] text-[#E72C7F] flex items-center justify-center hover:bg-[#E72C7F] hover:text-white transition-colors"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
@@ -270,13 +339,13 @@ export function VicePartyClient() {
                   <button
                     key={i}
                     onClick={() => setCurrentImg(i)}
-                    className={`h-2 rounded-full transition-all duration-300 ${i === currentImg ? 'bg-[#FF1493] w-8' : 'bg-white/30 w-2 hover:bg-white/50'}`}
+                    className={`h-2 rounded-full transition-all duration-300 ${i === currentImg ? 'bg-[#E72C7F] w-8' : 'bg-white/30 w-2 hover:bg-white/50'}`}
                   />
                 ))}
               </div>
               <button
                 onClick={() => scrollGallery('right')}
-                className="w-12 h-12 rounded-full border-2 border-[#FF1493] text-[#FF1493] flex items-center justify-center hover:bg-[#FF1493] hover:text-white transition-colors"
+                className="w-12 h-12 rounded-full border-2 border-[#E72C7F] text-[#E72C7F] flex items-center justify-center hover:bg-[#E72C7F] hover:text-white transition-colors"
               >
                 <ChevronRight className="w-6 h-6" />
               </button>
@@ -290,20 +359,62 @@ export function VicePartyClient() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative h-[50vh] md:h-[60vh] flex items-center justify-center text-center overflow-hidden border border-[#FF1493]/30 rounded-lg shadow-[0_0_50px_rgba(255,20,147,0.1)]"
+          className="relative h-[50vh] md:h-[60vh] flex items-center justify-center text-center overflow-hidden border border-[#E72C7F]/30 rounded-lg shadow-[0_0_50px_rgba(255,20,147,0.1)]"
         >
           <div className="absolute inset-0 z-0">
             <Image src={ASSETS.images[0]} alt="Vibe" fill className="object-cover grayscale brightness-[0.15]" sizes="100vw" />
           </div>
           <div className="relative z-10 px-4 space-y-8">
             <h2 className="text-4xl md:text-7xl font-heading text-white tracking-[6px] md:tracking-[12px] uppercase leading-none drop-shadow-[0_0_15px_rgba(255,20,147,0.3)]">
-              JOIN THE <span className="text-[#FF1493]">MADNESS</span>
+              JOIN THE <span className="text-[#E72C7F]">MADNESS</span>
             </h2>
-            <Button
-              onClick={handleBooking}
-              className="bg-[#FF1493] text-white hover:bg-white hover:text-[#FF1493] rounded-none h-14 md:h-16 px-12 md:px-16 font-bold uppercase tracking-[4px] text-sm md:text-base transition-all duration-500 shadow-[0_0_40px_rgba(255,20,147,0.5)] hover:scale-105">
-              GET TICKETS
-            </Button>
+            <Dialog onOpenChange={(open) => { if (!open) setIsSuccess(false); }}>
+              <DialogTrigger render={
+                <Button className="bg-[#E72C7F] text-white hover:bg-white hover:text-[#E72C7F] rounded-none h-14 md:h-16 px-12 md:px-16 font-bold uppercase tracking-[4px] text-sm md:text-base transition-all duration-500 shadow-[0_0_40px_rgba(255,20,147,0.5)] hover:scale-105" />
+              }>
+                ENTRY IN THE GUEST LIST
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px] bg-[#111] border-[#E72C7F]/30 text-white rounded-none">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-heading tracking-widest text-[#E72C7F] uppercase">
+                    {isSuccess ? "You're on the list!" : "Guest List"}
+                  </DialogTitle>
+                  <DialogDescription className="text-gray-400">
+                    {isSuccess ? "Thank you for registering." : "Register your details below to join the Vice Party guest list."}
+                  </DialogDescription>
+                </DialogHeader>
+                {isSuccess ? (
+                  <div className="py-8 flex flex-col items-center justify-center text-center space-y-4">
+                    <p className="text-white text-lg">Your details have been received.</p>
+                    <p className="text-white/80">
+                      Follow <a href="https://www.instagram.com/laydayuluwatu/" target="_blank" rel="noopener noreferrer" className="text-[#E72C7F] underline hover:text-white transition-colors">@laydayuluwatu</a> on Instagram to stay updated!
+                    </p>
+                  </div>
+                ) : (
+                  <form className="grid gap-4 py-4" onSubmit={handleBooking}>
+                    <div className="grid gap-2">
+                      <Label htmlFor="name2" className="text-white/80 uppercase tracking-widest text-xs">Name</Label>
+                      <Input id="name2" name="name" required className="bg-white/5 border-[#E72C7F]/30 text-white placeholder:text-white/30 focus-visible:ring-[#E72C7F] rounded-none h-12" placeholder="John Doe" />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="phone2" className="text-white/80 uppercase tracking-widest text-xs">Phone</Label>
+                      <Input id="phone2" name="phone" type="tel" required className="bg-white/5 border-[#E72C7F]/30 text-white placeholder:text-white/30 focus-visible:ring-[#E72C7F] rounded-none h-12" placeholder="+62..." />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="email2" className="text-white/80 uppercase tracking-widest text-xs">Email</Label>
+                      <Input id="email2" name="email" type="email" required className="bg-white/5 border-[#E72C7F]/30 text-white placeholder:text-white/30 focus-visible:ring-[#E72C7F] rounded-none h-12" placeholder="john@example.com" />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="people2" className="text-white/80 uppercase tracking-widest text-xs">How many people?</Label>
+                      <Input id="people2" name="people" type="number" min="1" required className="bg-white/5 border-[#E72C7F]/30 text-white placeholder:text-white/30 focus-visible:ring-[#E72C7F] rounded-none h-12" defaultValue="1" />
+                    </div>
+                    <Button type="submit" disabled={isLoading} className="w-full bg-[#E72C7F] text-white hover:bg-white hover:text-[#E72C7F] rounded-none h-12 font-bold uppercase tracking-[4px] mt-2 transition-all duration-300 shadow-[0_0_20px_rgba(255,20,147,0.4)] disabled:opacity-50">
+                      {isLoading ? "Registering..." : "Register Now"}
+                    </Button>
+                  </form>
+                )}
+              </DialogContent>
+            </Dialog>
           </div>
         </motion.section>
       </div>

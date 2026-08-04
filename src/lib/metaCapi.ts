@@ -73,6 +73,20 @@ export interface PurchaseEventParams {
   orderId: string;
 }
 
+export interface ContactEventParams {
+  eventId: string;
+  eventSourceUrl: string;
+  clientIp?: string | null;
+  clientUserAgent?: string | null;
+  fbp?: string | null;
+  fbc?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  country?: string;
+}
+
 /**
  * Build a Purchase event payload
  */
@@ -118,6 +132,44 @@ export function buildPurchaseEvent({
       currency: 'IDR',
       order_id: orderId,
       content_type: 'hotel',
+    },
+  };
+}
+
+/**
+ * Build a Contact event payload
+ */
+export function buildContactEvent({
+  eventId,
+  eventSourceUrl,
+  clientIp,
+  clientUserAgent,
+  fbp,
+  fbc,
+  email,
+  phone,
+  firstName,
+  lastName,
+  country = 'id',
+}: ContactEventParams) {
+  return {
+    event_name: 'Contact',
+    event_time: Math.floor(Date.now() / 1000),
+    event_id: eventId,
+    event_source_url: eventSourceUrl,
+    action_source: 'website',
+
+    user_data: {
+      em: email ? [hash(email)] : undefined,
+      ph: phone ? [hash(normalizePhone(phone))] : undefined,
+      fn: firstName ? [hash(firstName)] : undefined,
+      ln: lastName ? [hash(lastName)] : undefined,
+      country: country ? [hash(country)] : undefined,
+
+      client_ip_address: clientIp || undefined,
+      client_user_agent: clientUserAgent || undefined,
+      fbp: fbp || undefined,
+      fbc: fbc || undefined,
     },
   };
 }
