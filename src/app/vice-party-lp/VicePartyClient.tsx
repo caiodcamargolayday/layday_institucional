@@ -250,8 +250,8 @@ export function VicePartyClient() {
             <h2 className="text-3xl md:text-5xl font-heading tracking-widest uppercase text-white/90">WATCH THE <span className="text-[#E72C7F]">MADNESS</span></h2>
           </div>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-10 md:gap-16">
-            <VideoPlayer src="/vice_party_pictures/VICE PARTY.mp4" />
-            <VideoPlayer src="/vice_party_pictures/VICE JAKA .mp4" />
+            <VideoPlayer src="/vice_party_pictures/vice_party.mp4" />
+            <VideoPlayer src="/vice_party_pictures/vice_jaka.mp4" />
           </div>
         </div>
       </section>

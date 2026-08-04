@@ -203,7 +203,7 @@ function FormModal({ onClose }: { onClose: () => void }) {
 const ASSETS = {
   hero: "/gilit_opening_party/hero_section_v2.png",
   heroMobile: "/gilit_opening_party/mobile_version_v2.png",
-  video: "/gilit_opening_party/LDGT-Grand Opening.mp4",
+  video: "/gilit_opening_party/ldgt_grand_opening.mp4",
   flyer: "/gilit_opening_party/LDGT-Grand Opening Flyer-IGF.png"
 };
 
