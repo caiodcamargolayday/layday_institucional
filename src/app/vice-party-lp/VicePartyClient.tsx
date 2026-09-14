@@ -10,8 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 const HERO_IMAGES = [
-  "/vice_party_pictures/LDU-Vice Pool Party-IGF-GLANDO.jpg",
-  "/vice_party_pictures/LDU-Vice Pool Party-IGF-Jaka.jpg"
+  "/vice_party_pictures/LDU-Vice Pool Party-IGF-Jaka (1).jpg",
+  "/vice_party_pictures/LDU-Vice Pool Party-IGF-SANTAI.jpg"
 ];
 
 const ASSETS = {
@@ -32,7 +32,7 @@ const ASSETS = {
   ]
 };
 
-const VideoPlayer = ({ src }: { src: string }) => {
+const VideoPlayer = ({ src, poster }: { src: string; poster?: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -48,10 +48,11 @@ const VideoPlayer = ({ src }: { src: string }) => {
   };
 
   return (
-    <div className="relative w-full max-w-[300px] sm:max-w-[340px] mx-auto aspect-[9/16] rounded-2xl overflow-hidden group border-[2px] md:border-[4px] border-[#FFE500]/40 shadow-[0_0_30px_rgba(255,229,0,0.2)] bg-black">
+    <div className="relative w-full max-w-[300px] sm:max-w-[340px] mx-auto aspect-[9/16] rounded-2xl overflow-hidden group border-[2px] md:border-[4px] border-[#FF2E83]/40 shadow-[0_0_35px_rgba(255,46,131,0.25)] bg-black">
       <video
         ref={videoRef}
         src={src}
+        poster={poster}
         className="w-full h-full object-cover"
         loop
         playsInline
@@ -64,11 +65,11 @@ const VideoPlayer = ({ src }: { src: string }) => {
         className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 cursor-pointer ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}
         onClick={togglePlay}
       >
-        <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#FFE500] flex items-center justify-center shadow-[0_0_25px_rgba(255,229,0,0.8)] transform transition-transform hover:scale-110">
+        <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-tr from-[#FF2E83] to-[#00D2D3] flex items-center justify-center shadow-[0_0_25px_rgba(255,46,131,0.8)] transform transition-transform hover:scale-110">
           {isPlaying ? (
-            <Pause className="w-8 h-8 md:w-10 md:h-10 text-black ml-0" fill="currentColor" />
+            <Pause className="w-8 h-8 md:w-10 md:h-10 text-white ml-0" fill="currentColor" />
           ) : (
-            <Play className="w-8 h-8 md:w-10 md:h-10 text-black ml-1 md:ml-2" fill="currentColor" />
+            <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1 md:ml-2" fill="currentColor" />
           )}
         </div>
       </div>
@@ -108,12 +109,12 @@ export function VicePartyClient() {
         phone: formData.get("phone") as string,
         email: formData.get("email") as string,
         people: formData.get("people") as string,
-        tab: "11.09",
-        sheetName: "11.09",
-        sheet: "11.09",
-        date: "11.09",
-        partyDate: "11.09",
-        event: "11.09 Vice Party",
+        tab: "18.09",
+        sheetName: "18.09",
+        sheet: "18.09",
+        date: "18.09",
+        partyDate: "18.09",
+        event: "18.09 Vice Party",
       };
 
       // 1. Submit to Google Sheets (Apps Script)
@@ -160,7 +161,7 @@ export function VicePartyClient() {
         (window as any).dataLayer.push({
           event: 'contact',
           form_name: 'vice_party_guest_list',
-          event_date: '11.09',
+          event_date: '18.09',
         });
       }
 
@@ -188,11 +189,15 @@ export function VicePartyClient() {
   };
 
   return (
-    <div ref={containerRef} className="bg-[#0a0a0a] text-white font-sans selection:bg-[#FFE500] selection:text-black overflow-x-hidden min-h-screen">
+    <div ref={containerRef} className="relative bg-[#09090d] text-white font-sans selection:bg-[#FF2E83] selection:text-white overflow-x-hidden min-h-screen">
+      {/* Ambient background glows */}
+      <div className="fixed top-0 left-1/4 w-96 h-96 bg-[#FF2E83]/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="fixed bottom-1/3 right-1/4 w-96 h-96 bg-[#00D2D3]/10 rounded-full blur-[140px] pointer-events-none" />
+
       {/* 1. Hero */}
-      <section className="relative min-h-screen w-full overflow-hidden bg-[#0a0a0a] flex flex-col items-center justify-center pt-10 pb-16 md:pb-24 px-4">
+      <section className="relative min-h-screen w-full overflow-hidden bg-transparent flex flex-col items-center justify-center pt-10 pb-16 md:pb-24 px-4">
         
-        <div className="relative z-10 w-full max-w-sm md:max-w-md mx-auto aspect-[4/5] mb-8 overflow-hidden rounded-lg shadow-[0_0_30px_rgba(255,229,0,0.25)] border border-[#FFE500]/30">
+        <div className="relative z-10 w-full max-w-sm md:max-w-md mx-auto aspect-[4/5] mb-8 overflow-hidden rounded-lg shadow-[0_0_35px_rgba(255,46,131,0.3)] border border-[#FF2E83]/40">
           <AnimatePresence mode="wait">
             <motion.div
               key={heroIndex}
@@ -221,21 +226,21 @@ export function VicePartyClient() {
             transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
             className="w-full flex flex-col items-center gap-4 md:gap-6"
           >
-            <h1 className="text-5xl sm:text-6xl md:text-8xl font-heading text-white tracking-widest leading-none drop-shadow-[0_0_20px_rgba(255,229,0,0.4)]">
-              VICE <span className="text-[#FFE500]">PARTY</span>
+            <h1 className="text-5xl sm:text-6xl md:text-8xl font-heading text-white tracking-widest leading-none drop-shadow-[0_0_25px_rgba(255,46,131,0.5)]">
+              VICE <span className="text-[#00D2D3] drop-shadow-[0_0_25px_rgba(0,210,211,0.6)]">PARTY</span>
             </h1>
             <p className="text-lg md:text-xl font-bold text-white tracking-[2px] md:tracking-[4px] uppercase mt-2 mb-4">
-              Get <span className="text-[#FFE500]">2 Free Drinks</span> when you join the guest list
+              Get <span className="text-[#00D2D3]">2 Free Drinks</span> when you join the guest list
             </p>
             <Dialog onOpenChange={(open) => { if (!open) setIsSuccess(false); }}>
               <DialogTrigger render={
-                <Button className="bg-[#FFE500] text-black hover:bg-white hover:text-black rounded-none h-14 md:h-16 px-8 md:px-16 font-extrabold uppercase tracking-[4px] text-sm md:text-base transition-all duration-500 shadow-[0_0_30px_rgba(255,229,0,0.6)] hover:scale-105" />
+                <Button className="bg-gradient-to-r from-[#FF2E83] to-[#FF4694] hover:from-[#00D2D3] hover:to-[#00F0FF] text-white hover:text-black rounded-none h-14 md:h-16 px-8 md:px-16 font-extrabold uppercase tracking-[4px] text-sm md:text-base transition-all duration-500 shadow-[0_0_30px_rgba(255,46,131,0.6)] hover:shadow-[0_0_35px_rgba(0,210,211,0.7)] hover:scale-105" />
               }>
                 ENTRY IN THE GUEST LIST
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px] bg-[#111] border-[#FFE500]/30 text-white rounded-none">
+              <DialogContent className="sm:max-w-[425px] bg-[#111116] border-[#FF2E83]/40 text-white rounded-none shadow-[0_0_40px_rgba(255,46,131,0.25)]">
                 <DialogHeader>
-                  <DialogTitle className="text-2xl font-heading tracking-widest text-[#FFE500] uppercase">
+                  <DialogTitle className="text-2xl font-heading tracking-widest text-[#FF2E83] uppercase">
                     {isSuccess ? "You're on the list!" : "Guest List"}
                   </DialogTitle>
                   <DialogDescription className="text-gray-400">
@@ -246,28 +251,28 @@ export function VicePartyClient() {
                   <div className="py-8 flex flex-col items-center justify-center text-center space-y-4">
                     <p className="text-white text-lg">Your details have been received.</p>
                     <p className="text-white/80">
-                      Follow <a href="https://www.instagram.com/laydayuluwatu/" target="_blank" rel="noopener noreferrer" className="text-[#FFE500] underline hover:text-white transition-colors">@laydayuluwatu</a> on Instagram to stay updated!
+                      Follow <a href="https://www.instagram.com/laydayuluwatu/" target="_blank" rel="noopener noreferrer" className="text-[#00D2D3] underline hover:text-[#FF2E83] transition-colors">@laydayuluwatu</a> on Instagram to stay updated!
                     </p>
                   </div>
                 ) : (
                   <form className="grid gap-4 py-4" onSubmit={handleBooking}>
                     <div className="grid gap-2">
                       <Label htmlFor="name" className="text-white/80 uppercase tracking-widest text-xs">Name</Label>
-                      <Input id="name" name="name" required className="bg-white/5 border-[#FFE500]/30 text-white placeholder:text-white/30 focus-visible:ring-[#FFE500] rounded-none h-12" placeholder="John Doe" />
+                      <Input id="name" name="name" required className="bg-white/5 border-[#FF2E83]/30 text-white placeholder:text-white/30 focus-visible:ring-[#00D2D3] rounded-none h-12" placeholder="John Doe" />
                     </div>
                     <div className="grid gap-2">
                       <Label htmlFor="phone" className="text-white/80 uppercase tracking-widest text-xs">Phone</Label>
-                      <Input id="phone" name="phone" type="tel" required className="bg-white/5 border-[#FFE500]/30 text-white placeholder:text-white/30 focus-visible:ring-[#FFE500] rounded-none h-12" placeholder="+62..." />
+                      <Input id="phone" name="phone" type="tel" required className="bg-white/5 border-[#FF2E83]/30 text-white placeholder:text-white/30 focus-visible:ring-[#00D2D3] rounded-none h-12" placeholder="+62..." />
                     </div>
                     <div className="grid gap-2">
                       <Label htmlFor="email" className="text-white/80 uppercase tracking-widest text-xs">Email</Label>
-                      <Input id="email" name="email" type="email" required className="bg-white/5 border-[#FFE500]/30 text-white placeholder:text-white/30 focus-visible:ring-[#FFE500] rounded-none h-12" placeholder="john@example.com" />
+                      <Input id="email" name="email" type="email" required className="bg-white/5 border-[#FF2E83]/30 text-white placeholder:text-white/30 focus-visible:ring-[#00D2D3] rounded-none h-12" placeholder="john@example.com" />
                     </div>
                     <div className="grid gap-2">
                       <Label htmlFor="people" className="text-white/80 uppercase tracking-widest text-xs">How many people?</Label>
-                      <Input id="people" name="people" type="number" min="1" required className="bg-white/5 border-[#FFE500]/30 text-white placeholder:text-white/30 focus-visible:ring-[#FFE500] rounded-none h-12" defaultValue="1" />
+                      <Input id="people" name="people" type="number" min="1" required className="bg-white/5 border-[#FF2E83]/30 text-white placeholder:text-white/30 focus-visible:ring-[#00D2D3] rounded-none h-12" defaultValue="1" />
                     </div>
-                    <Button type="submit" disabled={isLoading} className="w-full bg-[#FFE500] text-black hover:bg-white hover:text-black rounded-none h-12 font-extrabold uppercase tracking-[4px] mt-2 transition-all duration-300 shadow-[0_0_20px_rgba(255,229,0,0.4)] disabled:opacity-50">
+                    <Button type="submit" disabled={isLoading} className="w-full bg-gradient-to-r from-[#FF2E83] to-[#FF4694] hover:from-[#00D2D3] hover:to-[#00F0FF] text-white hover:text-black rounded-none h-12 font-extrabold uppercase tracking-[4px] mt-2 transition-all duration-300 shadow-[0_0_20px_rgba(255,46,131,0.5)] hover:shadow-[0_0_25px_rgba(0,210,211,0.6)] disabled:opacity-50">
                       {isLoading ? "Registering..." : "Register Now"}
                     </Button>
                   </form>
@@ -279,29 +284,40 @@ export function VicePartyClient() {
       </section>
 
       {/* 1.5 Video Section */}
-      <section className="py-16 md:py-28 bg-[#0a0a0a]">
+      <section className="py-16 md:py-28 bg-transparent">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-5xl font-heading tracking-widest uppercase text-white/90">WATCH THE <span className="text-[#FFE500]">MADNESS</span></h2>
+            <h2 className="text-3xl md:text-5xl font-heading tracking-widest uppercase text-white/90">WATCH THE <span className="text-[#FF2E83] drop-shadow-[0_0_20px_rgba(255,46,131,0.6)]">MADNESS</span></h2>
           </div>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-10 md:gap-16">
-            <VideoPlayer src="/vice_party_pictures/LDU-Vice Pool Party-IGS-GLANDO.mp4" />
-            <VideoPlayer src="/vice_party_pictures/LDU-Vice Pool Party-IGS-Jaka.mp4" />
+            <VideoPlayer 
+              src="/vice_party_pictures/LDU-Vice Pool Party-IGS-Jaka (Motion).mp4" 
+              poster="/vice_party_pictures/LDU-Vice Pool Party-IGS-Jaka Cover (1).jpg"
+            />
+            <div className="relative w-full max-w-[300px] sm:max-w-[340px] mx-auto aspect-[9/16] rounded-2xl overflow-hidden border-[2px] md:border-[4px] border-[#00D2D3]/40 shadow-[0_0_35px_rgba(0,210,211,0.25)] bg-black group hover:scale-[1.02] transition-transform duration-300">
+              <Image 
+                src="/vice_party_pictures/LDU-Vice Pool Party-IGS-SANTAI Cover.jpg" 
+                alt="Vice Pool Party Lineup" 
+                fill 
+                className="object-cover" 
+                sizes="(max-width: 768px) 300px, 340px"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* 2. Ribbon */}
-      <div className="py-8 md:py-16 overflow-hidden bg-white/5 border-y border-[#FFE500]/20">
+      <div className="py-8 md:py-16 overflow-hidden bg-white/5 border-y border-[#FF2E83]/20">
         <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-4xl font-heading tracking-widest uppercase text-white/90">FEEL THE <span className="text-[#FFE500]">VIBE</span></h2>
+            <h2 className="text-2xl md:text-4xl font-heading tracking-widest uppercase text-white/90">FEEL THE <span className="text-[#00D2D3] drop-shadow-[0_0_20px_rgba(0,210,211,0.6)]">VIBE</span></h2>
         </div>
         <motion.div
           style={{ x: ribbonX }}
           className="flex gap-4 md:gap-6 whitespace-nowrap pt-4"
         >
           {[...ASSETS.images, ...ASSETS.images, ...ASSETS.images].map((img, i) => (
-            <div key={i} className="relative w-[260px] md:w-[400px] aspect-[4/5] md:aspect-video flex-shrink-0 grayscale-[0.2] hover:grayscale-0 transition-all duration-700 overflow-hidden border border-[#FFE500]/20 rounded-sm">
+            <div key={i} className="relative w-[260px] md:w-[400px] aspect-[4/5] md:aspect-video flex-shrink-0 grayscale-[0.1] hover:grayscale-0 transition-all duration-700 overflow-hidden border border-[#FF2E83]/20 hover:border-[#00D2D3]/60 rounded-sm">
               <Image src={img} alt="Vibe" fill className="object-cover" sizes="(max-width: 768px) 80vw, 40vw" />
             </div>
           ))}
@@ -312,11 +328,11 @@ export function VicePartyClient() {
         {/* 3. Interactive Gallery */}
         <section className="mb-16 md:mb-24">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-5xl font-heading tracking-widest uppercase text-white/90">PARTY <span className="text-[#FFE500]">GALLERY</span></h2>
+            <h2 className="text-3xl md:text-5xl font-heading tracking-widest uppercase text-white/90">PARTY <span className="text-[#FF2E83] drop-shadow-[0_0_20px_rgba(255,46,131,0.6)]">GALLERY</span></h2>
           </div>
           <div className="relative">
             {/* Main Image */}
-            <div className="relative aspect-[4/5] md:aspect-[21/9] overflow-hidden border-[2px] md:border-[4px] border-[#FFE500]/40 shadow-[0_0_30px_rgba(255,229,0,0.2)] bg-[#111] rounded-sm group">
+            <div className="relative aspect-[4/5] md:aspect-[21/9] overflow-hidden border-[2px] md:border-[4px] border-[#FF2E83]/40 shadow-[0_0_35px_rgba(255,46,131,0.25)] bg-[#111] rounded-sm group">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentImg}
@@ -337,7 +353,7 @@ export function VicePartyClient() {
               </AnimatePresence>
 
               {/* Side preview strips - Hidden on mobile */}
-              <div className="hidden md:block absolute left-0 top-0 w-[15%] h-full z-10 overflow-hidden opacity-20 hover:opacity-80 transition-opacity cursor-pointer border-r border-[#FFE500]/30 bg-black/50" onClick={() => scrollGallery('left')}>
+              <div className="hidden md:block absolute left-0 top-0 w-[15%] h-full z-10 overflow-hidden opacity-20 hover:opacity-80 transition-opacity cursor-pointer border-r border-[#FF2E83]/30 bg-black/50" onClick={() => scrollGallery('left')}>
                 <Image
                   src={ASSETS.images[(currentImg - 1 + ASSETS.images.length) % ASSETS.images.length]}
                   alt="prev"
@@ -348,7 +364,7 @@ export function VicePartyClient() {
                     <ChevronLeft className="w-12 h-12 text-white drop-shadow-md" />
                 </div>
               </div>
-              <div className="hidden md:block absolute right-0 top-0 w-[15%] h-full z-10 overflow-hidden opacity-20 hover:opacity-80 transition-opacity cursor-pointer border-l border-[#FFE500]/30 bg-black/50" onClick={() => scrollGallery('right')}>
+              <div className="hidden md:block absolute right-0 top-0 w-[15%] h-full z-10 overflow-hidden opacity-20 hover:opacity-80 transition-opacity cursor-pointer border-l border-[#FF2E83]/30 bg-black/50" onClick={() => scrollGallery('right')}>
                 <Image
                   src={ASSETS.images[(currentImg + 1) % ASSETS.images.length]}
                   alt="next"
@@ -365,7 +381,7 @@ export function VicePartyClient() {
             <div className="flex justify-center items-center gap-4 md:gap-8 mt-8">
               <button
                 onClick={() => scrollGallery('left')}
-                className="w-12 h-12 rounded-full border-2 border-[#FFE500] text-[#FFE500] flex items-center justify-center hover:bg-[#FFE500] hover:text-black transition-colors"
+                className="w-12 h-12 rounded-full border-2 border-[#00D2D3] text-[#00D2D3] flex items-center justify-center hover:bg-[#00D2D3] hover:text-black shadow-[0_0_15px_rgba(0,210,211,0.3)] transition-all duration-300"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
@@ -374,13 +390,13 @@ export function VicePartyClient() {
                   <button
                     key={i}
                     onClick={() => setCurrentImg(i)}
-                    className={`h-2 rounded-full transition-all duration-300 ${i === currentImg ? 'bg-[#FFE500] w-8' : 'bg-white/30 w-2 hover:bg-white/50'}`}
+                    className={`h-2 rounded-full transition-all duration-300 ${i === currentImg ? 'bg-[#FF2E83] shadow-[0_0_10px_rgba(255,46,131,0.8)] w-8' : 'bg-white/30 w-2 hover:bg-white/50'}`}
                   />
                 ))}
               </div>
               <button
                 onClick={() => scrollGallery('right')}
-                className="w-12 h-12 rounded-full border-2 border-[#FFE500] text-[#FFE500] flex items-center justify-center hover:bg-[#FFE500] hover:text-black transition-colors"
+                className="w-12 h-12 rounded-full border-2 border-[#00D2D3] text-[#00D2D3] flex items-center justify-center hover:bg-[#00D2D3] hover:text-black shadow-[0_0_15px_rgba(0,210,211,0.3)] transition-all duration-300"
               >
                 <ChevronRight className="w-6 h-6" />
               </button>
@@ -394,27 +410,27 @@ export function VicePartyClient() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative h-[50vh] md:h-[60vh] flex items-center justify-center text-center overflow-hidden border border-[#FFE500]/30 rounded-lg shadow-[0_0_50px_rgba(255,229,0,0.15)]"
+          className="relative h-[50vh] md:h-[60vh] flex items-center justify-center text-center overflow-hidden border border-[#FF2E83]/30 rounded-lg shadow-[0_0_50px_rgba(255,46,131,0.2)]"
         >
           <div className="absolute inset-0 z-0">
             <Image src={ASSETS.images[0]} alt="Vibe" fill className="object-cover grayscale brightness-[0.15]" sizes="100vw" />
           </div>
           <div className="relative z-10 px-4 space-y-8">
-            <h2 className="text-4xl md:text-7xl font-heading text-white tracking-[6px] md:tracking-[12px] uppercase leading-none drop-shadow-[0_0_15px_rgba(255,229,0,0.35)]">
-              JOIN THE <span className="text-[#FFE500]">MADNESS</span>
+            <h2 className="text-4xl md:text-7xl font-heading text-white tracking-[6px] md:tracking-[12px] uppercase leading-none drop-shadow-[0_0_20px_rgba(255,46,131,0.5)]">
+              JOIN THE <span className="text-[#00D2D3] drop-shadow-[0_0_20px_rgba(0,210,211,0.6)]">MADNESS</span>
             </h2>
             <p className="text-lg md:text-xl font-bold text-white tracking-[2px] md:tracking-[4px] uppercase mt-2 mb-4">
-              Get <span className="text-[#FFE500]">2 Free Drinks</span> when you join the guest list
+              Get <span className="text-[#FF2E83]">2 Free Drinks</span> when you join the guest list
             </p>
             <Dialog onOpenChange={(open) => { if (!open) setIsSuccess(false); }}>
               <DialogTrigger render={
-                <Button className="bg-[#FFE500] text-black hover:bg-white hover:text-black rounded-none h-14 md:h-16 px-12 md:px-16 font-extrabold uppercase tracking-[4px] text-sm md:text-base transition-all duration-500 shadow-[0_0_40px_rgba(255,229,0,0.5)] hover:scale-105" />
+                <Button className="bg-gradient-to-r from-[#FF2E83] to-[#FF4694] hover:from-[#00D2D3] hover:to-[#00F0FF] text-white hover:text-black rounded-none h-14 md:h-16 px-12 md:px-16 font-extrabold uppercase tracking-[4px] text-sm md:text-base transition-all duration-500 shadow-[0_0_40px_rgba(255,46,131,0.6)] hover:shadow-[0_0_45px_rgba(0,210,211,0.7)] hover:scale-105" />
               }>
                 ENTRY IN THE GUEST LIST
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px] bg-[#111] border-[#FFE500]/30 text-white rounded-none">
+              <DialogContent className="sm:max-w-[425px] bg-[#111116] border-[#FF2E83]/40 text-white rounded-none shadow-[0_0_40px_rgba(255,46,131,0.25)]">
                 <DialogHeader>
-                  <DialogTitle className="text-2xl font-heading tracking-widest text-[#FFE500] uppercase">
+                  <DialogTitle className="text-2xl font-heading tracking-widest text-[#FF2E83] uppercase">
                     {isSuccess ? "You're on the list!" : "Guest List"}
                   </DialogTitle>
                   <DialogDescription className="text-gray-400">
@@ -425,28 +441,28 @@ export function VicePartyClient() {
                   <div className="py-8 flex flex-col items-center justify-center text-center space-y-4">
                     <p className="text-white text-lg">Your details have been received.</p>
                     <p className="text-white/80">
-                      Follow <a href="https://www.instagram.com/laydayuluwatu/" target="_blank" rel="noopener noreferrer" className="text-[#FFE500] underline hover:text-white transition-colors">@laydayuluwatu</a> on Instagram to stay updated!
+                      Follow <a href="https://www.instagram.com/laydayuluwatu/" target="_blank" rel="noopener noreferrer" className="text-[#00D2D3] underline hover:text-[#FF2E83] transition-colors">@laydayuluwatu</a> on Instagram to stay updated!
                     </p>
                   </div>
                 ) : (
                   <form className="grid gap-4 py-4" onSubmit={handleBooking}>
                     <div className="grid gap-2">
                       <Label htmlFor="name2" className="text-white/80 uppercase tracking-widest text-xs">Name</Label>
-                      <Input id="name2" name="name" required className="bg-white/5 border-[#FFE500]/30 text-white placeholder:text-white/30 focus-visible:ring-[#FFE500] rounded-none h-12" placeholder="John Doe" />
+                      <Input id="name2" name="name" required className="bg-white/5 border-[#FF2E83]/30 text-white placeholder:text-white/30 focus-visible:ring-[#00D2D3] rounded-none h-12" placeholder="John Doe" />
                     </div>
                     <div className="grid gap-2">
                       <Label htmlFor="phone2" className="text-white/80 uppercase tracking-widest text-xs">Phone</Label>
-                      <Input id="phone2" name="phone" type="tel" required className="bg-white/5 border-[#FFE500]/30 text-white placeholder:text-white/30 focus-visible:ring-[#FFE500] rounded-none h-12" placeholder="+62..." />
+                      <Input id="phone2" name="phone" type="tel" required className="bg-white/5 border-[#FF2E83]/30 text-white placeholder:text-white/30 focus-visible:ring-[#00D2D3] rounded-none h-12" placeholder="+62..." />
                     </div>
                     <div className="grid gap-2">
                       <Label htmlFor="email2" className="text-white/80 uppercase tracking-widest text-xs">Email</Label>
-                      <Input id="email2" name="email" type="email" required className="bg-white/5 border-[#FFE500]/30 text-white placeholder:text-white/30 focus-visible:ring-[#FFE500] rounded-none h-12" placeholder="john@example.com" />
+                      <Input id="email2" name="email" type="email" required className="bg-white/5 border-[#FF2E83]/30 text-white placeholder:text-white/30 focus-visible:ring-[#00D2D3] rounded-none h-12" placeholder="john@example.com" />
                     </div>
                     <div className="grid gap-2">
                       <Label htmlFor="people2" className="text-white/80 uppercase tracking-widest text-xs">How many people?</Label>
-                      <Input id="people2" name="people" type="number" min="1" required className="bg-white/5 border-[#FFE500]/30 text-white placeholder:text-white/30 focus-visible:ring-[#FFE500] rounded-none h-12" defaultValue="1" />
+                      <Input id="people2" name="people" type="number" min="1" required className="bg-white/5 border-[#FF2E83]/30 text-white placeholder:text-white/30 focus-visible:ring-[#00D2D3] rounded-none h-12" defaultValue="1" />
                     </div>
-                    <Button type="submit" disabled={isLoading} className="w-full bg-[#FFE500] text-black hover:bg-white hover:text-black rounded-none h-12 font-extrabold uppercase tracking-[4px] mt-2 transition-all duration-300 shadow-[0_0_20px_rgba(255,229,0,0.4)] disabled:opacity-50">
+                    <Button type="submit" disabled={isLoading} className="w-full bg-gradient-to-r from-[#FF2E83] to-[#FF4694] hover:from-[#00D2D3] hover:to-[#00F0FF] text-white hover:text-black rounded-none h-12 font-extrabold uppercase tracking-[4px] mt-2 transition-all duration-300 shadow-[0_0_20px_rgba(255,46,131,0.5)] hover:shadow-[0_0_25px_rgba(0,210,211,0.6)] disabled:opacity-50">
                       {isLoading ? "Registering..." : "Register Now"}
                     </Button>
                   </form>
@@ -459,3 +475,4 @@ export function VicePartyClient() {
     </div>
   );
 }
+
