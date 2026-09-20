@@ -23,6 +23,13 @@ export function getCapiConfigs(origin: string): Array<{ pixelId: string; accessT
     return configs;
   }
 
+  if (origin === 'beerpong' || origin === 'beerpong-gilit' || origin === 'gilit-beerpong') {
+    return [{
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_BEERPONG_GILIT || '1036889488979198',
+      accessToken: process.env.META_ACCESS_TOKEN_BEERPONG_GILIT || 'EAARrizXTDwMBSr50dLo4MR79nQgmddNTlmL07YAaxMlp4Se2txcLVBtJZCm95qn0KlGpwdMZAZCZCWSIYcQQEYLjfuKMLzCpKichM6OMdAWsxShSgEENQkCjBrRkPTUmXv0DhU4ZAnM5cXtvo26mqnGGm2dhNBd3wFipKdLGGScpbyKWqa4YZAYNgTfSUZCZBPpPpAZDZD',
+    }];
+  }
+
   if (origin === 'anniversary-gilit') {
     return [{
       pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_GILIT || '1036889488979198',
@@ -49,6 +56,12 @@ export function getCapiConfig(origin: string) {
     return {
       pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_CANGGU || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY || '1392233983092323',
       accessToken: process.env.META_ACCESS_TOKEN_ANNIVERSARY_CANGGU || process.env.META_ACCESS_TOKEN_ANNIVERSARY || 'EAAYA08KKYP4BSXV9LXzO9ovjTLM6m6STy9vZBWScpoMUcJbQ22qcs63bt6rC2rhv7NsnndXwhuCTGnAZBFAEQjAEkEMjQdsqTnl0op9tR62HOgEvgcjYTWGQYu5C0zX5jZBD1EmiZAliNh3RdpS65homAlMmYL2sH1sIFM9ORya1bZCevUaHdndDhgyZAT2QZDZD',
+    };
+  }
+  if (origin === 'beerpong' || origin === 'beerpong-gilit' || origin === 'gilit-beerpong') {
+    return {
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_BEERPONG_GILIT || '1036889488979198',
+      accessToken: process.env.META_ACCESS_TOKEN_BEERPONG_GILIT || 'EAARrizXTDwMBSr50dLo4MR79nQgmddNTlmL07YAaxMlp4Se2txcLVBtJZCm95qn0KlGpwdMZAZCZCWSIYcQQEYLjfuKMLzCpKichM6OMdAWsxShSgEENQkCjBrRkPTUmXv0DhU4ZAnM5cXtvo26mqnGGm2dhNBd3wFipKdLGGScpbyKWqa4YZAYNgTfSUZCZBPpPpAZDZD',
     };
   }
   if (origin === 'anniversary-gilit') {
@@ -115,6 +128,66 @@ export function normalizePhone(phone: string | undefined | null): string | undef
   if (p.startsWith('0')) p = '62' + p.slice(1); // Indonesian local format
   if (!p.startsWith('62')) p = '62' + p;
   return '+' + p;
+}
+
+export interface RegistrationEventParams {
+  eventId: string;
+  eventSourceUrl?: string;
+  clientIp?: string | null;
+  clientUserAgent?: string | null;
+  fbp?: string | null;
+  fbc?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  country?: string;
+  eventName?: string;
+  contentName?: string;
+  actionSource?: 'chat' | 'website' | 'system' | 'other';
+}
+
+export function buildRegistrationEvent({
+  eventId,
+  eventSourceUrl = 'https://laydayhostels.com/beerpongatldgilit',
+  clientIp,
+  clientUserAgent,
+  fbp,
+  fbc,
+  email,
+  phone,
+  firstName,
+  lastName,
+  country = 'id',
+  eventName = 'CompleteRegistration',
+  contentName = 'Beerpong Championship Registration (WhatsApp)',
+  actionSource = 'chat',
+}: RegistrationEventParams) {
+  return {
+    event_name: eventName,
+    event_time: Math.floor(Date.now() / 1000),
+    event_id: eventId,
+    event_source_url: eventSourceUrl,
+    action_source: actionSource,
+
+    user_data: {
+      em: email ? [hash(email)] : undefined,
+      ph: phone ? [hash(normalizePhone(phone))] : undefined,
+      fn: firstName ? [hash(firstName)] : undefined,
+      ln: lastName ? [hash(lastName)] : undefined,
+      country: country ? [hash(country)] : undefined,
+
+      client_ip_address: clientIp || undefined,
+      client_user_agent: clientUserAgent || undefined,
+      fbp: fbp || undefined,
+      fbc: fbc || undefined,
+    },
+
+    custom_data: {
+      content_name: contentName,
+      status: 'confirmed_on_whatsapp',
+    },
+  };
 }
 
 export interface PurchaseEventParams {

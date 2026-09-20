@@ -10,7 +10,7 @@ const STANDALONE_ROUTES = ["/creator-week-gili-t", "/11-years-layday", "/2-years
 export function ConditionalShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isStandalone = STANDALONE_ROUTES.some((r) => pathname.startsWith(r)) || pathname.endsWith("-lp");
-  const isCompletelyStandalone = pathname.startsWith("/opening-party-gilit");
+  const isCompletelyStandalone = pathname.startsWith("/opening-party-gilit") || pathname.startsWith("/beerpongatldgilit");
 
   if (isCompletelyStandalone) {
     return <>{children}</>;

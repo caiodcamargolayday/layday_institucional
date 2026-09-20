@@ -6,6 +6,9 @@ import { usePathname, useSearchParams } from "next/navigation";
 function getPixelIdsForPath(pathname: string, origin?: string | null): string[] {
   const target = origin || pathname;
 
+  if (target.includes("beerpong")) {
+    return [process.env.NEXT_PUBLIC_META_PIXEL_ID_BEERPONG_GILIT || "1036889488979198"].filter(Boolean) as string[];
+  }
   if (target.includes("11-years-layday") || target.includes("anniversary-canggu") || target.includes("anniversary-gilit")) {
     const cangguId = process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_CANGGU || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY || "1392233983092323";
     const gilitId = process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_GILIT || "1036889488979198";
