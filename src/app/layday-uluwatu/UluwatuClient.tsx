@@ -200,12 +200,12 @@ export function UluwatuClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <span className="text-white font-bold tracking-[4px] uppercase text-[9px] mb-2 block drop-shadow-lg">Cliffside Sanctuary • Uluwatu</span>
+            <span className="text-white font-bold tracking-[4px] uppercase text-[9px] mb-2 block drop-shadow-lg">Tropical Sanctuary • Uluwatu</span>
             <h1 className="text-5xl md:text-7xl font-heading text-white tracking-widest leading-none mb-6 drop-shadow-2xl">
               LAY DAY <span className="text-[#EE5B2B]">ULUWATU</span>
             </h1>
             <p className="max-w-xl mx-auto text-white/90 font-medium tracking-wide text-lg md:text-xl leading-relaxed mb-8">
-              Industrial luxury meets the raw energy of the Bukit Peninsula. Cliffside vibes and legendary social rituals.
+              Industrial luxury meets the raw energy of the Bukit Peninsula. Island vibes and legendary social rituals.
             </p>
             <div className="flex flex-col items-center">
               <Button
@@ -261,7 +261,7 @@ export function UluwatuClient() {
               <span className="text-[10px] font-bold tracking-[2px] uppercase">Surf &amp; Party</span>
             </div>
             <h2 className="text-2xl md:text-5xl font-heading tracking-widest leading-tight uppercase">
-              CLIFFSIDE <span className="text-[#EE5B2B]">PARADISE</span>
+              TROPICAL <span className="text-[#EE5B2B]">PARADISE</span>
             </h2>
             <p className="text-sm md:text-base leading-relaxed font-medium opacity-70 max-w-lg uppercase tracking-tight">
               Welcome to Lay Day Uluwatu — where good vibes, salty hair, and unforgettable nights come standard. With 168 dorm beds and 5 private rooms, we’re your ultimate base for partying, chilling, and meeting people from around the world. By day, lounge by our massive pool or relax with a cold drink. By night, our lively bar keeps the energy high and the good times rolling.

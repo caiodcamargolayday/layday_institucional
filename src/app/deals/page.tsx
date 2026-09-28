@@ -17,7 +17,7 @@ const DEALS = [
   {
     title: "DAILY HAPPY HOUR - ULUWATU",
     image: "/lay_day_home/home_section_2.jpeg",
-    text: "Join us by the pool for epic sunset views, half-price drinks, and live DJ sets. The best pre-party in Uluwatu starts right here at our cliffside sanctuary.",
+    text: "Join us by the pool for epic sunset views, half-price drinks, and live DJ sets. The best pre-party in Uluwatu starts right here at our island sanctuary.",
     tag: "DRINKS",
     color: "#EE5B2B"
   },

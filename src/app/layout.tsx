@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Montserrat, Bebas_Neue } from "next/font/google";
+import { Manrope, Outfit, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { ConditionalShell } from "@/components/layout/ConditionalShell";
 
-const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" });
-const bebas = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-heading" });
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-sans" });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-heading" });
+const bebas = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-condensed" });
 
 export const metadata: Metadata = {
   title: "Lay Day Hostels",
@@ -34,7 +35,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.youtube.com" />
         <link rel="preconnect" href="https://www.google.com" />
       </head>
-      <body className={`${montserrat.variable} ${bebas.variable} font-sans antialiased bg-[#EBE6D8] text-[#004A61] flex flex-col min-h-screen`}>
+      <body className={`${manrope.variable} ${outfit.variable} ${bebas.variable} font-sans antialiased bg-[#EBE6D8] text-[#004A61] flex flex-col min-h-screen`}>
         <Suspense fallback={null}>
           <MetaPixel />
           <GoogleAdsPixel />

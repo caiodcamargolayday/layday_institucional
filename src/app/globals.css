@@ -9,6 +9,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
+  --font-condensed: var(--font-condensed);
 }
 
 :root {
@@ -23,6 +24,6 @@
     @apply bg-[#EBE6D8] text-[#083248] font-sans antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading tracking-wide;
+    @apply font-heading tracking-wide font-bold;
   }
 }

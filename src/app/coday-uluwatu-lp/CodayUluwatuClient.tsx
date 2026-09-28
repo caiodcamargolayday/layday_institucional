@@ -70,10 +70,10 @@ const DESTINATIONS = [
   { image: "/lay_day_uluwatu/surf 1.jpeg", title: "Padang Padang Beach", type: "beach", description: "One of Bali's most famous surf beaches, featuring a beautiful sandy cove accessed through a narrow rock crevice." },
   { image: "/lay_day_uluwatu/culture.jpeg", title: "Uluwatu Temple", type: "temple", description: "An iconic 11th-century sea temple perched dramatically on a 70-meter cliff. Famous for its wild monkeys and sunset Kecak fire dance." },
   { image: "/lay_day_uluwatu/party 1.jpeg", title: "Single Fin Bali", type: "activities", description: "Perched high on the cliffs overlooking the legendary Uluwatu surf break. The go-to spot for Sunday sunset sessions and drinks." },
-  { image: "/lay_day_uluwatu/place 1.jpeg", title: "Suluban Beach", type: "beach", description: "Also known as Blue Point, accessed by walking down through cave openings to reveal a hidden beach cove and professional surf breaks." },
+  { image: "/lay_day_uluwatu/palce 3.jpeg", title: "Suluban Beach", type: "beach", description: "Also known as Blue Point, accessed by walking down through cave openings to reveal a hidden beach cove and professional surf breaks." },
   { image: "/lay_day_uluwatu/party 2.jpeg", title: "Savaya Bali", type: "activities", description: "An ultra-luxury clifftop dayclub suspended over the Indian Ocean, hosting international DJs and offering premium pool-side lounging." },
   { image: "/lay_day_uluwatu/place 2.jpeg", title: "Dreamland Beach", type: "beach", description: "A wide stretch of white sand perfect for sunbathing, swimming, and watching waves break along the coast." },
-  { image: "/lay_day_uluwatu/sport.jpeg", title: "Ulu Cliffhouse", type: "activities", description: "A chic clifftop day club offering spectacular panoramic ocean views, a creative menu, and deep house music by the pool." }
+  { image: "/lay_day_uluwatu/El Kabron Beach Club.jpeg", title: "Ulu Cliffhouse", type: "activities", description: "A chic clifftop day club offering spectacular panoramic ocean views, a creative menu, and deep house music by the pool." }
 ];
 
 const DISPLAY_DESTINATIONS = DESTINATIONS.slice(0, 6);
@@ -145,7 +145,7 @@ export function CodayUluwatuClient() {
             transition={{ duration: 1, ease: "easeOut" }}
           >
             <span className="text-white font-bold tracking-[4px] uppercase text-[9px] mb-2 block drop-shadow-lg">Boutique Stays • Coworking • Wellness</span>
-            <h1 className="text-5xl md:text-7xl font-heading text-white tracking-widest leading-none mb-6 drop-shadow-2xl">
+            <h1 className="text-5xl md:text-7xl font-sans text-white tracking-widest leading-none mb-6 drop-shadow-2xl">
               CODAY <span className="text-[#EE5B2B]">ULUWATU</span>
             </h1>
             <p className="max-w-xl mx-auto text-white/90 font-medium tracking-wide text-lg md:text-xl leading-relaxed mb-8">
@@ -198,7 +198,7 @@ export function CodayUluwatuClient() {
               <Waves className="w-3.5 h-3.5 text-[#EE5B2B]" />
               <span className="text-[10px] font-bold tracking-[2px] uppercase">Nomad Sanctuary</span>
             </div>
-            <h2 className="text-2xl md:text-5xl font-heading tracking-widest leading-tight uppercase">
+            <h2 className="text-2xl md:text-5xl font-sans tracking-widest leading-tight uppercase">
               A NEW STANDARD FOR <span className="text-[#EE5B2B]">MODERN NOMADS</span>
             </h2>
             <p className="text-sm md:text-base leading-relaxed font-medium opacity-70 max-w-lg uppercase tracking-tight">
@@ -230,7 +230,7 @@ export function CodayUluwatuClient() {
         {/* 4. Our Destinations */}
         <section className="mb-16 md:mb-24">
           <div className="mb-10">
-            <h2 className="text-2xl md:text-4xl font-heading tracking-widest uppercase">OUR <span className="text-[#EE5B2B]">DESTINATIONS</span></h2>
+            <h2 className="text-2xl md:text-4xl font-sans tracking-widest uppercase">OUR <span className="text-[#EE5B2B]">DESTINATIONS</span></h2>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div className="space-y-6">
@@ -242,7 +242,7 @@ export function CodayUluwatuClient() {
                       <Image src={dest.image} alt={dest.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
                     </div>
                     <div>
-                      <h4 className="font-heading tracking-wider uppercase text-base md:text-lg leading-tight text-[#004A61] group-hover:text-[#EE5B2B] transition-colors mb-1">{dest.title}</h4>
+                      <h4 className="font-sans tracking-wider uppercase text-base md:text-lg leading-tight text-[#004A61] group-hover:text-[#EE5B2B] transition-colors mb-1">{dest.title}</h4>
                       <span className="text-xs text-[#EE5B2B] lowercase font-bold tracking-widest">{dest.type}</span>
                     </div>
                   </div>
@@ -279,7 +279,7 @@ export function CodayUluwatuClient() {
         {/* 5. Facilities + Amenities */}
         <section className="mb-16 md:mb-24 py-12 md:py-16 border-y border-[#004A61]/10">
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-4xl font-heading tracking-widest uppercase">FACILITIES + <span className="text-[#EE5B2B]">AMENITIES</span></h2>
+            <h2 className="text-2xl md:text-4xl font-sans tracking-widest uppercase">FACILITIES + <span className="text-[#EE5B2B]">AMENITIES</span></h2>
           </div>
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-10 md:gap-x-12 md:gap-y-12">
             {FACILITIES.map((fac, i) => (
@@ -296,7 +296,7 @@ export function CodayUluwatuClient() {
         {/* 6. Facilities Photo Gallery */}
         <section className="mb-16 md:mb-24">
           <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-4xl font-heading tracking-widest uppercase">SEE THE <span className="text-[#EE5B2B]">VIBE</span></h2>
+            <h2 className="text-2xl md:text-4xl font-sans tracking-widest uppercase">SEE THE <span className="text-[#EE5B2B]">VIBE</span></h2>
           </div>
           <div className="relative">
             {/* Main Image */}
@@ -370,7 +370,7 @@ export function CodayUluwatuClient() {
         <section className="mb-12 md:mb-20">
           <div className="text-center mb-8">
             <Camera className="w-5 h-5 text-[#EE5B2B] mx-auto mb-4" />
-            <h2 className="text-xl md:text-4xl font-heading tracking-widest uppercase">THE <span className="text-[#EE5B2B]">UNFILTERED</span> GALLERY</h2>
+            <h2 className="text-xl md:text-4xl font-sans tracking-widest uppercase">THE <span className="text-[#EE5B2B]">UNFILTERED</span> GALLERY</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
@@ -388,7 +388,7 @@ export function CodayUluwatuClient() {
               >
                 <Image src={item.src} alt={item.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 30vw" />
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center p-4 text-center">
-                  <h4 className="text-white font-heading text-lg tracking-widest">{item.title}</h4>
+                  <h4 className="text-white font-sans text-lg tracking-widest">{item.title}</h4>
                 </div>
               </motion.div>
             ))}
@@ -406,7 +406,7 @@ export function CodayUluwatuClient() {
             <Image src="/coday_uluwatu/co living 3.jpg" alt="Vibe" fill className="object-cover grayscale brightness-50" sizes="100vw" />
           </div>
           <div className="relative z-10 px-4 space-y-4">
-            <h2 className="text-3xl md:text-6xl font-heading text-white tracking-[6px] md:tracking-[12px] uppercase leading-none">
+            <h2 className="text-3xl md:text-6xl font-sans text-white tracking-[6px] md:tracking-[12px] uppercase leading-none">
               LIVE THE <span className="text-[#EE5B2B]">VIBE</span>
             </h2>
             <Button
@@ -443,7 +443,7 @@ export function CodayUluwatuClient() {
                 .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #EE5B2B; }
               `}</style>
               <div className="sticky top-0 bg-[#EBE7E0] z-10 p-6 flex justify-between items-center border-b border-[#004A61]/10">
-                <h2 className="text-xl font-heading tracking-widest uppercase text-[#004A61]">MORE PLACES TO VISIT</h2>
+                <h2 className="text-xl font-sans tracking-widest uppercase text-[#004A61]">MORE PLACES TO VISIT</h2>
                 <button onClick={() => setIsModalOpen(false)} className="text-[#004A61] hover:text-[#EE5B2B] transition-colors">
                   <X className="w-8 h-8" />
                 </button>
@@ -456,7 +456,7 @@ export function CodayUluwatuClient() {
                     </div>
                     <div>
                       <span className="text-[#EE5B2B] lowercase font-bold tracking-widest text-[10px] mb-2 block">{dest.type}</span>
-                      <h3 className="text-2xl md:text-3xl font-heading tracking-widest text-[#004A61] uppercase leading-tight mb-3">{dest.title}</h3>
+                      <h3 className="text-2xl md:text-3xl font-sans tracking-widest text-[#004A61] uppercase leading-tight mb-3">{dest.title}</h3>
                       <p className="text-sm opacity-70 font-medium">{dest.description}</p>
                     </div>
                   </div>
