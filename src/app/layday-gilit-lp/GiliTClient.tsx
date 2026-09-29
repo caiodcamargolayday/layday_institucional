@@ -150,8 +150,9 @@ export function GiliTClient() {
             transition={{ duration: 1, ease: "easeOut" }}
           >
             <span className="text-white font-bold tracking-[4px] uppercase text-[9px] mb-2 block drop-shadow-lg">Island Sanctuary • Gili T</span>
-            <h1 className="text-5xl md:text-7xl font-heading text-white tracking-widest leading-none mb-6 drop-shadow-2xl">
-              LAY DAY <span className="text-[#EE5B2B]">GILI T</span>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading text-white tracking-wider sm:tracking-widest leading-tight md:leading-none mb-6 drop-shadow-2xl">
+              <span className="inline-block whitespace-nowrap">LAY DAY</span>{" "}
+              <span className="text-[#EE5B2B] inline-block whitespace-nowrap">GILI&nbsp;T</span>
             </h1>
             <p className="max-w-xl mx-auto text-white/90 font-medium tracking-wide text-lg md:text-xl leading-relaxed">
               Experience the legendary island life. Pure vibes and the best pool parties in Gili Trawangan.

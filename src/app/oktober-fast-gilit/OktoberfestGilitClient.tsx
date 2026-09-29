@@ -267,7 +267,7 @@ export function OktoberfestGilitClient() {
             <Beer className="w-4 h-4 text-[#E59819]" />
           </div>
           <span className="font-heading tracking-widest text-lg text-white">
-            LAY DAY <span className="text-[#E59819]">GILI T</span>
+            LAY DAY <span className="text-[#E59819] whitespace-nowrap">GILI&nbsp;T</span>
           </span>
         </div>
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest bg-[#E59819]/10 border border-[#E59819]/30 text-[#E59819] px-3 py-1 rounded-full font-bold">
@@ -570,7 +570,7 @@ export function OktoberfestGilitClient() {
           </div>
 
           <h2 className="text-4xl sm:text-5xl md:text-7xl font-heading text-white tracking-widest uppercase leading-none drop-shadow-[0_0_25px_rgba(229,152,25,0.4)]">
-            OKTOBERFEST <span className="text-[#E59819]">GILI T</span>
+            OKTOBERFEST <span className="text-[#E59819] inline-block whitespace-nowrap">GILI&nbsp;T</span>
           </h2>
 
           <p className="text-base sm:text-lg md:text-xl font-bold text-gray-200 tracking-[2px] uppercase">
