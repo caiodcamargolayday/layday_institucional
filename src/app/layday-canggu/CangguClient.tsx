@@ -253,7 +253,7 @@ export function CangguClient() {
             <h2 className="text-2xl md:text-5xl font-heading tracking-widest leading-tight uppercase">
               WHERE THE <span className="text-[#EE5B2B]">STORY</span> BEGAN
             </h2>
-            <p className="text-sm md:text-base leading-relaxed font-medium opacity-70 max-w-lg uppercase tracking-tight">
+            <p className="text-sm md:text-base leading-relaxed font-medium opacity-70 max-w-lg">
               Welcome to Lay Day, your ultimate Bali retreat! Nestled in the heart of Canggu, we offer 16 dorms and private rooms for the perfect night&apos;s rest. Get ready to experience our legendary bar, multiple swimming pools, and a rooftop cafe. We keep the buzz alive with ongoing events that&apos;ll have you dancing, mingling, and making memories.
             </p>
           </motion.div>

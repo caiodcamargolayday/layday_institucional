@@ -197,8 +197,8 @@ export default function CodayPage() {
             <h2 className="text-2xl md:text-5xl font-sans tracking-widest leading-tight uppercase">
               A NEW STANDARD FOR <span className="text-[#EE5B2B]">MODERN NOMADS</span>
             </h2>
-            <p className="text-sm md:text-base leading-relaxed font-medium opacity-70 max-w-lg uppercase tracking-tight">
-              CoDay Uluwatu isn't just a place to sleep—it's a high-performance sanctuary designed for the digital generation. We've blended luxury boutique aesthetics with industrial coworking infrastructure and premium wellness recovery labs to create a space where productivity meets the raw spirit of the Balinese coast.
+            <p className="text-sm md:text-base leading-relaxed font-medium opacity-70 max-w-lg">
+              CoDay Uluwatu isn&apos;t just a place to sleep—it&apos;s a high-performance sanctuary designed for the digital generation. We&apos;ve blended luxury boutique aesthetics with industrial coworking infrastructure and premium wellness recovery labs to create a space where productivity meets the raw spirit of the Balinese coast.
             </p>
           </motion.div>
 

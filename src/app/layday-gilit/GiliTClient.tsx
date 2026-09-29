@@ -185,7 +185,7 @@ export function GiliTClient() {
             <h2 className="text-2xl md:text-5xl font-heading tracking-widest leading-tight uppercase">
               THE <span className="text-[#EE5B2B]">UNFILTERED</span> GILI LIFE
             </h2>
-            <p className="text-sm md:text-base leading-relaxed font-medium opacity-70 uppercase tracking-tight">
+            <p className="text-sm md:text-base leading-relaxed font-medium opacity-70">
               Welcome to the island that never sleeps. Our Gili Trawangan location is a sanctuary for the social traveler.
             </p>
             <div className="flex gap-4 pt-2">

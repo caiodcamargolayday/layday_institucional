@@ -298,7 +298,7 @@ export function UluwatuClient() {
             <h2 className="text-2xl md:text-5xl font-heading tracking-widest leading-tight uppercase">
               TROPICAL <span className="text-[#EE5B2B]">PARADISE</span>
             </h2>
-            <p className="text-sm md:text-base leading-relaxed font-medium opacity-70 max-w-lg uppercase tracking-tight">
+            <p className="text-sm md:text-base leading-relaxed font-medium opacity-70 max-w-lg">
               Welcome to Lay Day Uluwatu — where good vibes, salty hair, and unforgettable nights come standard. With 168 dorm beds and 5 private rooms, we’re your ultimate base for partying, chilling, and meeting people from around the world. By day, lounge by our massive pool or relax with a cold drink. By night, our lively bar keeps the energy high and the good times rolling.
             </p>
           </motion.div>
