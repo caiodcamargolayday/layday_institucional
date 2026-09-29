@@ -44,6 +44,13 @@ export function getCapiConfigs(origin: string): Array<{ pixelId: string; accessT
     }];
   }
 
+  if (origin === 'oktoberfest-gilit' || origin === 'oktober-fast-gilit') {
+    return [{
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_OKTOBERFEST_GILIT || '1036889488979198',
+      accessToken: process.env.META_ACCESS_TOKEN_OKTOBERFEST_GILIT || 'EAARrizXTDwMBSod5ZBMBYZBiUvEIvD87TCZCX7YCROR1K7xdgHRjJvvuaUgielB55UEPFk5jUEaNqWQGMpQYKp5EwJSKLSdBe8WP3zZBdIZA1EcwYGp3C4RTfVavhWKBfNJOTC5GZAjuSFynNcFsIzjnzxqjZARsbVjP26d8SqGNFGgMcZBSNfKHC9CNS9AFtAZDZD',
+    }];
+  }
+
   if (origin === 'oktoberfest' || origin === 'oktoberfest-canggu' || origin === 'oktober-fast-canggu') {
     return [{
       pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_OKTOBERFEST_CANGGU || '1392233983092323',
@@ -59,6 +66,12 @@ export function getCapiConfigs(origin: string): Array<{ pixelId: string; accessT
 }
 
 export function getCapiConfig(origin: string) {
+  if (origin === 'oktoberfest-gilit' || origin === 'oktober-fast-gilit') {
+    return {
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_OKTOBERFEST_GILIT || '1036889488979198',
+      accessToken: process.env.META_ACCESS_TOKEN_OKTOBERFEST_GILIT || 'EAARrizXTDwMBSod5ZBMBYZBiUvEIvD87TCZCX7YCROR1K7xdgHRjJvvuaUgielB55UEPFk5jUEaNqWQGMpQYKp5EwJSKLSdBe8WP3zZBdIZA1EcwYGp3C4RTfVavhWKBfNJOTC5GZAjuSFynNcFsIzjnzxqjZARsbVjP26d8SqGNFGgMcZBSNfKHC9CNS9AFtAZDZD',
+    };
+  }
   if (origin === 'oktoberfest' || origin === 'oktoberfest-canggu' || origin === 'oktober-fast-canggu') {
     return {
       pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_OKTOBERFEST_CANGGU || '1392233983092323',
