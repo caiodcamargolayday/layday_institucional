@@ -44,6 +44,13 @@ export function getCapiConfigs(origin: string): Array<{ pixelId: string; accessT
     }];
   }
 
+  if (origin === 'oktoberfest' || origin === 'oktoberfest-canggu' || origin === 'oktober-fast-canggu') {
+    return [{
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_OKTOBERFEST_CANGGU || '1392233983092323',
+      accessToken: process.env.META_ACCESS_TOKEN_OKTOBERFEST_CANGGU || 'EAAYA08KKYP4BSrENwf3otuqA2OinCuyNt5uje1cJ53vqtchLkAo7uDvfydsFTliRCAMu1hcZCYg57Ueu1xUMZAvKQ4jZCpuPC83Vej35tInQRTRhIFYkZCzhWEBE6hdRdDLqICdYWnIoxgiyeuFkd9mrk1OqV9OjyPsQ6dwL8VyUFhiLtz8DiHefgbYZAYQZDZD',
+    }];
+  }
+
   const single = getCapiConfig(origin);
   if (single.pixelId && single.accessToken) {
     return [{ pixelId: single.pixelId, accessToken: single.accessToken }];
@@ -52,6 +59,12 @@ export function getCapiConfigs(origin: string): Array<{ pixelId: string; accessT
 }
 
 export function getCapiConfig(origin: string) {
+  if (origin === 'oktoberfest' || origin === 'oktoberfest-canggu' || origin === 'oktober-fast-canggu') {
+    return {
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_OKTOBERFEST_CANGGU || '1392233983092323',
+      accessToken: process.env.META_ACCESS_TOKEN_OKTOBERFEST_CANGGU || 'EAAYA08KKYP4BSrENwf3otuqA2OinCuyNt5uje1cJ53vqtchLkAo7uDvfydsFTliRCAMu1hcZCYg57Ueu1xUMZAvKQ4jZCpuPC83Vej35tInQRTRhIFYkZCzhWEBE6hdRdDLqICdYWnIoxgiyeuFkd9mrk1OqV9OjyPsQ6dwL8VyUFhiLtz8DiHefgbYZAYQZDZD',
+    };
+  }
   if (origin === 'anniversary' || origin === 'anniversary-canggu' || origin === '11-years-layday') {
     return {
       pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_CANGGU || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY || '1392233983092323',

@@ -26,6 +26,9 @@ function getPixelIdsForPath(pathname: string, origin?: string | null): string[] 
   if (target.includes("uluwatu")) {
     return [process.env.NEXT_PUBLIC_META_PIXEL_ID_LDULUWATU].filter(Boolean) as string[];
   }
+  if (target.includes("oktober")) {
+    return [process.env.NEXT_PUBLIC_META_PIXEL_ID_OKTOBERFEST_CANGGU || "1392233983092323"].filter(Boolean) as string[];
+  }
   if (target.includes("canggu")) {
     return [process.env.NEXT_PUBLIC_META_PIXEL_ID_LDCANGGU].filter(Boolean) as string[];
   }
