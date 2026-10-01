@@ -27,7 +27,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-const POSTER_IMAGE = "/october_fast_ld_canggu/IGF.png";
+const POSTER_IMAGE = "/october_fast_ld_canggu/IGF.webp";
 
 const VIBE_IMAGES = [
   "/lay_day_canggu/swimming_pools.jpeg",
@@ -279,30 +279,23 @@ export function OktoberfestCangguClient() {
       {/* 1. HERO SECTION */}
       <section className="relative min-h-[92vh] w-full flex flex-col items-center justify-center pt-8 pb-16 md:pb-24 px-4">
         {/* Event Poster Card */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative z-10 w-full max-w-[340px] sm:max-w-[400px] md:max-w-[440px] mx-auto aspect-[4/5] mb-8 overflow-hidden rounded-2xl shadow-[0_0_50px_rgba(229,152,25,0.25)] border-2 border-[#E59819]/50 bg-[#F4EFE6]"
+        <div
+          className="relative z-10 w-full max-w-[340px] sm:max-w-[400px] md:max-w-[440px] mx-auto aspect-[4/5] mb-8 overflow-hidden rounded-2xl shadow-[0_0_50px_rgba(229,152,25,0.25)] border-2 border-[#E59819]/50 bg-[#0C2330] transition-transform duration-500 hover:scale-[1.02]"
         >
           <Image
             src={POSTER_IMAGE}
             alt="Oktoberfest at Lay Day Canggu - Prost in Paradise"
             fill
             priority
+            quality={85}
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, 440px"
+            sizes="(max-width: 480px) 340px, (max-width: 768px) 400px, 440px"
           />
-        </motion.div>
+        </div>
 
         {/* Hero Copy & BUTTON 1 OF 2 */}
         <div className="relative z-20 w-full flex flex-col items-center text-center max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="w-full flex flex-col items-center gap-4"
-          >
+          <div className="w-full flex flex-col items-center gap-4">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#16435C]/80 border border-[#E59819]/40 text-[#E59819] text-xs sm:text-sm font-bold tracking-widest uppercase shadow-md">
               <Sparkles className="w-4 h-4 text-[#E59819]" />
               Prost in Paradise • Lay Day Canggu
@@ -333,7 +326,7 @@ export function OktoberfestCangguClient() {
                 ENTRY IN THE GUEST LIST
               </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -470,17 +463,19 @@ export function OktoberfestCangguClient() {
         {/* Continuous Horizontal Strip */}
         <div className="overflow-hidden pb-8">
           <motion.div style={{ x: ribbonX }} className="flex gap-4 sm:gap-6 whitespace-nowrap px-4">
-            {[...VIBE_IMAGES, ...VIBE_IMAGES].map((img, i) => (
+            {VIBE_IMAGES.map((img, i) => (
               <div
                 key={i}
-                className="relative w-[260px] sm:w-[320px] md:w-[380px] aspect-[4/3] flex-shrink-0 overflow-hidden border border-[#E59819]/30 rounded-xl shadow-md group hover:border-[#E59819] transition-all"
+                className="relative w-[260px] sm:w-[320px] md:w-[380px] aspect-[4/3] flex-shrink-0 overflow-hidden border border-[#E59819]/30 rounded-xl shadow-md group hover:border-[#E59819] transition-all bg-[#0C2330]"
               >
                 <Image
                   src={img}
                   alt="Lay Day Canggu Vibe"
                   fill
+                  loading="lazy"
+                  quality={75}
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 768px) 80vw, 380px"
+                  sizes="(max-width: 640px) 260px, (max-width: 768px) 320px, 380px"
                 />
               </div>
             ))}
@@ -496,15 +491,17 @@ export function OktoberfestCangguClient() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.3 }}
                 className="absolute inset-0"
               >
                 <Image
                   src={VIBE_IMAGES[currentImg]}
                   alt="Lay Day Canggu Experience"
                   fill
+                  loading="lazy"
+                  quality={80}
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 900px"
+                  sizes="(max-width: 768px) 100vw, 896px"
                 />
               </motion.div>
             </AnimatePresence>
@@ -552,6 +549,8 @@ export function OktoberfestCangguClient() {
             src={VIBE_IMAGES[0]}
             alt="Oktoberfest Backdrop"
             fill
+            loading="lazy"
+            quality={60}
             className="object-cover opacity-15"
             sizes="100vw"
           />

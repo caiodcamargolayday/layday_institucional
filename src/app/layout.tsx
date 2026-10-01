@@ -4,11 +4,12 @@ import "./globals.css";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { ConditionalShell } from "@/components/layout/ConditionalShell";
 
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-sans" });
-const outfit = Outfit({ subsets: ["latin"], variable: "--font-heading" });
-const bebas = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-condensed" });
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-heading", display: "swap" });
+const bebas = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-condensed", display: "swap" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://staylayday.com"),
   title: "Lay Day Hostels",
   description: "Lay Day has been the trailblazer in Bali's hostel scene modest hostel in Canggu with just 30 beds, a small pool, and a cosy little bar grew to become a ...",
   icons: {
