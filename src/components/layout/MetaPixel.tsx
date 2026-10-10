@@ -17,6 +17,15 @@ function getPixelIdsForPath(pathname: string, origin?: string | null): string[] 
   if (target.includes("2-years-layday-uluwatu") || target.includes("anniversary-uluwatu")) {
     return [process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_ULUWATU || "1035484145914151"].filter(Boolean) as string[];
   }
+  if (target.includes("halloween")) {
+    if (target.includes("gilit")) {
+      return [process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_GILIT || "1036889488979198"].filter(Boolean) as string[];
+    }
+    if (target.includes("uluwatu")) {
+      return [process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_ULUWATU || "1035484145914151"].filter(Boolean) as string[];
+    }
+    return [process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_CANGGU || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY || "1392233983092323"].filter(Boolean) as string[];
+  }
   if (target.includes("coday")) {
     return [process.env.NEXT_PUBLIC_META_PIXEL_ID_CODAY].filter(Boolean) as string[];
   }

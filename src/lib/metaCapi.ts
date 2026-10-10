@@ -58,6 +58,27 @@ export function getCapiConfigs(origin: string): Array<{ pixelId: string; accessT
     }];
   }
 
+  if (origin === 'halloween' || origin === 'halloween-canggu' || origin === 'halloween-ld-canggu' || origin === 'layday-of-the-dead') {
+    return [{
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_HALLOWEEN_CANGGU || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_CANGGU || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY || '1392233983092323',
+      accessToken: process.env.META_ACCESS_TOKEN_HALLOWEEN_CANGGU || process.env.META_ACCESS_TOKEN_ANNIVERSARY_CANGGU || process.env.META_ACCESS_TOKEN_ANNIVERSARY || 'EAAYA08KKYP4BSXV9LXzO9ovjTLM6m6STy9vZBWScpoMUcJbQ22qcs63bt6rC2rhv7NsnndXwhuCTGnAZBFAEQjAEkEMjQdsqTnl0op9tR62HOgEvgcjYTWGQYu5C0zX5jZBD1EmiZAliNh3RdpS65homAlMmYL2sH1sIFM9ORya1bZCevUaHdndDhgyZAT2QZDZD',
+    }];
+  }
+
+  if (origin === 'halloween-gilit' || origin === 'halloween-ld-gilit') {
+    return [{
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_HALLOWEEN_GILIT || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_GILIT || '1036889488979198',
+      accessToken: process.env.META_ACCESS_TOKEN_HALLOWEEN_GILIT || process.env.META_ACCESS_TOKEN_ANNIVERSARY_GILIT || 'EAARrizXTDwMBSSRiv6tURLZCs3XdYQVhMJuKo9UgkE9d1qXOUbqyAkHSVwqKnyw53T13TsGTcZBeSl0bUHmb7RRpEuk5V6ZAVOJ4BhjTwxN9GZAmXxO8aPpQcmSrkiJDVLQK1EIKL8PGS8PcUp7AOZCUoLXvXBQJorZC33Izj41jSBPt7oxJOUiwKZBm99SlQZDZD',
+    }];
+  }
+
+  if (origin === 'halloween-uluwatu' || origin === 'halloween-ld-uluwatu') {
+    return [{
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_HALLOWEEN_ULUWATU || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_ULUWATU || '1035484145914151',
+      accessToken: process.env.META_ACCESS_TOKEN_HALLOWEEN_ULUWATU || process.env.META_ACCESS_TOKEN_ANNIVERSARY_ULUWATU || 'EAANDHKnVCjkBSYuAMjZB7EuU74wc0r5YrDZAlmrtkgxZByC8MDfivPsKzG4NcW7Du42Lmu38z6MPvi84mxWX2X3mcPGkMVqru5smb8hDwp3sKVIQbZAj1WzT7sG2MAhV5rsCBSxicf48IA9oll2Ct0TSqz3HK46oZB1xZBcEnmLNQ2pDHN1vRQsLHSznN6SAZDZD',
+    }];
+  }
+
   const single = getCapiConfig(origin);
   if (single.pixelId && single.accessToken) {
     return [{ pixelId: single.pixelId, accessToken: single.accessToken }];
@@ -66,6 +87,24 @@ export function getCapiConfigs(origin: string): Array<{ pixelId: string; accessT
 }
 
 export function getCapiConfig(origin: string) {
+  if (origin === 'halloween' || origin === 'halloween-canggu' || origin === 'halloween-ld-canggu' || origin === 'layday-of-the-dead') {
+    return {
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_HALLOWEEN_CANGGU || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_CANGGU || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY || '1392233983092323',
+      accessToken: process.env.META_ACCESS_TOKEN_HALLOWEEN_CANGGU || process.env.META_ACCESS_TOKEN_ANNIVERSARY_CANGGU || process.env.META_ACCESS_TOKEN_ANNIVERSARY || 'EAAYA08KKYP4BSXV9LXzO9ovjTLM6m6STy9vZBWScpoMUcJbQ22qcs63bt6rC2rhv7NsnndXwhuCTGnAZBFAEQjAEkEMjQdsqTnl0op9tR62HOgEvgcjYTWGQYu5C0zX5jZBD1EmiZAliNh3RdpS65homAlMmYL2sH1sIFM9ORya1bZCevUaHdndDhgyZAT2QZDZD',
+    };
+  }
+  if (origin === 'halloween-gilit' || origin === 'halloween-ld-gilit') {
+    return {
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_HALLOWEEN_GILIT || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_GILIT || '1036889488979198',
+      accessToken: process.env.META_ACCESS_TOKEN_HALLOWEEN_GILIT || process.env.META_ACCESS_TOKEN_ANNIVERSARY_GILIT || 'EAARrizXTDwMBSSRiv6tURLZCs3XdYQVhMJuKo9UgkE9d1qXOUbqyAkHSVwqKnyw53T13TsGTcZBeSl0bUHmb7RRpEuk5V6ZAVOJ4BhjTwxN9GZAmXxO8aPpQcmSrkiJDVLQK1EIKL8PGS8PcUp7AOZCUoLXvXBQJorZC33Izj41jSBPt7oxJOUiwKZBm99SlQZDZD',
+    };
+  }
+  if (origin === 'halloween-uluwatu' || origin === 'halloween-ld-uluwatu') {
+    return {
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_HALLOWEEN_ULUWATU || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_ULUWATU || '1035484145914151',
+      accessToken: process.env.META_ACCESS_TOKEN_HALLOWEEN_ULUWATU || process.env.META_ACCESS_TOKEN_ANNIVERSARY_ULUWATU || 'EAANDHKnVCjkBSYuAMjZB7EuU74wc0r5YrDZAlmrtkgxZByC8MDfivPsKzG4NcW7Du42Lmu38z6MPvi84mxWX2X3mcPGkMVqru5smb8hDwp3sKVIQbZAj1WzT7sG2MAhV5rsCBSxicf48IA9oll2Ct0TSqz3HK46oZB1xZBcEnmLNQ2pDHN1vRQsLHSznN6SAZDZD',
+    };
+  }
   if (origin === 'oktoberfest-gilit' || origin === 'oktober-fast-gilit') {
     return {
       pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_OKTOBERFEST_GILIT || '1036889488979198',
