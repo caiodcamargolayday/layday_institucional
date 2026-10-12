@@ -27,8 +27,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-const POSTER_FEED = "/halloween_ld_canggu/LDC-Halloween-IGF.jpg";
-const POSTER_STORY = "/halloween_ld_canggu/LDC-Free Shot-IGS.jpg";
+const POSTER_FEED = "/halloween_ld_canggu/LDC-Halloween-IGF.webp";
+const POSTER_STORY = "/halloween_ld_canggu/LDC-Free Shot-IGS.webp";
 
 const VIBE_IMAGES = [
   "/lay_day_canggu/swimming_pools.jpeg",
@@ -469,7 +469,7 @@ export function HalloweenCangguClient() {
       const formData = new FormData(e.currentTarget);
       const name = (formData.get("name") as string) || "";
       const email = (formData.get("email") as string) || "";
-      const people = (formData.get("people") as string) || "1";
+      const nationality = (formData.get("nationality") as string) || "";
 
       // Combine country code + local number
       const cleanPhoneDigits = phoneNumber.replace(/\D/g, "").replace(/^0+/, "");
@@ -477,14 +477,17 @@ export function HalloweenCangguClient() {
 
       setSubmittedName(name);
 
-      // Payload exactly matching Google Sheet columns: Timestamp, Name, Phone, Email, How many people
+      // Payload matching Google Sheet columns: Timestamp, Name, Phone, Email, Nationality
       const payload = {
         name,
         phone: fullPhone,
         email,
-        people,
-        how_many_people: people,
-        "How many people": people,
+        nationality,
+        Nationality: nationality,
+        // Backward compatibility
+        "How many people": nationality,
+        how_many_people: nationality,
+        people: nationality,
         event: "Lay Day of the Dead - Halloween Canggu",
         date: "30/10/2026",
         location: "Lay Day Canggu",
@@ -545,7 +548,7 @@ export function HalloweenCangguClient() {
           form_name: "halloween_canggu_guestlist",
           event_name: "Lay Day of the Dead Halloween Canggu",
           event_date: "30/10/2026",
-          people_count: people,
+          nationality,
         });
       }
 
@@ -585,19 +588,14 @@ export function HalloweenCangguClient() {
       {/* 1. HERO SECTION WITH CENTRALIZED LOGO */}
       <section className="relative z-10 min-h-[96vh] w-full flex flex-col items-center justify-center pt-8 pb-16 md:pb-24 px-4">
         {/* Centralized Lay Day Logo */}
-        <motion.div
-          initial={{ opacity: 0, y: -25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="w-full flex flex-col items-center justify-center mb-6"
-        >
+        <div className="w-full flex flex-col items-center justify-center mb-6">
           <div className="relative w-44 sm:w-56 md:w-64 h-16 sm:h-20 drop-shadow-[0_0_25px_rgba(225,29,72,0.5)]">
             <Image
               src="/logo_layday_canggu.png"
               alt="Lay Day Canggu"
               fill
               priority
-              quality={75}
+              quality={80}
               className="object-contain filter invert brightness-0 invert drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]"
             />
           </div>
@@ -605,7 +603,7 @@ export function HalloweenCangguClient() {
             <span className="w-2 h-2 rounded-full bg-[#E11D48] animate-ping" />
             Friday Oct 30 • 4 PM Till Late
           </div>
-        </motion.div>
+        </div>
 
         {/* Poster Tabs & Poster Display */}
         <div className="relative z-10 flex flex-col items-center mb-8">
@@ -635,13 +633,13 @@ export function HalloweenCangguClient() {
 
           {/* Poster Frame */}
           <div className="relative w-full max-w-[290px] xs:max-w-[340px] sm:max-w-[390px] md:max-w-[430px] aspect-[4/5] overflow-hidden rounded-2xl shadow-[0_0_60px_rgba(225,29,72,0.4)] border-2 border-[#E11D48]/70 bg-[#12060D] transition-all duration-500 hover:scale-[1.02] hover:border-[#FF2A4D]">
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={activePosterTab}
-                initial={{ opacity: 0, scale: 0.96 }}
+                initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.3 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.2 }}
                 className="absolute inset-0"
               >
                 <Image
@@ -649,7 +647,7 @@ export function HalloweenCangguClient() {
                   alt="Lay Day of the Dead - Halloween Party Canggu"
                   fill
                   priority
-                  quality={75}
+                  quality={80}
                   className="object-cover"
                   sizes="(max-width: 480px) 340px, (max-width: 768px) 390px, 430px"
                 />
@@ -831,7 +829,7 @@ export function HalloweenCangguClient() {
         {/* Featured Slider */}
         <div className="max-w-4xl mx-auto px-4 mt-6">
           <div className="relative aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-2xl border-2 border-[#E11D48]/40 shadow-[0_0_35px_rgba(225,29,72,0.25)] bg-[#111]">
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={currentImg}
                 initial={{ opacity: 0 }}
@@ -1111,23 +1109,21 @@ export function HalloweenCangguClient() {
                 />
               </div>
 
-              {/* 4. How many people */}
+              {/* 4. Nationality */}
               <div className="grid gap-1.5">
-                <Label htmlFor="gl-people" className="text-white/90 uppercase tracking-widest text-xs font-bold">
-                  4. How many people?
+                <Label htmlFor="gl-nationality" className="text-white/90 uppercase tracking-widest text-xs font-bold">
+                  4. Nationality
                 </Label>
                 <Input
-                  id="gl-people"
-                  name="people"
-                  type="number"
-                  min="1"
-                  max="20"
+                  id="gl-nationality"
+                  name="nationality"
+                  type="text"
                   required
-                  defaultValue="1"
+                  placeholder="e.g. Australian, British, Indonesian, German..."
                   className="bg-[#0A0407] border-[#E11D48]/40 text-white placeholder:text-gray-500 focus-visible:ring-[#E11D48] rounded-md h-11"
                 />
                 <span className="text-[11px] text-gray-400">
-                  Bring your costume squad or register your Fear Pong team!
+                  Let us know where you&apos;re from!
                 </span>
               </div>
 

@@ -33,7 +33,9 @@ export async function POST(req: NextRequest) {
       hour12: false,
     });
 
-    // Exact fields matching Google Sheet format (Column A: Timestamp, B: Name, C: Phone, D: Email, E: How many people)
+    const nationality = String(body.nationality || body.Nationality || body.people || "").trim();
+
+    // Exact fields matching Google Sheet format (Column A: Timestamp, B: Name, C: Phone, D: Email, E: Nationality)
     const payload = {
       Timestamp: formattedTimestamp,
       timestamp: formattedTimestamp,
@@ -44,9 +46,12 @@ export async function POST(req: NextRequest) {
       phone: phoneStr,
       Email: body.email || "",
       email: body.email || "",
-      "How many people": String(body.people || body.how_many_people || "1"),
-      how_many_people: String(body.people || body.how_many_people || "1"),
-      people: String(body.people || body.how_many_people || "1"),
+      Nationality: nationality,
+      nationality: nationality,
+      // Backward compatibility keys if Google Apps Script reads them
+      "How many people": nationality,
+      how_many_people: nationality,
+      people: nationality,
       event: "Lay Day of the Dead - Halloween Canggu",
       source: "halloween-canggu-lp",
     };

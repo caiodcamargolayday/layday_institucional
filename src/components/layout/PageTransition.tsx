@@ -13,6 +13,9 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     pathname.startsWith("/oktober-fast-gilit") ||
     pathname.startsWith("/oktoberfest-gilit") ||
     pathname.startsWith("/oktober-fest-gilit") ||
+    pathname.startsWith("/halloween-canggu") ||
+    pathname.startsWith("/halloween-gilit") ||
+    pathname.startsWith("/halloween-uluwatu") ||
     pathname.endsWith("-lp");
 
   if (isStandalone) {
