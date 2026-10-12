@@ -254,153 +254,38 @@ function CalaveraSkullSvg({ className = "", glowColor = "#E11D48" }: { className
   );
 }
 
+/**
+ * High-performance GPU-composited Background with Ornate Calavera Accents
+ */
 function CalaveraMotionBackground() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+      {/* Halftone / Dot Grid print texture */}
       <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#E11D48_1px,transparent_1px)] [background-size:22px_22px]" />
 
-      <motion.div
-        animate={{
-          scale: [1, 1.25, 1],
-          opacity: [0.15, 0.25, 0.15],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#E11D48] rounded-full blur-[170px]"
-      />
-      <motion.div
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.1, 0.2, 0.1],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute bottom-1/3 right-10 w-[550px] h-[550px] bg-[#DC2626] rounded-full blur-[180px]"
-      />
-      <motion.div
-        animate={{
-          scale: [1, 1.15, 1],
-          opacity: [0.08, 0.16, 0.08],
-        }}
-        transition={{
-          duration: 9,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-1/2 left-10 w-[450px] h-[450px] bg-[#F59E0B] rounded-full blur-[160px]"
-      />
+      {/* Ambient Lighting Orbs - Zero JS / Instant GPU Render */}
+      <div className="absolute top-0 left-1/4 w-[500px] sm:w-[600px] h-[500px] sm:h-[600px] bg-[#E11D48]/15 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/3 right-10 w-[450px] sm:w-[550px] h-[450px] sm:h-[550px] bg-[#DC2626]/12 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-10 w-[400px] sm:w-[450px] h-[400px] sm:h-[450px] bg-[#F59E0B]/10 rounded-full blur-[140px] pointer-events-none" />
 
-      <motion.div
-        animate={{
-          rotate: 360,
-          scale: [1, 1.05, 1],
-        }}
-        transition={{
-          rotate: { duration: 160, repeat: Infinity, ease: "linear" },
-          scale: { duration: 12, repeat: Infinity, ease: "easeInOut" },
-        }}
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] h-[700px] sm:h-[900px] opacity-[0.035]"
-      >
+      {/* Center Giant Watermark Skull */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[800px] h-[600px] sm:h-[800px] opacity-[0.035] pointer-events-none">
         <CalaveraSkullSvg className="w-full h-full" glowColor="#E11D48" />
-      </motion.div>
+      </div>
 
-      <motion.div
-        animate={{
-          y: [-20, 25, -20],
-          x: [-15, 20, -15],
-          rotate: [-6, 8, -6],
-        }}
-        transition={{
-          duration: 14,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-[8%] left-[4%] w-32 sm:w-44 md:w-56 opacity-25 drop-shadow-[0_0_25px_rgba(225,29,72,0.4)]"
-      >
+      {/* Ornate Atmospheric Skull Watermarks */}
+      <div className="absolute top-[8%] left-[3%] w-28 sm:w-40 md:w-48 opacity-[0.18] pointer-events-none drop-shadow-[0_0_20px_rgba(225,29,72,0.35)]">
         <CalaveraSkullSvg className="w-full h-full" glowColor="#E11D48" />
-      </motion.div>
-
-      <motion.div
-        animate={{
-          y: [25, -20, 25],
-          x: [15, -15, 15],
-          rotate: [8, -6, 8],
-        }}
-        transition={{
-          duration: 16,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-[18%] right-[4%] w-28 sm:w-40 md:w-48 opacity-25 drop-shadow-[0_0_25px_rgba(245,158,11,0.4)]"
-      >
+      </div>
+      <div className="absolute top-[18%] right-[3%] w-24 sm:w-36 md:w-44 opacity-[0.18] pointer-events-none drop-shadow-[0_0_20px_rgba(245,158,11,0.35)]">
         <CalaveraSkullSvg className="w-full h-full" glowColor="#F59E0B" />
-      </motion.div>
-
-      <motion.div
-        animate={{
-          y: [-30, 20, -30],
-          x: [10, -20, 10],
-          rotate: [-10, 6, -10],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-[48%] left-[-2%] w-36 sm:w-52 opacity-20 drop-shadow-[0_0_30px_rgba(225,29,72,0.35)]"
-      >
+      </div>
+      <div className="absolute top-[52%] left-[-2%] w-28 sm:w-40 opacity-[0.14] pointer-events-none drop-shadow-[0_0_20px_rgba(225,29,72,0.3)]">
         <CalaveraSkullSvg className="w-full h-full" glowColor="#E11D48" />
-      </motion.div>
-
-      <motion.div
-        animate={{
-          y: [20, -35, 20],
-          x: [-15, 15, -15],
-          rotate: [6, -10, 6],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute bottom-[12%] right-[2%] w-36 sm:w-52 md:w-64 opacity-25 drop-shadow-[0_0_30px_rgba(225,29,72,0.4)]"
-      >
+      </div>
+      <div className="absolute bottom-[10%] right-[2%] w-28 sm:w-44 opacity-[0.16] pointer-events-none drop-shadow-[0_0_20px_rgba(255,42,77,0.3)]">
         <CalaveraSkullSvg className="w-full h-full" glowColor="#FF2A4D" />
-      </motion.div>
-
-      {[...Array(12)].map((_, i) => (
-        <motion.div
-          key={i}
-          animate={{
-            y: ["110vh", "-10vh"],
-            x: [
-              `${(i * 9) % 100}vw`,
-              `${((i * 9) % 100) + ((i % 2 === 0 ? 1 : -1) * 8)}vw`,
-            ],
-            opacity: [0, 0.8, 0],
-            scale: [0.5, 1.2, 0.5],
-          }}
-          transition={{
-            duration: 10 + (i % 6) * 3,
-            repeat: Infinity,
-            ease: "linear",
-            delay: i * 1.2,
-          }}
-          className={`absolute bottom-0 w-2 h-2 rounded-full blur-[1px] ${
-            i % 3 === 0
-              ? "bg-[#E11D48] shadow-[0_0_10px_#E11D48]"
-              : i % 3 === 1
-              ? "bg-[#F59E0B] shadow-[0_0_10px_#F59E0B]"
-              : "bg-[#FF2A4D] shadow-[0_0_10px_#FF2A4D]"
-          }`}
-        />
-      ))}
+      </div>
     </div>
   );
 }
@@ -564,7 +449,7 @@ export function HalloweenUluwatuClient() {
               alt="Lay Day Uluwatu"
               fill
               priority
-              quality={80}
+              unoptimized
               className="object-contain filter invert brightness-0 invert drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]"
             />
           </div>
@@ -599,29 +484,42 @@ export function HalloweenUluwatuClient() {
             </button>
           </div>
 
-          <div className="relative w-full max-w-[290px] xs:max-w-[340px] sm:max-w-[390px] md:max-w-[430px] aspect-[4/5] overflow-hidden rounded-2xl shadow-[0_0_60px_rgba(225,29,72,0.4)] border-2 border-[#E11D48]/70 bg-[#12060D] transition-all duration-500 hover:scale-[1.02] hover:border-[#FF2A4D]">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={activePosterTab}
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.2 }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={activePosterTab === "event" ? POSTER_FEED : POSTER_STORY}
-                  alt="Lay Day of the Dead - Halloween Party Uluwatu"
-                  fill
-                  priority
-                  quality={80}
-                  className="object-cover"
-                  sizes="(max-width: 480px) 340px, (max-width: 768px) 390px, 430px"
-                />
-              </motion.div>
-            </AnimatePresence>
+          <div className="relative w-full max-w-[290px] xs:max-w-[340px] sm:max-w-[390px] md:max-w-[430px] aspect-[4/5] overflow-hidden rounded-2xl shadow-[0_0_60px_rgba(225,29,72,0.4)] border-2 border-[#E11D48]/70 bg-[#12060D] transition-transform duration-500 hover:scale-[1.02] hover:border-[#FF2A4D]">
+            {/* Event Feed Poster - Rendered Immediately */}
+            <div
+              className={`absolute inset-0 transition-opacity duration-200 ${
+                activePosterTab === "event" ? "opacity-100 z-10" : "opacity-0 pointer-events-none z-0"
+              }`}
+            >
+              <Image
+                src={POSTER_FEED}
+                alt="Lay Day of the Dead - Halloween Party Uluwatu"
+                fill
+                priority
+                unoptimized
+                className="object-cover"
+                sizes="(max-width: 480px) 340px, (max-width: 768px) 390px, 430px"
+              />
+            </div>
 
-            <div className="absolute top-3 right-3 bg-black/85 backdrop-blur-md border border-[#E11D48] text-[#FF2A4D] text-[11px] font-extrabold uppercase px-2.5 py-1 rounded-md shadow-lg tracking-wider">
+            {/* Free Shot Story Poster - Ready Instantly */}
+            <div
+              className={`absolute inset-0 transition-opacity duration-200 ${
+                activePosterTab === "shot" ? "opacity-100 z-10" : "opacity-0 pointer-events-none z-0"
+              }`}
+            >
+              <Image
+                src={POSTER_STORY}
+                alt="Lay Day of the Dead - Free Shot Uluwatu"
+                fill
+                priority
+                unoptimized
+                className="object-cover"
+                sizes="(max-width: 480px) 340px, (max-width: 768px) 390px, 430px"
+              />
+            </div>
+
+            <div className="absolute top-3 right-3 z-20 bg-black/85 backdrop-blur-md border border-[#E11D48] text-[#FF2A4D] text-[11px] font-extrabold uppercase px-2.5 py-1 rounded-md shadow-lg tracking-wider">
               Free Shot On List
             </div>
           </div>
