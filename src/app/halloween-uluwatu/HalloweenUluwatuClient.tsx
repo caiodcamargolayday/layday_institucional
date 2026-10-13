@@ -36,7 +36,6 @@ const POSTER_STORY_BLUR =
 
 
 const VIBE_IMAGES = [
-  "/lay_day_uluwatu/party 1.jpeg",
   "/lay_day_uluwatu/party 2.jpeg",
   "/lay_day_uluwatu/bar 1.jpeg",
   "/lay_day_uluwatu/bar.jpeg",
@@ -49,9 +48,9 @@ const VIBE_IMAGES = [
 
 const HIGHLIGHT_CARDS = [
   {
-    title: "Free Shot & Drink Specials",
-    desc: "Get a FREE welcome shot on entry with the guest list! Plus eerie cocktails, shooter boards & bucket deals from 2 PM.",
-    badge: "Free Shot",
+    title: "Free Mixed Drink & Drink Specials",
+    desc: "Get a FREE welcome mixed drink on entry with the guest list! Plus eerie cocktails, shooter boards & bucket deals from 2 PM.",
+    badge: "Free Mixed Drink",
     icon: Wine,
   },
   {
@@ -485,7 +484,7 @@ export function HalloweenUluwatuClient() {
                   : "text-gray-300 hover:text-white"
               }`}
             >
-              🍹 Free Shot Perk
+              🍹 Free Mixed Drink Perk
             </button>
           </div>
 
@@ -524,7 +523,7 @@ export function HalloweenUluwatuClient() {
             >
               <Image
                 src={POSTER_STORY}
-                alt="Lay Day of the Dead - Free Shot Uluwatu"
+                alt="Lay Day of the Dead - Free Mixed Drink Uluwatu"
                 fill
                 priority
                 unoptimized
@@ -536,7 +535,7 @@ export function HalloweenUluwatuClient() {
             </div>
 
             <div className="absolute top-3 right-3 z-20 bg-black/85 backdrop-blur-md border border-[#E11D48] text-[#FF2A4D] text-[11px] font-extrabold uppercase px-2.5 py-1 rounded-md shadow-lg tracking-wider">
-              Free Shot On List
+              Free Mixed Drink On List
             </div>
           </div>
         </div>
@@ -558,7 +557,7 @@ export function HalloweenUluwatuClient() {
             </p>
 
             <p className="text-xs sm:text-base text-gray-300 max-w-xl font-medium leading-relaxed px-2">
-              Join the guest list for <span className="text-white font-bold">Free Entry + A FREE WELCOME SHOT</span> on arrival &amp; lock in your spot for Uluwatu&apos;s biggest Halloween pool party starting at 2 PM!
+              Join the guest list for <span className="text-white font-bold">Free Entry + A FREE WELCOME MIXED DRINK</span> on arrival &amp; lock in your spot for Uluwatu&apos;s biggest Halloween pool party starting at 2 PM!
             </p>
 
             {/* BUTTON 1 OF 2 */}
@@ -571,7 +570,7 @@ export function HalloweenUluwatuClient() {
                 }}
                 className="w-full max-w-[340px] sm:max-w-[400px] md:max-w-[440px] bg-gradient-to-r from-[#E11D48] via-[#DC2626] to-[#F59E0B] hover:from-[#BE123C] hover:to-[#B91C1C] text-white rounded-lg sm:rounded-none h-13 sm:h-14 md:h-16 px-3 sm:px-8 md:px-12 font-extrabold uppercase tracking-[1.5px] sm:tracking-[2.5px] text-xs sm:text-sm md:text-base transition-all duration-300 shadow-[0_0_35px_rgba(225,29,72,0.6)] hover:shadow-[0_0_45px_rgba(225,29,72,0.9)] hover:scale-105 border border-[#FF2A4D] cursor-pointer text-center"
               >
-                JOIN THE GUEST LIST (FREE SHOT)
+                JOIN THE GUEST LIST (FREE MIXED DRINK)
               </Button>
             </div>
           </div>
@@ -636,7 +635,7 @@ export function HalloweenUluwatuClient() {
               <div className="text-left md:text-right">
                 <span className="text-xs uppercase tracking-widest text-gray-400 block">Prizes on the line</span>
                 <span className="text-sm sm:text-base font-bold text-[#FF2A4D]">
-                  Free Shots • Bar Tabs • Lay Day Merch • Best Dressed Trophy
+                  Free Mixed Drinks • Bar Tabs • Lay Day Merch • Best Dressed Trophy
                 </span>
               </div>
             </div>
@@ -795,7 +794,7 @@ export function HalloweenUluwatuClient() {
           </p>
 
           <p className="text-xs sm:text-sm text-gray-300 max-w-lg mx-auto leading-relaxed px-2">
-            Get your name on the list now to lock in Free Entry, your Free Welcome Shot on arrival, and entry for the Beer Pong &amp; Costume competitions.
+            Get your name on the list now to lock in Free Entry, your Free Welcome Mixed Drink on arrival, and entry for the Beer Pong &amp; Costume competitions.
           </p>
 
           <div className="pt-2 w-full flex justify-center px-3">
@@ -807,7 +806,7 @@ export function HalloweenUluwatuClient() {
               }}
               className="w-full max-w-[340px] sm:max-w-[400px] md:max-w-[440px] bg-gradient-to-r from-[#E11D48] via-[#DC2626] to-[#F59E0B] hover:from-[#BE123C] hover:to-[#B91C1C] text-white rounded-lg sm:rounded-none h-13 sm:h-14 md:h-16 px-3 sm:px-8 md:px-12 font-extrabold uppercase tracking-[1.5px] sm:tracking-[2.5px] text-xs sm:text-sm md:text-base transition-all duration-300 shadow-[0_0_40px_rgba(225,29,72,0.7)] hover:shadow-[0_0_50px_rgba(225,29,72,0.9)] hover:scale-105 border border-[#FF2A4D] cursor-pointer text-center"
             >
-              JOIN THE GUEST LIST (FREE SHOT)
+              JOIN THE GUEST LIST (FREE MIXED DRINK)
             </Button>
           </div>
         </motion.div>
@@ -823,7 +822,7 @@ export function HalloweenUluwatuClient() {
             <DialogDescription className="text-gray-300 text-sm">
               {isSuccess
                 ? "We've registered you for Lay Day of the Dead at Lay Day Uluwatu."
-                : "Enter your details below to claim Free Entry + A Free Welcome Shot on arrival."}
+                : "Enter your details below to claim Free Entry + A Free Welcome Mixed Drink on arrival."}
             </DialogDescription>
           </DialogHeader>
 
@@ -837,7 +836,7 @@ export function HalloweenUluwatuClient() {
                   You&apos;re locked in, {submittedName || "Legend"}! 💀🍹
                 </p>
                 <p className="text-gray-300 text-sm">
-                  Your spot on the guest list &amp; <span className="text-[#FF2A4D] font-bold">Free Welcome Shot</span> are confirmed for{" "}
+                  Your spot on the guest list &amp; <span className="text-[#FF2A4D] font-bold">Free Welcome Mixed Drink</span> are confirmed for{" "}
                   <span className="text-white font-semibold">Friday, October 30th @ 2:00 PM</span>.
                 </p>
               </div>
@@ -847,7 +846,7 @@ export function HalloweenUluwatuClient() {
                 <p>⏰ Start Time: 2:00 PM Till Late</p>
                 <p>🎧 DJs: DJ Glando &amp; DJ Essar</p>
                 <p>🏆 Contests: Beer Pong Tournament + Best Dressed Costume Awards</p>
-                <p>🍹 Perk: Show your confirmation at the bar for your Free Shot!</p>
+                <p>🍹 Perk: Show your confirmation at the bar for your Free Mixed Drink!</p>
               </div>
               <p className="text-white/80 text-sm pt-2">
                 Follow{" "}
@@ -997,7 +996,7 @@ export function HalloweenUluwatuClient() {
                 disabled={isLoading}
                 className="w-full bg-gradient-to-r from-[#E11D48] via-[#DC2626] to-[#F59E0B] hover:from-[#BE123C] hover:to-[#B91C1C] text-white font-extrabold uppercase tracking-[3px] h-12 mt-2 transition-all duration-300 shadow-[0_0_25px_rgba(225,29,72,0.5)] disabled:opacity-50 rounded-md cursor-pointer"
               >
-                {isLoading ? "Saving Your Spot..." : "Claim Free Entry + Free Shot"}
+                {isLoading ? "Saving Your Spot..." : "Claim Free Entry + Free Mixed Drink"}
               </Button>
             </form>
           )}
