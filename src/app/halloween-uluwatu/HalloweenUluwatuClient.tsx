@@ -29,6 +29,11 @@ import { Label } from "@/components/ui/label";
 
 const POSTER_FEED = "/halloween_ld_uluwatu/LDU-Halloween-IGF.webp";
 const POSTER_STORY = "/halloween_ld_uluwatu/LDU-Free Shot-IGS.webp";
+const POSTER_FEED_BLUR =
+  "data:image/webp;base64,UklGRiABAABXRUJQVlA4IBQBAABQBQCdASoYAB4APxFwr1AsJiQisAgBgCIJQBcGMX/b7vJC2GUzQn01EFspbOwVxWaS1JgA/ursMVmZh9DWIgvfZUpqOFcAW5R9iYPpRfOwyPwNzvA6ooCPLBJNXYHNKHNCEyyCePXyxpCzBHoK/iCgYeV9psjGhD4AhtSYGqD+DyBqMeckqOVMoMOEPiH5el41zrBTLLKPF8//Evi91R5p+RSKHrvd9MP4cYl2pBDTDT1l74x5NBVh31mRrFQmQzUOBoBFjh6fBVkCr0k8iIYelqdwbaSJjjWtbA3angnY6tGa8hjjulgycxpp/xeMVr45YwYtpOwg4n6XfIqPVEQrp7L6tmYsHkxLejszUEDiWcvyAAA=";
+const POSTER_STORY_BLUR =
+  "data:image/webp;base64,UklGRtQAAABXRUJQVlA4IMgAAADQBQCdASoRAB4APxF0s1KsJqSisBgIAYAiCUABzgWjRWZu5m8jdrpiiEO+3yg0kMOJ2l/NihsAAP7zccXQW6M3eG/pXFSo184NZV8a74nkFuuW8fioMvY4XvkmfgicqW0mDoFXA9o7/dt+P5+P2K5WN62BMM/Qild6I38ieB1oCfL+XGS21py8qIQ1k/gNPqG6Ya/DebfrKAst25RICjkhmrGnpQB57syC9QBBqw/FbEueUvviMSbRsVGF9o+CrL+tKTKNh+WIAA==";
+
 
 const VIBE_IMAGES = [
   "/lay_day_uluwatu/party 1.jpeg",
@@ -484,7 +489,14 @@ export function HalloweenUluwatuClient() {
             </button>
           </div>
 
-          <div className="relative w-full max-w-[290px] xs:max-w-[340px] sm:max-w-[390px] md:max-w-[430px] aspect-[4/5] overflow-hidden rounded-2xl shadow-[0_0_60px_rgba(225,29,72,0.4)] border-2 border-[#E11D48]/70 bg-[#12060D] transition-transform duration-500 hover:scale-[1.02] hover:border-[#FF2A4D]">
+          <div
+            className="relative w-full max-w-[290px] xs:max-w-[340px] sm:max-w-[390px] md:max-w-[430px] aspect-[4/5] overflow-hidden rounded-2xl shadow-[0_0_60px_rgba(225,29,72,0.4)] border-2 border-[#E11D48]/70 bg-[#12060D] transition-transform duration-500 hover:scale-[1.02] hover:border-[#FF2A4D]"
+            style={{
+              backgroundImage: `url(${activePosterTab === "event" ? POSTER_FEED_BLUR : POSTER_STORY_BLUR})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
             {/* Event Feed Poster - Rendered Immediately */}
             <div
               className={`absolute inset-0 transition-opacity duration-200 ${
@@ -497,6 +509,8 @@ export function HalloweenUluwatuClient() {
                 fill
                 priority
                 unoptimized
+                placeholder="blur"
+                blurDataURL={POSTER_FEED_BLUR}
                 className="object-cover"
                 sizes="(max-width: 480px) 340px, (max-width: 768px) 390px, 430px"
               />
@@ -514,6 +528,8 @@ export function HalloweenUluwatuClient() {
                 fill
                 priority
                 unoptimized
+                placeholder="blur"
+                blurDataURL={POSTER_STORY_BLUR}
                 className="object-cover"
                 sizes="(max-width: 480px) 340px, (max-width: 768px) 390px, 430px"
               />

@@ -29,6 +29,11 @@ import { Label } from "@/components/ui/label";
 
 const POSTER_FEED = "/halloween_ld_gilit/LDGT-Halloween-IGF.webp";
 const POSTER_STORY = "/halloween_ld_gilit/LDGT-Free Shot-IGS.webp";
+const POSTER_FEED_BLUR =
+  "data:image/webp;base64,UklGRhIBAABXRUJQVlA4IAYBAABQBgCdASoYAB4APxF8tVOsJ6UiqAqpgCIJQBhyGQuALAD3MkKjny3rvLuhRx9hSM4gKMfevDNAE4AawAD+6uwxWJ9x5JmLIdZ1O5V2G09wQYSGdLTx6uhcundY+T0IXAy1uavliMrFkfDZQYHid6tmzZGh149a9JR6rGmxWSwYb1jrTl6v/Ucb5+6V11tXN8ZgkVwyfvw1V+ZfpptFM0y6xD7bmGC9Gz95NrSzHl83AIIblLp9iU42fAgtM6OherlBWRNCQjbxjFX9DS5UXz1srpi7p0fudBxojTtT7MUwf0Jhy6FObfItD1Px9qepcqqMHgQ3hsMYx273kc9muLz7JGW27GgA";
+const POSTER_STORY_BLUR =
+  "data:image/webp;base64,UklGRsoAAABXRUJQVlA4IL4AAADQBQCdASoRAB4APxFytFKsJiUisBgIAYAiCWMAzNWs5SzIAOj4wanH7Ci/2yXGM8GdRzo+4KHgAP7zcckaNVlO4ks95SFyWLS0GzhkEc1HlYQXtzuZ1jQlaRxWrHuyK3OlcY1JUfgDtt1I+DpF7b+7PfrT5Ul+OAjKQjZtUQaWX10M10Vayppbp6hAcptoVOY6iovNbx/wHUtCoOXhjfjniPBGkRa7Ic+T3RIa/d6ukR//dW+y5+9ZRUwoUAAA";
+
 
 const VIBE_IMAGES = [
   "/layday_gilit/layday_gilit_picture 1.jpg",
@@ -484,7 +489,14 @@ export function HalloweenGiliTClient() {
             </button>
           </div>
 
-          <div className="relative w-full max-w-[290px] xs:max-w-[340px] sm:max-w-[390px] md:max-w-[430px] aspect-[4/5] overflow-hidden rounded-2xl shadow-[0_0_60px_rgba(225,29,72,0.4)] border-2 border-[#E11D48]/70 bg-[#12060D] transition-transform duration-500 hover:scale-[1.02] hover:border-[#FF2A4D]">
+          <div
+            className="relative w-full max-w-[290px] xs:max-w-[340px] sm:max-w-[390px] md:max-w-[430px] aspect-[4/5] overflow-hidden rounded-2xl shadow-[0_0_60px_rgba(225,29,72,0.4)] border-2 border-[#E11D48]/70 bg-[#12060D] transition-transform duration-500 hover:scale-[1.02] hover:border-[#FF2A4D]"
+            style={{
+              backgroundImage: `url(${activePosterTab === "event" ? POSTER_FEED_BLUR : POSTER_STORY_BLUR})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
             {/* Event Feed Poster - Rendered Immediately */}
             <div
               className={`absolute inset-0 transition-opacity duration-200 ${
@@ -497,6 +509,8 @@ export function HalloweenGiliTClient() {
                 fill
                 priority
                 unoptimized
+                placeholder="blur"
+                blurDataURL={POSTER_FEED_BLUR}
                 className="object-cover"
                 sizes="(max-width: 480px) 340px, (max-width: 768px) 390px, 430px"
               />
@@ -514,6 +528,8 @@ export function HalloweenGiliTClient() {
                 fill
                 priority
                 unoptimized
+                placeholder="blur"
+                blurDataURL={POSTER_STORY_BLUR}
                 className="object-cover"
                 sizes="(max-width: 480px) 340px, (max-width: 768px) 390px, 430px"
               />

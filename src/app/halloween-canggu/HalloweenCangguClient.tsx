@@ -29,6 +29,10 @@ import { Label } from "@/components/ui/label";
 
 const POSTER_FEED = "/halloween_ld_canggu/LDC-Halloween-IGF.webp";
 const POSTER_STORY = "/halloween_ld_canggu/LDC-Free Shot-IGS.webp";
+const POSTER_FEED_BLUR =
+  "data:image/webp;base64,UklGRhABAABXRUJQVlA4IAQBAACwBgCdASoYAB4APxF4s1IsJySisBgIAYAiCUAYboEDslzAda4gxGuQad3gH4drS87VEIh7gI15tISO/1SN4AD+6uw1UpzB98ha22RVXpauwSL7j7mT2nyiQSsmBu2yZ8iJ3PAL2nXEnh3Pj8/mfNeYjYuvSzq+LmN27CV8jpa+PxMLrHTmBXJmOYhU4YiOKry3t7cYfa384GR2rhTlNjMs4zqz3oQAkNVGS1K2hbsq7DZ2pGq7nuSD22BXwrqqqO2TDZ4b2xXLF0sxWktj3FqGXQg9PQbgc+yfxbN9941rEljWsA0KxTvr3EQQEks/gKlt+px21bOp2UyTliAWlrbfVWMAAA==";
+const POSTER_STORY_BLUR =
+  "data:image/webp;base64,UklGRsgAAABXRUJQVlA4ILwAAABwBQCdASoRAB4APxF0tFKsJiUisBgIAYAiCWMABRKEb1hlw8EOTn79XiotRerP/dVoBZIAAP7zcfr13EVArZJuCiHjIVbTxQGq0u4Z6wQSJBeb29/EN3hCk52fKgwYJ4j8pram3f3DzYFJJbfOfu+ktP4F9QjCpoT/deHuoPGiX2VguA+l1tAWopCs8/Tcrp27PYkCJDKE1vpVkK59NFy29ZQNztScy7+ZR1erpEgAT6L3VP3thbwDwAAAAA==";
 
 const VIBE_IMAGES = [
   "/lay_day_canggu/swimming_pools.jpeg",
@@ -506,7 +510,14 @@ export function HalloweenCangguClient() {
           </div>
 
           {/* Poster Frame */}
-          <div className="relative w-full max-w-[290px] xs:max-w-[340px] sm:max-w-[390px] md:max-w-[430px] aspect-[4/5] overflow-hidden rounded-2xl shadow-[0_0_60px_rgba(225,29,72,0.4)] border-2 border-[#E11D48]/70 bg-[#12060D] transition-transform duration-500 hover:scale-[1.02] hover:border-[#FF2A4D]">
+          <div
+            className="relative w-full max-w-[290px] xs:max-w-[340px] sm:max-w-[390px] md:max-w-[430px] aspect-[4/5] overflow-hidden rounded-2xl shadow-[0_0_60px_rgba(225,29,72,0.4)] border-2 border-[#E11D48]/70 bg-[#12060D] transition-transform duration-500 hover:scale-[1.02] hover:border-[#FF2A4D]"
+            style={{
+              backgroundImage: `url(${activePosterTab === "event" ? POSTER_FEED_BLUR : POSTER_STORY_BLUR})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
             {/* Event Feed Poster - Rendered Immediately */}
             <div
               className={`absolute inset-0 transition-opacity duration-200 ${
@@ -519,6 +530,8 @@ export function HalloweenCangguClient() {
                 fill
                 priority
                 unoptimized
+                placeholder="blur"
+                blurDataURL={POSTER_FEED_BLUR}
                 className="object-cover"
                 sizes="(max-width: 480px) 340px, (max-width: 768px) 390px, 430px"
               />
@@ -536,6 +549,8 @@ export function HalloweenCangguClient() {
                 fill
                 priority
                 unoptimized
+                placeholder="blur"
+                blurDataURL={POSTER_STORY_BLUR}
                 className="object-cover"
                 sizes="(max-width: 480px) 340px, (max-width: 768px) 390px, 430px"
               />

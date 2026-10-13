@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isStandalone =
+    !pathname ||
     pathname.startsWith("/opening-party-gilit") ||
     pathname.startsWith("/beerpongatldgilit") ||
     pathname.startsWith("/oktober-fast-canggu") ||
