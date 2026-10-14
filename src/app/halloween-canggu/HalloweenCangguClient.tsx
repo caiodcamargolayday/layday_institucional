@@ -579,8 +579,16 @@ export function HalloweenCangguClient() {
               FREE SHOT • FACE PAINTING • FEAR PONG • PUB CRAWL • COSTUME PRIZES
             </p>
 
+            {/* Highlighted Perk Badge */}
+            <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl sm:rounded-full bg-gradient-to-r from-[#E11D48]/25 via-[#F59E0B]/15 to-[#E11D48]/25 border border-[#FF2A4D]/60 shadow-[0_0_25px_rgba(225,29,72,0.35)] backdrop-blur-md">
+              <Gift className="w-4 h-4 text-[#F59E0B] shrink-0" />
+              <span className="text-xs sm:text-sm md:text-base font-black text-white tracking-wider uppercase text-center">
+                Free Entry + Free Welcome Shot on Arrival
+              </span>
+            </div>
+
             <p className="text-xs sm:text-base text-gray-300 max-w-xl font-medium leading-relaxed px-2">
-              Join the guest list for <span className="text-white font-bold">Free Entry + A FREE WELCOME SHOT</span> on arrival &amp; guarantee your spot for Bali&apos;s wildest Halloween poolside fiesta!
+              Join the guest list to guarantee your spot for Bali&apos;s wildest Halloween poolside fiesta!
             </p>
 
             {/* BUTTON 1 OF 2 */}
