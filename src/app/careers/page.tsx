@@ -6,7 +6,17 @@ import Image from "next/image";
 import { Users, Star, Zap, Coffee, Globe, Heart, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import Link from "next/link";
+
 const POSITIONS = [
+  {
+    title: "MARKETING MANAGER",
+    location: "LAY DAY & TUSK ULUWATU",
+    type: "FULL-TIME",
+    description: "Lead multi-brand marketing, paid social (Meta & Google Ads), content creation, and influencer relations across both Lay Day and Tusk.",
+    link: "/hiring-marketing-manager",
+    isHot: true
+  },
   {
     title: "BARTENDER",
     location: "LAY DAY CANGGU",
@@ -150,14 +160,27 @@ export default function CareersPage() {
                 className="group border-b border-[#004A61]/10 py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-white transition-all duration-500 px-4 -mx-4 cursor-pointer"
               >
                 <div className="space-y-1">
-                  <p className="text-[#EE5B2B] text-[10px] font-bold tracking-[2px] uppercase">{job.location}</p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-[#EE5B2B] text-[10px] font-bold tracking-[2px] uppercase">{job.location}</p>
+                    {job.isHot && (
+                      <span className="bg-[#EE5B2B] text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">
+                        Actively Hiring
+                      </span>
+                    )}
+                  </div>
                   <h4 className="text-2xl font-heading tracking-widest group-hover:translate-x-1 transition-transform duration-500">{job.title}</h4>
                 </div>
                 <div className="max-w-xs md:text-right">
                   <p className="text-[11px] font-medium opacity-70 mb-3 leading-relaxed">{job.description}</p>
                   <div className="flex items-center md:justify-end gap-3">
                     <span className="text-[9px] font-bold border border-[#004A61]/20 px-2 py-0.5 rounded-full uppercase tracking-widest">{job.type}</span>
-                    <button className="text-[9px] font-bold text-[#EE5B2B] uppercase tracking-[1px] hover:underline">Apply Now →</button>
+                    {job.link ? (
+                      <Link href={job.link} className="text-[9px] font-bold text-[#EE5B2B] uppercase tracking-[1px] hover:underline flex items-center gap-1">
+                        View Role & Apply →
+                      </Link>
+                    ) : (
+                      <button className="text-[9px] font-bold text-[#EE5B2B] uppercase tracking-[1px] hover:underline">Apply Now →</button>
+                    )}
                   </div>
                 </div>
               </motion.div>

@@ -20,8 +20,14 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-y: auto;
+  }
   body {
     @apply bg-[#EBE6D8] text-[#083248] font-sans antialiased;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading tracking-wide font-bold;
