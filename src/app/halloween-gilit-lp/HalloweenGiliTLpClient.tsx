@@ -303,26 +303,16 @@ export function HalloweenGiliTLpClient() {
             className="flex flex-col items-center"
           >
             {/* Top Red Tag */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#D71920] text-white text-[10px] md:text-xs font-heading tracking-[3px] uppercase font-bold shadow-lg mb-3">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#D71920] text-white text-[10px] md:text-xs font-heading tracking-[3px] uppercase font-bold shadow-lg mb-4">
               <Sparkles className="w-3.5 h-3.5 text-white" />
-              <span>DIRECT BOOKING PROMO • CODE: HALLOWEEN2026</span>
+              <span>HALLOWEEN SPECIAL OFFER</span>
             </div>
 
             {/* Flyer Title Visual Identity */}
             <div className="relative my-2">
-              <span className="block text-[#D71920] font-heading font-black tracking-[6px] md:tracking-[12px] text-lg sm:text-2xl md:text-3xl uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                HALLOWEEN IN
-              </span>
-              <h1 className="text-5xl sm:text-7xl md:text-9xl font-heading font-black text-[#D71920] tracking-wider leading-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+              <h1 className="text-6xl sm:text-8xl md:text-9xl font-heading font-black text-[#D71920] tracking-wider leading-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
                 GILI T
               </h1>
-              <div className="flex items-center justify-center gap-2 mt-2">
-                <div className="h-[2px] w-6 md:w-16 bg-[#D71920]" />
-                <span className="text-white text-[10px] md:text-xs font-bold tracking-[4px] uppercase drop-shadow-md">
-                  LAY DAY GILI T • ISLAND SANCTUARY
-                </span>
-                <div className="h-[2px] w-6 md:w-16 bg-[#D71920]" />
-              </div>
 
               {/* Floating Limited Offer Stamp */}
               <div className="absolute -top-4 -right-8 md:-top-6 md:-right-16 z-30">
@@ -330,25 +320,25 @@ export function HalloweenGiliTLpClient() {
               </div>
             </div>
 
-            {/* Subtitle */}
-            <p className="max-w-xl mx-auto text-white/95 font-medium tracking-wide text-base md:text-lg leading-relaxed mt-3 drop-shadow-md">
-              Experience the legendary island life with an exclusive Halloween treat: <strong className="text-white font-bold underline decoration-[#D71920] decoration-2">Get 30% off</strong> when you stay 3 nights.
-            </p>
-
-            {/* Jagged Date Banner from flyer */}
-            <div className="mt-5 mb-3">
-              <JaggedDateBanner text="*VALID FOR CHECK-INS FROM OCT 28TH, 29TH & 30TH*" />
-            </div>
-
-            {/* STAY 3 NIGHTS GET 30% OFF Display */}
-            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-6">
-              <span className="text-white font-heading text-sm md:text-xl font-black tracking-widest uppercase drop-shadow-md">
+            {/* STAY 3 NIGHTS GET 30% OFF Display - Placed right below title */}
+            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mt-4 mb-4">
+              <span className="text-white font-heading text-base sm:text-xl md:text-2xl font-black tracking-widest uppercase drop-shadow-md">
                 STAY 3 NIGHTS
               </span>
-              <span className="bg-[#D71920] text-white px-3 py-1 font-heading text-xl md:text-3xl font-black tracking-wider uppercase shadow-2xl border-2 border-white">
+              <span className="bg-[#D71920] text-white px-3 py-1 font-heading text-xl sm:text-2xl md:text-3xl font-black tracking-wider uppercase shadow-2xl border-2 border-white">
                 GET 30% OFF
               </span>
             </div>
+
+            {/* Subtitle */}
+            <p className="max-w-xl mx-auto text-white/95 font-medium tracking-wide text-base md:text-lg leading-relaxed drop-shadow-md">
+              Experience the legendary island life in Lay Day Gili T with an exclusive Halloween treat: <strong className="text-white font-bold underline decoration-[#D71920] decoration-2">get 30% off</strong> when you book 3 nights.
+            </p>
+
+            {/* Additional info date note - smaller and without a frame */}
+            <p className="text-white/80 text-xs md:text-sm font-medium tracking-wider uppercase mt-4 mb-6 drop-shadow">
+              Valid for check-ins from Oct 28th, 29th &amp; 30th
+            </p>
 
             {/* Hero CTA Button */}
             <div className="flex flex-col items-center">
@@ -357,9 +347,6 @@ export function HalloweenGiliTLpClient() {
                 className="bg-[#D71920] text-white hover:bg-white hover:text-[#D71920] rounded-none h-14 px-10 md:px-14 font-heading font-black uppercase tracking-[3px] text-xs md:text-sm transition-all duration-300 shadow-2xl border-2 border-white/20 hover:border-[#D71920] hover:scale-105">
                 CLAIM 30% OFF • BOOK NOW
               </Button>
-              <span className="text-[10px] md:text-[11px] font-bold text-white/80 tracking-widest uppercase mt-2 drop-shadow">
-                Promo code automatically applied at checkout
-              </span>
               
               <motion.div
                 animate={{ y: [0, 8, 0] }}
@@ -523,7 +510,7 @@ export function HalloweenGiliTLpClient() {
               ACCOMMODATION <span className="text-[#D71920]">OPTIONS</span>
             </h2>
             <p className="text-xs md:text-sm text-black/60 max-w-md mx-auto mt-2">
-              Choose your stay for Halloween week. Stay 3 nights to claim 30% off direct rates with promo code <strong>HALLOWEEN2026</strong>.
+              Choose your stay for Halloween week. Book 3 nights to claim 30% off direct rates.
             </p>
           </div>
           
@@ -655,7 +642,9 @@ export function HalloweenGiliTLpClient() {
           </div>
 
           <div className="relative z-10 max-w-2xl mx-auto space-y-4">
-            <JaggedDateBanner text="*VALID FOR CHECK-INS FROM OCT 28TH, 29TH & 30TH*" />
+            <p className="text-white/80 text-xs md:text-sm font-medium tracking-wider uppercase">
+              Valid for check-ins from Oct 28th, 29th &amp; 30th
+            </p>
             
             <h2 className="text-3xl md:text-6xl font-heading font-black tracking-widest uppercase leading-tight">
               STAY 3 NIGHTS <br />
@@ -663,7 +652,7 @@ export function HalloweenGiliTLpClient() {
             </h2>
 
             <p className="text-sm md:text-base opacity-80 max-w-lg mx-auto font-medium">
-              Don't miss the biggest island Halloween in Bali &amp; Lombok. Direct booking discount automatically calculated with promo code <strong className="text-white underline">HALLOWEEN2026</strong>.
+              Don't miss the biggest island Halloween in Bali &amp; Lombok. Direct booking discount is automatically applied when you book directly with this link.
             </p>
 
             <div className="pt-2">
@@ -673,10 +662,6 @@ export function HalloweenGiliTLpClient() {
                 BOOK DIRECT WITH 30% OFF
               </Button>
             </div>
-            
-            <span className="text-[11px] font-bold text-white/60 tracking-wider uppercase block">
-              https://hotels.cloudbeds.com/en/reservation/4fbPDV?promo=HALLOWEEN2026
-            </span>
           </div>
 
           <div className="absolute inset-0 z-0 opacity-10">
