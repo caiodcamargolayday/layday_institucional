@@ -21,6 +21,8 @@ export function ConditionalShell({ children }: { children: React.ReactNode }) {
       pathname?.startsWith("/oktober-fest-gilit") ||
       pathname?.startsWith("/halloween-canggu") ||
       pathname?.startsWith("/halloween-gilit") ||
+      pathname?.startsWith("/halloween-promo-gilit") ||
+      pathname?.startsWith("/layday-gilit-halloween") ||
       pathname?.startsWith("/halloween-uluwatu") ||
       pathname?.startsWith("/hiring-marketing-manager")
     );
