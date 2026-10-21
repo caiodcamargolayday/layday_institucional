@@ -152,12 +152,13 @@ export function UluwatuClient() {
 
   const handleBooking = () => {
     localStorage.setItem("booking_origin", "uluwatu");
+    sessionStorage.setItem("booking_origin", "uluwatu");
     if (typeof window !== "undefined" && (window as any).fbq) {
       (window as any).fbq('track', 'InitiateCheckout');
     }
     trackGoogleAdsConversion();
 
-    let baseUrl = "https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR";
+    let baseUrl = "https://booking.sentec.io/hotel/GURP7CNNHEEJAP";
     const keep = ['gclid', 'gbraid', 'wbraid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid'];
     
     if (searchParams) {
@@ -171,7 +172,7 @@ export function UluwatuClient() {
         }
       });
       if (hasParams) {
-        baseUrl += "&" + paramsToKeep.toString();
+        baseUrl += (baseUrl.includes("?") ? "&" : "?") + paramsToKeep.toString();
       }
     }
     window.open(baseUrl, "_blank");

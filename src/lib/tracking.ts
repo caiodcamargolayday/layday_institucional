@@ -34,8 +34,8 @@ export const CLOUDBEDS_CONFIG = {
   },
   uluwatu: {
     name: "Lay Day Uluwatu",
-    code: "10021",
-    url: "https://www.simplebooking.it/ibe2/hotel/10021?lang=EN&cur=IDR",
+    code: "GURP7CNNHEEJAP",
+    url: "https://booking.sentec.io/hotel/GURP7CNNHEEJAP",
     googleAdsId: process.env.NEXT_PUBLIC_GOOGLE_ADS_ID_LAYDAY_ULUWATU || process.env.NEXT_PUBLIC_GOOGLE_ADS_ID_ULUWATU || "AW-18002704389",
     googleAdsLabel: process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL_ULUWATU_BOOKING,
     metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_LDULUWATU || "1188168500073960",
@@ -114,7 +114,7 @@ export function getAttributionParams(): Record<string, string> {
 /**
  * Build a fully decorated Cloudbeds reservation URL carrying all Google Ads & Meta attribution parameters
  */
-export function buildCloudbedsUrl(venue: 'canggu' | 'gilit' | 'coday', extraParams?: Record<string, string | number | undefined>): string {
+export function buildCloudbedsUrl(venue: VenueKey, extraParams?: Record<string, string | number | undefined>): string {
   const config = CLOUDBEDS_CONFIG[venue];
   if (!config) return '';
 
@@ -142,7 +142,7 @@ export function buildCloudbedsUrl(venue: 'canggu' | 'gilit' | 'coday', extraPara
  * Open Cloudbeds reservation with tracking events & attribution preserved
  */
 export function openCloudbedsBooking(
-  venue: 'canggu' | 'gilit' | 'coday',
+  venue: VenueKey,
   extraParams?: Record<string, string | number | undefined>
 ): void {
   if (typeof window === 'undefined') return;
@@ -160,12 +160,20 @@ export function openCloudbedsBooking(
       });
     }
 
-    // 3. Track Google Analytics / Google Ads begin_checkout
+    // 3. Track Google Analytics / Google Ads begin_checkout & conversion
     if ((window as any).gtag) {
       (window as any).gtag('event', 'begin_checkout', {
         currency: 'IDR',
         items: [{ item_name: CLOUDBEDS_CONFIG[venue].name }],
       });
+
+      const adsId = CLOUDBEDS_CONFIG[venue].googleAdsId;
+      const adsLabel = CLOUDBEDS_CONFIG[venue].googleAdsLabel;
+      if (adsId && adsLabel) {
+        (window as any).gtag('event', 'conversion', {
+          send_to: `${adsId}/${adsLabel}`
+        });
+      }
     }
 
     // 4. Push to GTM dataLayer

@@ -18,12 +18,8 @@ export function HotelBookingButton({ hotelId, className, children }: HotelBookin
     } else if (hotelId === "20") {
       openCloudbedsBooking("coday");
     } else if (hotelId === "17") {
-      // Lay Day Uluwatu (SimpleBooking)
-      localStorage.setItem("booking_origin", "uluwatu");
-      if ((window as any).fbq) {
-        (window as any).fbq('track', 'InitiateCheckout');
-      }
-      window.open(CLOUDBEDS_CONFIG.uluwatu.url, "_blank");
+      // Lay Day Uluwatu (Sentec)
+      openCloudbedsBooking("uluwatu");
     } else {
       openCloudbedsBooking("canggu");
     }
