@@ -42,19 +42,6 @@ function SpiderWeb({ className = "", style = {} }: { className?: string; style?:
   );
 }
 
-// Circular "LIMITED OFFER !" Badge from the flyer
-function LimitedOfferStamp({ className = "" }: { className?: string }) {
-  return (
-    <div
-      className={`inline-flex items-center justify-center rounded-full bg-[#D71920] text-white font-black text-center uppercase shadow-2xl border-2 border-dashed border-white/80 select-none transform -rotate-12 hover:rotate-0 transition-transform duration-300 ${className}`}
-    >
-      <div className="flex flex-col items-center justify-center p-2 leading-none">
-        <span className="text-[9px] md:text-[10px] tracking-wider font-extrabold opacity-95">LIMITED</span>
-        <span className="text-[12px] md:text-[14px] tracking-widest font-black text-white">OFFER !</span>
-      </div>
-    </div>
-  );
-}
 
 // Red Jagged Banner matching the flyer's date tape
 function JaggedDateBanner({ text = "*VALID FOR CHECK-INS FROM OCT 28TH, 29TH & 30TH*" }: { text?: string }) {
@@ -313,11 +300,6 @@ export function HalloweenGiliTLpClient() {
               <h1 className="text-6xl sm:text-8xl md:text-9xl font-heading font-black text-[#D71920] tracking-wider leading-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
                 GILI T
               </h1>
-
-              {/* Floating Limited Offer Stamp */}
-              <div className="absolute -top-4 -right-8 md:-top-6 md:-right-16 z-30">
-                <LimitedOfferStamp className="w-16 h-16 md:w-24 md:h-24" />
-              </div>
             </div>
 
             {/* STAY 3 NIGHTS GET 30% OFF Display - Placed right below title */}
@@ -332,7 +314,10 @@ export function HalloweenGiliTLpClient() {
 
             {/* Subtitle */}
             <p className="max-w-xl mx-auto text-white/95 font-medium tracking-wide text-base md:text-lg leading-relaxed drop-shadow-md">
-              Experience the legendary island life in Lay Day Gili T with an exclusive Halloween treat: <strong className="text-white font-bold underline decoration-[#D71920] decoration-2">get 30% off</strong> when you book 3 nights.
+              Experience the legendary island life in Lay Day Gili T with an exclusive Halloween treat:
+              <span className="block mt-1">
+                <strong className="text-white font-bold whitespace-nowrap">get 30% off</strong> when you book 3 nights.
+              </span>
             </p>
 
             {/* Additional info date note - smaller and without a frame */}
