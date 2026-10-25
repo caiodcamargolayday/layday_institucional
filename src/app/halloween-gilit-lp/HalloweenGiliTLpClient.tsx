@@ -374,7 +374,7 @@ export function HalloweenGiliTLpClient() {
                 🎃 Special Promo Conditions:
               </p>
               <p>
-                Valid for check-ins from <strong>Oct 28th, 29th &amp; 30th</strong>. Stay 3 nights or more to activate 30% savings on all dorms and private rooms.
+                Valid for check-ins from <strong>Oct 28th, 29th &amp; 30th</strong>. Stay 3 nights only to activate 30% savings on all dorms and private rooms.
               </p>
             </div>
 
