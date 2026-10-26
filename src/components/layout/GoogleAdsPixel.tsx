@@ -12,7 +12,7 @@ export function GoogleAdsPixel() {
 
     let pixelId: string | undefined;
 
-    if (pathname.includes("coday-uluwatu")) {
+    if (pathname.includes("coday")) {
       pixelId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID_CODAY_ULUWATU;
     } else if (pathname.includes("layday-uluwatu")) {
       pixelId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID_LAYDAY_ULUWATU;

@@ -160,20 +160,12 @@ export function openCloudbedsBooking(
       });
     }
 
-    // 3. Track Google Analytics / Google Ads begin_checkout & conversion
+    // 3. Track Google Analytics begin_checkout
     if ((window as any).gtag) {
       (window as any).gtag('event', 'begin_checkout', {
         currency: 'IDR',
         items: [{ item_name: CLOUDBEDS_CONFIG[venue].name }],
       });
-
-      const adsId = CLOUDBEDS_CONFIG[venue].googleAdsId;
-      const adsLabel = CLOUDBEDS_CONFIG[venue].googleAdsLabel;
-      if (adsId && adsLabel) {
-        (window as any).gtag('event', 'conversion', {
-          send_to: `${adsId}/${adsLabel}`
-        });
-      }
     }
 
     // 4. Push to GTM dataLayer

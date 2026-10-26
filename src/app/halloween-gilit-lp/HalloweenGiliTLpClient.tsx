@@ -168,20 +168,12 @@ export function HalloweenGiliTLpClient() {
       });
     }
 
-    // Google Analytics / Google Ads begin_checkout & conversion
+    // Google Analytics begin_checkout
     if ((window as any).gtag) {
       (window as any).gtag("event", "begin_checkout", {
         currency: "IDR",
         items: [{ item_name: "Lay Day Gili T - Halloween 30% Off Direct Booking" }],
       });
-
-      const adsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID_GILIT || "AW-18224532346";
-      const adsLabel = process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL_GILIT;
-      if (adsId && adsLabel) {
-        (window as any).gtag("event", "conversion", {
-          send_to: `${adsId}/${adsLabel}`,
-        });
-      }
     }
 
     // GTM dataLayer

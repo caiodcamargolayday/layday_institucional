@@ -1,0 +1,403 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2026-10-25T23:30:00.000Z",
+  "containerVersion": {
+    "path": "accounts/6370441690/containers/260713652/versions/0",
+    "accountId": "6370441690",
+    "containerId": "260713652",
+    "containerVersionId": "0",
+    "container": {
+      "path": "accounts/6370441690/containers/260713652",
+      "accountId": "6370441690",
+      "containerId": "260713652",
+      "name": "Lay Day Canggu (Cloudbeds + Website)",
+      "publicId": "GTM-MGM8GCS4",
+      "usageContext": [
+        "WEB"
+      ]
+    },
+    "tag": [
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "tagId": "1",
+        "name": "Conversion Linker - Cross Domain",
+        "type": "gclidw",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "enableCrossDomainLinking",
+            "value": "true"
+          },
+          {
+            "type": "LIST",
+            "key": "domains",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "laydayhostels.com"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "laydayhostel.com"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "hotels.cloudbeds.com"
+              },
+              {
+                "type": "TEMPLATE",
+                "value": "cloudbeds.com"
+              }
+            ]
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "enableUrlParamLinking",
+            "value": "true"
+          }
+        ],
+        "firingTriggerId": [
+          "2147479553"
+        ]
+      },
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "tagId": "2",
+        "name": "Meta Pixel - Base Code & PageView",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n  !function(f,b,e,v,n,t,s)\n  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?\n  n.callMethod.apply(n,arguments):n.queue.push(arguments)};\n  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';\n  n.queue=[];t=b.createElement(e);t.async=!0;\n  t.src=v;s=b.getElementsByTagName(e)[0];\n  s.parentNode.insertBefore(t,s)}(window, document,'script',\n  'https://connect.facebook.net/en_US/fbevents.js');\n  fbq('init', '976155272048859');\n  fbq('track', 'PageView');\n</script>\n<noscript>\n  <img height=\"1\" width=\"1\" style=\"display:none\"\n       src=\"https://www.facebook.com/tr?id=976155272048859&ev=PageView&noscript=1\"/>\n</noscript>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "2147479553"
+        ]
+      },
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "tagId": "3",
+        "name": "Meta Pixel - InitiateCheckout (Cloudbeds)",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function() {\n  if (window.fbq && location.hostname.indexOf('cloudbeds') > -1) {\n    var isConfirmation = location.pathname.indexOf('confirm') > -1 || location.search.indexOf('reservation_id') > -1;\n    if (!isConfirmation) {\n      fbq('track', 'InitiateCheckout', {\n        content_name: 'Lay Day Canggu',\n        currency: 'IDR'\n      });\n    }\n  }\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "2147479553"
+        ]
+      },
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "tagId": "4",
+        "name": "Meta Pixel - Purchase Conversion",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function() {\n  var numVal = {{cjs - bookingTotal}} || 0;\n  var cur = {{dlv - ecommerce.currency}} || {{dlv - currency}} || 'IDR';\n  var txId = {{dlv - ecommerce.transaction_id}} || {{dlv - reservationId}} || {{dlv - bookingId}} || '';\n\n  if (window.fbq) {\n    fbq('track', 'Purchase', {\n      value: numVal,\n      currency: cur,\n      content_name: 'Lay Day Canggu Booking',\n      content_type: 'product',\n      order_id: String(txId)\n    }, {\n      eventID: txId ? 'cb_' + txId : undefined\n    });\n  }\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "100"
+        ]
+      },
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "tagId": "5",
+        "name": "Google Ads - Booking Purchase Conversion",
+        "type": "awct",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "conversionId",
+            "value": "18281940342"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "conversionLabel",
+            "value": "rossCOKHyNYcEPaKwY1E"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "conversionValue",
+            "value": "{{cjs - bookingTotal}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "orderId",
+            "value": "{{dlv - ecommerce.transaction_id}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "currencyCode",
+            "value": "{{dlv - ecommerce.currency}}"
+          }
+        ],
+        "firingTriggerId": [
+          "100"
+        ]
+      }
+    ],
+    "trigger": [
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "triggerId": "100",
+        "name": "Event - Purchase or Booking Confirmed",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "MATCH_REGEX",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "^(purchase|booking_confirmed|reservation_confirmed|booking_complete|cloudbeds_reservation_confirm)$"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "variable": [
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "variableId": "1",
+        "name": "cjs - bookingTotal",
+        "type": "jsm",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "javascript",
+            "value": "function() {\n  function parseVal(v) {\n    if (v === null || v === undefined) return 0;\n    var s = String(v).replace(/[^0-9.,]/g, '');\n    if (!s) return 0;\n    var dots = (s.match(/\\./g) || []).length;\n    var commas = (s.match(/,/g) || []).length;\n    if (dots > 1 && commas === 0) s = s.replace(/\\./g, '');\n    else if (commas > 1 && dots === 0) s = s.replace(/,/g, '');\n    else if (dots >= 1 && commas >= 1) {\n      s = s.lastIndexOf('.') > s.lastIndexOf(',') ? s.replace(/,/g, '') : s.replace(/\\./g, '').replace(',', '.');\n    } else if (commas === 1) {\n      var afterComma = s.split(',')[1] || '';\n      s = afterComma.length === 3 ? s.replace(',', '') : s.replace(',', '.');\n    }\n    var n = Number(s);\n    return isNaN(n) ? 0 : n;\n  }\n\n  try {\n    var val = {{dlv - ecommerce.value}};\n    if (val && !isNaN(val) && Number(val) > 0) return Number(val);\n  } catch(e) {}\n\n  try {\n    var dl = window.dataLayer || [];\n    for (var i = dl.length - 1; i >= 0; i--) {\n      var row = dl[i];\n      if (!row) continue;\n      if (row.ecommerce && row.ecommerce.purchase && row.ecommerce.purchase.actionField && row.ecommerce.purchase.actionField.revenue) {\n        var f = parseVal(row.ecommerce.purchase.actionField.revenue);\n        if (f > 0) return f;\n      }\n      if (row.ecommerce && row.ecommerce.value) {\n        var g = parseVal(row.ecommerce.value);\n        if (g > 0) return g;\n      }\n      var direct = row.grand_total || row.total || row.reservation_total || row.booking_total || (row.cloudbeds && (row.cloudbeds.total || row.cloudbeds.grand_total));\n      if (direct) {\n        var h = parseVal(direct);\n        if (h > 0) return h;\n      }\n    }\n  } catch(e) {}\n\n  return 0;\n}"
+          }
+        ]
+      },
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "variableId": "10",
+        "name": "dlv - ecommerce.value",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "ecommerce.value"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "defaultValue",
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "variableId": "11",
+        "name": "dlv - ecommerce.transaction_id",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "ecommerce.transaction_id"
+          }
+        ]
+      },
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "variableId": "12",
+        "name": "dlv - ecommerce.currency",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "ecommerce.currency"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "defaultValue",
+            "value": "IDR"
+          }
+        ]
+      },
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "variableId": "13",
+        "name": "dlv - transactionTotal",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "transactionTotal"
+          }
+        ]
+      },
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "variableId": "14",
+        "name": "dlv - reservationId",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "reservationId"
+          }
+        ]
+      },
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "variableId": "15",
+        "name": "dlv - total",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "total"
+          }
+        ]
+      },
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "variableId": "16",
+        "name": "dlv - currency",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "currency"
+          }
+        ]
+      },
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "variableId": "17",
+        "name": "dlv - bookingId",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "bookingId"
+          }
+        ]
+      }
+    ],
+    "builtInVariable": [
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "type": "EVENT",
+        "name": "Event"
+      },
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "type": "PAGE_URL",
+        "name": "Page URL"
+      },
+      {
+        "accountId": "6370441690",
+        "containerId": "260713652",
+        "type": "PAGE_HOSTNAME",
+        "name": "Page Hostname"
+      }
+    ]
+  }
+}
