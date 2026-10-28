@@ -17,6 +17,9 @@ function getPixelIdsForPath(pathname: string, origin?: string | null): string[] 
   if (target.includes("2-years-layday-uluwatu") || target.includes("anniversary-uluwatu")) {
     return [process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_ULUWATU || "1035484145914151"].filter(Boolean) as string[];
   }
+  if (target.includes("halloween-canggu-lp") || target.includes("halloween-promo-canggu") || target.includes("layday-canggu-halloween")) {
+    return [process.env.NEXT_PUBLIC_META_PIXEL_ID_LDCANGGU || "976155272048859"].filter(Boolean) as string[];
+  }
   if (target.includes("halloween")) {
     if (target.includes("gilit")) {
       return [process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_GILIT || "1036889488979198"].filter(Boolean) as string[];

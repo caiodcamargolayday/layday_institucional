@@ -58,6 +58,12 @@ export function getCapiConfigs(origin: string): Array<{ pixelId: string; accessT
     }];
   }
 
+  if (origin === 'canggu' || origin === 'halloween-canggu-lp' || origin === 'halloween-direct-booking-canggu') {
+    const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID_LDCANGGU || '976155272048859';
+    const accessToken = process.env.META_ACCESS_TOKEN_LDCANGGU || 'EAAYA08KKYP4BRh8JT9GjVyPW6AzZAaBs30otgl6b3x77Ko0c6xHGtJCC0syLfdJYsM9MymdrWw3j6X7b4EW2tfh5yQ68ZBW0QxbvcYUoxZA8z57';
+    return [{ pixelId, accessToken }];
+  }
+
   if (origin === 'halloween' || origin === 'halloween-canggu' || origin === 'halloween-ld-canggu' || origin === 'layday-of-the-dead') {
     return [{
       pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_HALLOWEEN_CANGGU || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_CANGGU || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY || '1392233983092323',
@@ -87,6 +93,13 @@ export function getCapiConfigs(origin: string): Array<{ pixelId: string; accessT
 }
 
 export function getCapiConfig(origin: string) {
+  if (origin === 'canggu' || origin === 'halloween-canggu-lp' || origin === 'halloween-direct-booking-canggu') {
+    return {
+      pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_LDCANGGU || '976155272048859',
+      accessToken: process.env.META_ACCESS_TOKEN_LDCANGGU || 'EAAYA08KKYP4BRh8JT9GjVyPW6AzZAaBs30otgl6b3x77Ko0c6xHGtJCC0syLfdJYsM9MymdrWw3j6X7b4EW2tfh5yQ68ZBW0QxbvcYUoxZA8z57',
+    };
+  }
+
   if (origin === 'halloween' || origin === 'halloween-canggu' || origin === 'halloween-ld-canggu' || origin === 'layday-of-the-dead') {
     return {
       pixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID_HALLOWEEN_CANGGU || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY_CANGGU || process.env.NEXT_PUBLIC_META_PIXEL_ID_ANNIVERSARY || '1392233983092323',
