@@ -9,7 +9,7 @@ import {
   Flame, Snowflake, Coffee, Laptop, GlassWater, Sparkles, Refrigerator, Car
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { openCloudbedsBooking } from "@/lib/tracking";
+import { getAttributionParams } from "@/lib/tracking";
 
 const ASSETS = {
   hero: "/coday_uluwatu/uluwatu_surfers_hero.png",
@@ -86,7 +86,47 @@ export function CodayUluwatuClient() {
   const [currentFacilityImg, setCurrentFacilityImg] = useState(0);
 
   const handleBooking = () => {
-    openCloudbedsBooking("coday");
+    if (typeof window === "undefined") return;
+
+    localStorage.setItem("booking_origin", "coday");
+    sessionStorage.setItem("booking_origin", "coday");
+
+    if ((window as any).fbq) {
+      (window as any).fbq("track", "InitiateCheckout", {
+        content_name: "Coday Uluwatu",
+        currency: "IDR",
+        promo: "BINGIN30",
+      });
+    }
+
+    if ((window as any).gtag) {
+      (window as any).gtag("event", "begin_checkout", {
+        currency: "IDR",
+        items: [{ item_name: "Coday Uluwatu" }],
+      });
+    }
+
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({
+      event: "begin_checkout",
+      venue: "coday",
+      promo: "BINGIN30",
+      ecommerce: {
+        currency: "IDR",
+        items: [{ item_name: "Coday Uluwatu" }],
+      },
+    });
+
+    try {
+      const url = new URL("https://hotels.cloudbeds.com/reservation/WEE9oP?promo=BINGIN30&currency=idr#promo=BINGIN30");
+      const attribution = getAttributionParams();
+      Object.entries(attribution).forEach(([key, val]) => {
+        if (val) url.searchParams.set(key, val);
+      });
+      window.open(url.toString(), "_blank");
+    } catch {
+      window.open("https://hotels.cloudbeds.com/reservation/WEE9oP#promo=BINGIN30", "_blank");
+    }
   };
 
   const storyImages = [
